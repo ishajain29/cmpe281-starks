@@ -12,3 +12,8 @@ In Extreme Programming, feedback can be of various forms: system and team. None 
 
 * In the two meetings we had, extensive discussion took place about the domain, the appropriate cloud service provider and NoSQL Database to be used. For instance, initially, I had planned to work on Cassandra, however, on recommendation of one of the team members who would be achieving waste elimination for the team, I planned to opt for MongoDB after weighing in all the pros and cons.
 
+**Week 2**
+
+* The second week revolved around making decisions regarding the flow of data from the User Interface to the Database (Replicas) and the basic structural architecture to be adhered to. At first, it was suggested to initiate the code for the project from UI, however, feedback was incorporated that resulted in focussing more on the backend functionalities as suggested by the professor. 
+
+* Each person brought onto the table the different stories or use cases of their domain and the understanding of their matter to which the other team members then added the extra input.
