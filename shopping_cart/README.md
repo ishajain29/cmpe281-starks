@@ -35,7 +35,7 @@ Shared shopping cart will allow your friends, colleague and roommates to create 
 
 ## Database Schema ##
 
-```json
+```javascript
 User-Carts
 {
     _id      :   <cart_id>,
@@ -45,12 +45,12 @@ User-Carts
                         product_id: <product_id>,
                         quantity  : 1,
                         name      : "Apple - MacBook Pro® - 13 Display",
-                        price     : $1299.99
+                        price     : $1299
                     }
                 ]
 }
 ```
-```json
+```javascript
 Shared-Carts
 {
     _id             :   <shared_cart_id>,
