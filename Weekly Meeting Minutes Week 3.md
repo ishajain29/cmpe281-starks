@@ -1,4 +1,4 @@
-## Week 2
+## Week 3
 
 ### What did the team do the past week?
 * **Purvesh**: I worked on implementing the web services for basic insert operation. Also, I created web service stubs for other operations. I worked on connecting the Java code to the MondoDB using Mongo Java Driver.
