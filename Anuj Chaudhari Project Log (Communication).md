@@ -19,3 +19,8 @@ This Wiki page contains information about how team implemented Extreme Programmi
 * This week we communicated during our meeting hour as well as on our team's slack channel how to proceed to our project.
 * All the team members shared their views on how to manage git structures and git branches. 
 * Moreover to this, everyone discussed on how they are going to proceed in upcomming week. And discussed about the basic features that we should be focusing at the initial stage of the development.
+
+## Week 3
+* This week we decided how we will be approaching our project goal during our weekly meeting.
+* During team meeting, everyone shared their thoughts on their functionality and how they are going to implement it. Their dependency to other modules and how they will share data between other modules.
+* The communication went well and everyone got the idea about the system as a whole and what will be the features of the system.
