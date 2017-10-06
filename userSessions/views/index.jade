@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1 users
+	ul
+		each user, i in users
+			li 
+				a(href="/user/#{user.username}") #{user.email}
+
+	a(href="/adduser") SignUp!
+  
