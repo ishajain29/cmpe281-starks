@@ -7,7 +7,6 @@ Shared shopping cart will allow your friends, colleague and roommates to create 
 1. **Creating new shopping cart**
 
     * Admin User: Create new shopping cart, invite people to join or share joining link for that shopping cart
-
     * Other Users: Get joining link and join the group
 
 2. **When user wants to purchase an item**
@@ -22,7 +21,6 @@ Shared shopping cart will allow your friends, colleague and roommates to create 
 
     * Item in not in the cart
         * Add item directly to the shared cart.
-
     * Item is already in the cart
         * Show confirmation pop-up that item is already in the cart added by User-X, do you want to add the item again.
 
@@ -34,4 +32,67 @@ Shared shopping cart will allow your friends, colleague and roommates to create 
     * Admin can also be changed from this menu
 
 
+
+## Database Schema ##
+
+```javascript
+User-Carts
+{
+    _id      :   <cart_id>,
+    user_id  :   <user_id>,
+    products :   [ 
+                    { 
+                        product_id: <product_id>,
+                        quantity  : 1,
+                        name      : "Apple - MacBook Pro® - 13 Display",
+                        price     : $1299
+                    }
+                ]
+}
+```
+```javascript
+Shared-Carts
+{
+    _id             :   <shared_cart_id>,
+    admin_id        :   <user_id>,
+    group_users     :   [<user_id>, <user_id>, <user_id>],
+    products        :   [ 
+                            { 
+                                product_id: <product_id>,
+                                quantity  : 1,
+                                name      : "Google Pixel 2, 64GB Black",
+                                price     : $649,
+                                added_by  : <userid>
+                            }
+                        ],
+    invite_link     :   "https://sharedshoppingcart.com/cart/invite/460cab6e-a813-11e7-9f32-60f81dc1f3c0",
+    expiration_date :   "2016-05-18T16:00:00Z"
+}
+```
+
+## Web services (to be created) ##
+
+### User Cart Related Services ###
+
+1. Create new user cart
+2. Add items to user cart
+3. Update/Delete items from user cart
+4. Place order
+
+### Shared Cart Related Services ###
+
+1. Create shared cart
+2. Add users to shared cart[admin only]
+    * with email ids
+    * with sharable invite link
+3. Remove users from shared cart[admin only]
+4. Add items to shared cart
+5. Update/Delete items from shared cart
+    * Admin can update/delete all the items
+    * Group users can update/delete those items that are added by them only
+6. Place order[admin only]
+
+### Common Services ###
+
+1. Check for out-of-stock items in the cart [when cart is loaded and before any order is placed]
 
