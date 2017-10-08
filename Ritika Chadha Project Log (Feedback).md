@@ -17,3 +17,10 @@ In Extreme Programming, feedback can be of various forms: system and team. None 
 * The second week revolved around making decisions regarding the flow of data from the User Interface to the Database (Replicas) and the basic structural architecture to be adhered to. At first, it was suggested to initiate the code for the project from UI, however, feedback was incorporated that resulted in focussing more on the backend functionalities as suggested by the professor. 
 
 * Each person brought onto the table the different stories or use cases of their domain and the understanding of their matter to which the other team members then added the extra input.
+
+**Week 3**
+
+* This week, the team was upto the task of resolving the inter-module dependencies. Each of the domain is dependent on the domain of the other team member. Utmost attention to detail was given to the functionalities that would be dependent on the other team member. 
+
+* Positive feedback was delivered and accepted when it came to resolving the above mentioned. Moreover, changes were adopted according to the views of the others as well after the consensus of the entire team. This brought about a positive impact in aggregating the entire project.
+
