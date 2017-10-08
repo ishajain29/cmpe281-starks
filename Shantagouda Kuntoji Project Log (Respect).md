@@ -19,4 +19,9 @@ Respect in Extreme Programming (XP) refers to a system where everyone gives and 
 
 * Team unanimously agreed to take in the ideas that best suited fot the application. Sense of respect to other individuals and their ideas was maintained by all team members.
 
+#### Week 3 :
+* This week team discussed about the functionality interaction within the application. Dependencies of the application on other modules were discussed. Each member expresses his functionality and the dependencies he will be having within the application.
 
+* Team decided to make few changes as per the requirmeent and dependencies of the other team members. Team ensured that all the dependencies are taken care and wherever possible changed few functionalities with the consent of team memebr concerned.
+
+* Utmost respect was maintained for team members idea and their functionality dependencies, which will help to achieve great results as a Team. Changes to functinalities were only done with the consent of concerned team member.
