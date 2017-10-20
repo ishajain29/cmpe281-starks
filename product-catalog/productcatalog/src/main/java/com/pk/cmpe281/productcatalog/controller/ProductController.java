@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pk.cmpe281.productcatalog.dao.ProductCatalogDAO;
+import com.pk.cmpe281.productcatalog.exception.InvalidPageNumberException;
+import com.pk.cmpe281.productcatalog.exception.ProductNotFoundException;
 import com.pk.cmpe281.productcatalog.model.Product;
 
 @RestController
@@ -25,7 +27,6 @@ public class ProductController {
 	 @Qualifier("productCatalogDAO")
 	 ProductCatalogDAO productCatalogDAO;
 	 
-	 //NOTE: Set content-type=application/json in the request header
 	 @RequestMapping(value = "/product", method = RequestMethod.POST)
 	 @ResponseBody
 	 @ResponseStatus(HttpStatus.CREATED)
@@ -36,18 +37,20 @@ public class ProductController {
 	     
 	     if(product != null){
 	    	 product.setId(randomUUIDString);
-			 productCatalogDAO.insert(product);  	 
+			 productCatalogDAO.insertProduct(product);  	 
 	     }
 	 }
 	
 	 @RequestMapping(value = "/product/{id}", 
 			 method = RequestMethod.GET, produces = "application/json")
 	 @ResponseBody
-	 public Product getProductById(@PathVariable long id){
+	 public Product getProductById(@PathVariable String id){
 		 
-		 Product product = new Product();
+		 Product product = productCatalogDAO.getProductById(id);
 		 
-		 //TODO: Add logic for fetching the product based on the id from MongoDB
+		 if(product == null){
+			 throw new ProductNotFoundException();
+		 }
 		 
 		 return product;
 	 }
@@ -57,8 +60,25 @@ public class ProductController {
 	 @ResponseBody
 	 public List<Product> getProductsByPageNumber(@PathVariable int pageNumber){
 		 
+		 if(pageNumber <= 0){
+			 throw new InvalidPageNumberException();
+		 }
+		 
 		 List<Product> productList = new ArrayList<Product>();
-		 //TODO: Add Logic for fetching products from MongoDB
+		
+		 productList = productCatalogDAO.getProductsByPageNumber(pageNumber);
+		 
+		 return productList;
+	 }
+	 
+	 @RequestMapping(value = "/products/{category}", 
+			 method = RequestMethod.GET, produces = "application/json")
+	 @ResponseBody
+	 public List<Product> getProductsByCategory(@PathVariable String category){
+		 
+		 List<Product> productList = new ArrayList<Product>();
+		
+		 productList = productCatalogDAO.getProductsByCategory(category);
 		 
 		 return productList;
 	 }
