@@ -18,4 +18,9 @@ It is a core principle of LEAN which provides guidelines to remove waste during 
 * As we have started development of the web services from this week for all the data domains, there are number of services for which the result is dependent on the output of the web service of other domain.
 * During this meeting, we identified several possible dependencies for some features. We decided to develop web services in such a way that it doesn't create wait time for the dependent web service. We will try to do tasks in parallel as much as possible.
 
+## Week-4
+* This week we tried to eliminate the waste which is generally created by the Hand-offs. Meaning passing the work from one person to other person after completing first person's work.
+* During last week, we identified some web services which are possible dependencies. In this week, we implemented and documented these web services so that other team members who are waiting for it can use these services for their development.
+* Since, different web services have to be developed by the respective member avoiding hand-offs was impossible. We tried to maintain the Kanban board appropriately so that it helped to reduce the hand-off time. 
+
  
