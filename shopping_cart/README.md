@@ -39,7 +39,7 @@ Shared shopping cart will allow your friends, colleague and roommates to create 
 User-Carts
 {
     _id      :   <cart_id>,
-    user_id  :   <user_id>,
+    userId  :   <user_id>,
     products :   [ 
                     { 
                         product_id: <product_id>,
@@ -54,8 +54,8 @@ User-Carts
 Shared-Carts
 {
     _id             :   <shared_cart_id>,
-    admin_id        :   <user_id>,
-    group_users     :   [<user_id>, <user_id>, <user_id>],
+    adminId        :   <user_id>,
+    groupUsers     :   [<user_id>, <user_id>, <user_id>],
     products        :   [ 
                             { 
                                 product_id: <product_id>,
@@ -65,8 +65,8 @@ Shared-Carts
                                 added_by  : <userid>
                             }
                         ],
-    invite_link     :   "https://sharedshoppingcart.com/cart/invite/460cab6e-a813-11e7-9f32-60f81dc1f3c0",
-    expiration_date :   "2016-05-18T16:00:00Z"
+    inviteLink     :   "http://my.api.com/carts/shared/460cab6e-a813-11e7-9f32-60f81dc1f3c0/join",
+    expirationDate :   "2016-05-18T16:00:00Z"
 }
 ```
 
@@ -75,6 +75,25 @@ Shared-Carts
 ### User Cart Related Services ###
 
 1. Create new user cart
+
+    ```
+    POST http://my.api.com/carts/user
+    {
+        userId: <user_id>
+    }
+    
+
+    201 Created
+    {
+        cartId: <cart_id>,
+        link: "http://my.api.com/carts/user/<cart_id>"
+    }
+
+    403 Forbidden
+    {
+        error: "Cart for this user already exists"
+    }
+    ```
 2. Add items to user cart
 3. Update/Delete items from user cart
 4. Place order
@@ -82,6 +101,26 @@ Shared-Carts
 ### Shared Cart Related Services ###
 
 1. Create shared cart
+    ```
+    POST http://my.api.com/carts/shared
+    {
+        adminId: <user_id>,
+        groupUsers: [<user_id>, <user_id>, <user_id>]
+    }
+
+    
+    201 Created
+    {
+        sharedCartId: <shared_cart_id>,
+        link: "http://my.api.com/carts/shared/<shared_cart_id>",
+        inviteLink: "http://my.api.com/carts/shared/<shared_cart_id>/join"
+    }
+
+    403 Forbidden
+    {
+        error: "Cart for this user already exists"
+    }
+    ```
 2. Add users to shared cart[admin only]
     * with email ids
     * with sharable invite link
