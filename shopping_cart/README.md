@@ -115,11 +115,6 @@ Shared-Carts
         link: "http://my.api.com/carts/shared/<shared_cart_id>",
         inviteLink: "http://my.api.com/carts/shared/<shared_cart_id>/join"
     }
-
-    403 Forbidden
-    {
-        error: "Cart for this user already exists"
-    }
     ```
 2. Add users to shared cart[admin only]
     * with email ids

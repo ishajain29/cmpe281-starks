@@ -63,4 +63,10 @@ type (
 		CartId string `json:"cartId"`
 		Link   string `json:"link"`
 	}
+
+	CreateSharedCartResponse struct {
+		CartId     string `json:"cartId"`
+		Link       string `json:"link"`
+		InviteLink string `json:"inviteLink"`
+	}
 )

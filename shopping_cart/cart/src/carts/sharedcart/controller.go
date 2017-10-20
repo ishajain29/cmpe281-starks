@@ -39,9 +39,10 @@ func Create(c *gin.Context) {
 
 	err = collection.Insert(emptySharedCart)
 
-	resBody := models.CreateUserCartResponse{
-		CartId: cartId.Hex(),
-		Link:   models.LinkSharedCart + "/" + cartId.Hex(),
+	resBody := models.CreateSharedCartResponse{
+		CartId:     cartId.Hex(),
+		Link:       models.LinkSharedCart + "/" + cartId.Hex(),
+		InviteLink: models.LinkSharedCart + "/" + cartId.Hex() + "/join",
 	}
 
 	resJSON, _ := json.Marshal(resBody)
