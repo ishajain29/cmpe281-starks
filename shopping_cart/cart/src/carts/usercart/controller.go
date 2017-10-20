@@ -59,26 +59,27 @@ func Create(c *gin.Context) {
 
 func Get(c *gin.Context) {
 
-	u := models.Product{
-		//Id:       c.Param("id"),
-		Quantity: 10,
-		Name:     "Google Pixel 2",
-		Price:    649,
-		AddedBy:  "user_id",
+	c.Header("Content-Type", "application/json; charset=utf-8")
+
+	session, err := mgo.Dial(models.MongodbServer)
+	if err != nil {
+		fmt.Println("mongodb connection failed")
+		panic(err)
+	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	collection := session.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
+
+	var userCart models.UserCart
+	//err = collection.FindId(bson.ObjectIdHex(c.Param("id"))).One(&userCart)
+	err = collection.Find(bson.M{"userId": c.Param("id")}).One(&userCart)
+
+	if err != nil {
+		c.String(http.StatusNotFound, "{\"Error\": \"Could no cart found for this id\"}")
+		return
 	}
 
-	var products []models.Product
-
-	products = append(products, u)
-	products = append(products, u)
-
-	cart := models.UserCart{
-		//Id:       "cart_id",
-		UserId:   "user_id",
-		Products: products,
-	}
-
-	uj, _ := json.Marshal(cart)
+	uj, _ := json.Marshal(userCart)
 
 	c.String(http.StatusOK, string(uj))
 }

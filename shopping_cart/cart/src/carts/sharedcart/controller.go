@@ -50,7 +50,30 @@ func Create(c *gin.Context) {
 }
 
 func Get(c *gin.Context) {
-	c.String(http.StatusOK, "get "+c.Param("id"))
+
+	c.Header("Content-Type", "application/json; charset=utf-8")
+
+	session, err := mgo.Dial(models.MongodbServer)
+	if err != nil {
+		fmt.Println("mongodb connection failed")
+		panic(err)
+	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	collection := session.DB(models.MongodbDatabase).C(models.MongodbCollectionSharedCarts)
+
+	var sharedCart models.SharedCart
+	err = collection.FindId(bson.ObjectIdHex(c.Param("id"))).One(&sharedCart)
+	//err = collection.Find(bson.M{"userId": c.Param("id")}).One(&userCart)
+
+	if err != nil {
+		c.String(http.StatusNotFound, "{\"Error\": \"Could no cart found for this id\"}")
+		return
+	}
+
+	uj, _ := json.Marshal(sharedCart)
+
+	c.String(http.StatusOK, string(uj))
 }
 
 func Update(c *gin.Context) {
