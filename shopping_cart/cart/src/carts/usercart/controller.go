@@ -28,7 +28,7 @@ func Create(c *gin.Context) {
 	// Check for already existing cart for the same user
 	count, err := collection.Find(bson.M{"userId": reqUserId}).Limit(1).Count()
 	if err != nil {
-		c.String(http.StatusInternalServerError, "Could not fetch from database")
+		c.String(http.StatusInternalServerError, "{\"Error\": \"Could not fetch data from database\"}")
 		return
 	}
 	if count > 0 {

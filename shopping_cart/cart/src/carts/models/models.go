@@ -48,7 +48,6 @@ type (
 		AdminId        string        `json:"adminId" bson:"adminId"`
 		GroupUsers     []string      `json:"groupUsers" bson:"groupUsers"`
 		Products       []Product     `json:"products" bson:"products"`
-		InviteLink     string        `json:"inviteLink" bson:"inviteLink"`
 		ExpirationDate time.Time     `json:"expirationDate" bson:"expirationDate"`
 	}
 

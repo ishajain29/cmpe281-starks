@@ -1,13 +1,51 @@
 package sharedcart
 
 import (
-	"net/http"
-
+	"carts/models"
+	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
+	"net/http"
 )
 
 func Create(c *gin.Context) {
-	c.String(http.StatusOK, "create")
+
+	reqAdminId, _ := c.GetPostForm("adminId")
+	c.Header("Content-Type", "application/json; charset=utf-8")
+
+	session, err := mgo.Dial(models.MongodbServer)
+	if err != nil {
+		fmt.Println("mongodb connection failed")
+		panic(err)
+	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	collection := session.DB(models.MongodbDatabase).C(models.MongodbCollectionSharedCarts)
+
+	// Create Empty Cart
+	var products []models.Product
+
+	cartId := bson.NewObjectId()
+	var arrGroupUsers []string
+
+	emptySharedCart := models.SharedCart{
+		Id:         cartId,
+		AdminId:    reqAdminId,
+		GroupUsers: arrGroupUsers,
+		Products:   products,
+	}
+
+	err = collection.Insert(emptySharedCart)
+
+	resBody := models.CreateUserCartResponse{
+		CartId: cartId.Hex(),
+		Link:   models.LinkSharedCart + "/" + cartId.Hex(),
+	}
+
+	resJSON, _ := json.Marshal(resBody)
+	c.String(http.StatusCreated, string(resJSON))
 }
 
 func Get(c *gin.Context) {
