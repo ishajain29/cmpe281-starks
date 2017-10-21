@@ -14,7 +14,7 @@ import (
 // Create New User's Cart
 func Create(c *gin.Context) {
 
-	reqUserId, _ := c.GetPostForm("userId")
+	requserId, _ := c.GetPostForm("userId")
 	c.Header("Content-Type", "application/json; charset=utf-8")
 
 	session, err := mgo.Dial(models.MongodbServer)
@@ -27,7 +27,7 @@ func Create(c *gin.Context) {
 	collection := session.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
 
 	// Check for already existing cart for the same user
-	count, err := collection.Find(bson.M{"userId": reqUserId}).Limit(1).Count()
+	count, err := collection.Find(bson.M{"userId": requserId}).Limit(1).Count()
 	if err != nil {
 		c.String(http.StatusInternalServerError, "{\"Error\": \"Could not fetch data from database\"}")
 		return
@@ -43,7 +43,7 @@ func Create(c *gin.Context) {
 	cartId := bson.NewObjectId()
 	emptyUserCart := models.UserCart{
 		Id:       cartId,
-		UserId:   reqUserId,
+		UserId:   requserId,
 		Products: products,
 	}
 
@@ -115,11 +115,11 @@ func Update(c *gin.Context) {
 	for i := 0; i < len(request.Updates); i++ {
 		switch request.Updates[i].Operation {
 		case models.UPDATE_ADD:
-			addProductsInCart(collection, request.Updates[i].Products, c.Param("id"))
+			addUpdateProductsInCart(collection, request.Updates[i].Products, c.Param("id"))
 		case models.UPDATE_REMOVE:
 			removeProductsFromCart(collection, request.Updates[i].Products, c.Param("id"))
-		case models.UPDATE_REPACE:
-			replaceProductsInCart(collection, request.Updates[i].Products, c.Param("id"))
+			// case models.UPDATE_REPACE:
+			// 	replaceProductsInCart(collection, request.Updates[i].Products, c.Param("id"))
 		}
 	}
 
@@ -133,16 +133,17 @@ func Delete(c *gin.Context) {
 	c.String(http.StatusOK, "delete "+c.Param("id"))
 }
 
-func addProductsInCart(collection *mgo.Collection, products []models.Product, userId string) {
+// addUpdateProductsInCart
+func addUpdateProductsInCart(collection *mgo.Collection, products []models.Product, userID string) {
 
 	for i := 0; i < len(products); i++ {
 
-		count, _ := collection.Find(bson.M{"userId": userId, "products.id": products[i].Id}).Count()
+		count, _ := collection.Find(bson.M{"userId": userID, "products.id": products[i].Id}).Count()
 
 		fmt.Println("Product Id: ", products[i].Id.Hex(), " Count: ", count)
 
 		if count > 0 {
-			query := bson.M{"userId": userId, "products.id": products[i].Id}
+			query := bson.M{"userId": userID, "products.id": products[i].Id}
 			change := bson.M{"$set": bson.M{"products.$": products[i]}}
 			err := collection.Update(query, change)
 
@@ -151,8 +152,7 @@ func addProductsInCart(collection *mgo.Collection, products []models.Product, us
 			}
 
 		} else {
-			query := bson.M{"userId": userId}
-			//query := bson.M{"userId": userId, "products.id": bson.M{"$in": []models.Product{models.Product{Id: products[i].Id}}}}
+			query := bson.M{"userId": userID}
 			change := bson.M{"$push": bson.M{"products": products[i]}}
 			_, err := collection.Upsert(query, change)
 			if err != nil {
@@ -163,10 +163,15 @@ func addProductsInCart(collection *mgo.Collection, products []models.Product, us
 
 }
 
-func removeProductsFromCart(collection *mgo.Collection, products []models.Product, userId string) {
+// removeProductsFromCart
+func removeProductsFromCart(collection *mgo.Collection, products []models.Product, userID string) {
+	for i := 0; i < len(products); i++ {
+		query := bson.M{"userId": userID}
+		change := bson.M{"$pull": bson.M{"products": bson.M{"id": products[i].Id}}}
 
-}
-
-func replaceProductsInCart(collection *mgo.Collection, products []models.Product, userId string) {
-
+		err := collection.Update(query, change)
+		if err != nil {
+			fmt.Println("Error While removing: ", err)
+		}
+	}
 }
