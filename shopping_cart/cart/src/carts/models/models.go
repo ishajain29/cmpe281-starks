@@ -36,6 +36,12 @@ func init() {
 	println("LinkSharedCart:", LinkSharedCart)
 }
 
+const (
+	UPDATE_ADD    = "add"
+	UPDATE_REMOVE = "remove"
+	UPDATE_REPACE = "replace"
+)
+
 type (
 	UserCart struct {
 		Id       bson.ObjectId `json:"id" bson:"_id,omitempty"`
@@ -52,7 +58,7 @@ type (
 	}
 
 	Product struct {
-		Id       bson.ObjectId `json:"id" bson:"_id,omitempty"`
+		Id       bson.ObjectId `json:"id"`
 		Quantity int           `json:"quantity" bson:"quantity"`
 		Name     string        `json:"name" bson:"name"`
 		Price    float32       `json:"price" bson:"price"`
@@ -68,5 +74,14 @@ type (
 		CartId     string `json:"cartId"`
 		Link       string `json:"link"`
 		InviteLink string `json:"inviteLink"`
+	}
+
+	UpdateUserCartRequest struct {
+		Updates []Update `json:"update"`
+	}
+
+	Update struct {
+		Operation string    `json:"op"`
+		Products  []Product `json:"products"`
 	}
 )

@@ -42,7 +42,7 @@ User-Carts
     userId  :   <user_id>,
     products :   [ 
                     { 
-                        product_id: <product_id>,
+                        productId: <product_id>,
                         quantity  : 1,
                         name      : "Apple - MacBook Pro® - 13 Display",
                         price     : $1299
@@ -58,7 +58,7 @@ Shared-Carts
     groupUsers     :   [<user_id>, <user_id>, <user_id>],
     products        :   [ 
                             { 
-                                product_id: <product_id>,
+                                productId: <product_id>,
                                 quantity  : 1,
                                 name      : "Google Pixel 2, 64GB Black",
                                 price     : $649,
@@ -94,7 +94,51 @@ Shared-Carts
         error: "Cart for this user already exists"
     }
     ```
-2. Add items to user cart
+2. Add Remove items to/from user cart
+
+    ```
+    PATCH http://my.api.com/carts/user/<cart_id>
+    {
+        "update":
+                [
+                    {
+                        "op": "add", 
+                        "products": 
+                                [
+                                    {  
+                                        "id"        : "507f1f77bcf86cd799439011",
+                                        "quantity"  : 1,
+                                        "name"      : "Apple - MacBook Pro® - 13 Display",
+                                        "price"     : 1299
+                                    }
+                                ]
+                    },
+                    {
+                        "op": "remove", 
+                        "products": 
+                                [
+                                    {  
+                                        "id": "507f1f77bcf86cd799439012"
+                                    }   
+                                ]
+                    },
+                    {
+                        "op": "replace", 
+                        "products": 
+                                [
+                                    {  
+                                        "id": "507f1f77bcf86cd799439013",
+                                        "quantity"  : 4,
+                                        "name"      : "Apple - MacBook Pro® - 13 Display",
+                                        "price"     : 1299
+                                    }                            
+                                ]
+                    }
+                ]
+    }
+
+    200 OK
+    ```
 3. Update/Delete items from user cart
 4. Place order
 

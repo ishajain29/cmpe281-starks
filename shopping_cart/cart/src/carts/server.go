@@ -16,7 +16,8 @@ func main() {
 	{
 		r1.POST("", usercart.Create)
 		r1.GET("/:id", usercart.Get)
-		r1.PUT("/:id", usercart.Update)
+		//r1.PUT("/:id", usercart.Update)
+		r1.PATCH("/:id", usercart.Update)
 		r1.DELETE("/:id", usercart.Delete)
 	}
 
@@ -24,7 +25,8 @@ func main() {
 	{
 		r2.POST("", sharedcart.Create)
 		r2.GET("/:id", sharedcart.Get)
-		r2.PUT("/:id", sharedcart.Update)
+		r2.PATCH("/:id", usercart.Update)
+		//r2.PUT("/:id", sharedcart.Update)
 		r2.DELETE("/:id", sharedcart.Delete)
 	}
 	// By default it serves on :8080
