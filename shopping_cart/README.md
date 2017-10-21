@@ -92,7 +92,7 @@ Shared-Carts
 2. Add product to user cart
 
     ```
-    POST http://my.api.com/carts/user/<user_id>
+    POST http://my.api.com/carts/user/<user_id>/product
     {  
         "id"        : "507f1f77bcf86cd799439012",
         "quantity"  : 1,
