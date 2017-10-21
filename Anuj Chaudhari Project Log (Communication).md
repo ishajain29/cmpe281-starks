@@ -24,3 +24,8 @@ This Wiki page contains information about how team implemented Extreme Programmi
 * This week we decided how we will be approaching our project goal during our weekly meeting.
 * During team meeting, everyone shared their thoughts on their functionality and how they are going to implement it. Their dependency to other modules and how they will share data between other modules.
 * The communication went well and everyone got the idea about the system as a whole and what will be the features of the system.
+
+## Week 4
+* This week we communicated about the problems that we are facing or we may face due to the distributed nature of the system. After a break of one week it was important to communicate well and get everyone back on track.
+* Everyone shared thier thoughts their own webservices and what are the dependencies that their module rely on. We communicated about which frontend technologies we can use and gave their opinion about their knowledge on that some technologies.
+* Everyone discussed upon how they are going to proceed this week, what are the challanges that they facing. Everybody gave suggestions to each others.
