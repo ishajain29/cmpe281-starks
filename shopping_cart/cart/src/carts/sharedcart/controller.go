@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-func Create(c *gin.Context) {
+func CreateCart(c *gin.Context) {
 
 	reqAdminId, _ := c.GetPostForm("adminId")
 	c.Header("Content-Type", "application/json; charset=utf-8")
@@ -49,7 +49,7 @@ func Create(c *gin.Context) {
 	c.String(http.StatusCreated, string(resJSON))
 }
 
-func Get(c *gin.Context) {
+func GetCart(c *gin.Context) {
 
 	c.Header("Content-Type", "application/json; charset=utf-8")
 
@@ -76,10 +76,10 @@ func Get(c *gin.Context) {
 	c.String(http.StatusOK, string(uj))
 }
 
-func Update(c *gin.Context) {
+func UpdateCart(c *gin.Context) {
 	c.String(http.StatusOK, "update "+c.Param("id"))
 }
 
-func Delete(c *gin.Context) {
+func DeleteCart(c *gin.Context) {
 	c.String(http.StatusOK, "delete "+c.Param("id"))
 }

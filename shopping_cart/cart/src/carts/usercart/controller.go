@@ -11,8 +11,8 @@ import (
 	"net/http"
 )
 
-// Create New User's Cart
-func Create(c *gin.Context) {
+// CreateCart Create New User's Cart
+func CreateCart(c *gin.Context) {
 
 	requserId, _ := c.GetPostForm("userId")
 	c.Header("Content-Type", "application/json; charset=utf-8")
@@ -64,8 +64,8 @@ func Create(c *gin.Context) {
 	c.String(http.StatusCreated, string(resJSON))
 }
 
-// Get Get User's Cart from user id
-func Get(c *gin.Context) {
+// GetCart Get User's Cart from user id
+func GetCart(c *gin.Context) {
 
 	c.Header("Content-Type", "application/json; charset=utf-8")
 
@@ -92,86 +92,110 @@ func Get(c *gin.Context) {
 	c.String(http.StatusOK, string(uj))
 }
 
-// Update update user cart with patch method
-func Update(c *gin.Context) {
-	jsonResponse, _ := ioutil.ReadAll(c.Request.Body)
-	//fmt.Printf("%s", string(jsonResponse))
+// DeleteCart delete user cart
+func DeleteCart(c *gin.Context) {
+	c.String(http.StatusOK, "delete "+c.Param("id"))
+}
 
-	request := &models.UpdateUserCartRequest{}
-	err := json.Unmarshal([]byte(jsonResponse), request)
+// AddProduct to User cart
+func AddProduct(c *gin.Context) {
+	jsonRequest, _ := ioutil.ReadAll(c.Request.Body)
+
+	product := &models.Product{}
+	err := json.Unmarshal([]byte(jsonRequest), product)
 	if err != nil {
 		fmt.Println("Error Unmarshalling: ", err)
+		c.String(http.StatusInternalServerError, "")
+		return
 	}
+	product.AddedBy = c.Param("id")
 
 	session, err := mgo.Dial(models.MongodbServer)
 	if err != nil {
-		fmt.Println("mongodb connection failed")
-		panic(err)
+		fmt.Println("mongodb connection failed", err)
+		c.String(http.StatusInternalServerError, "")
+		return
 	}
 	defer session.Close()
 	session.SetMode(mgo.Monotonic, true)
 	collection := session.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
 
-	for i := 0; i < len(request.Updates); i++ {
-		switch request.Updates[i].Operation {
-		case models.UPDATE_ADD:
-			addUpdateProductsInCart(collection, request.Updates[i].Products, c.Param("id"))
-		case models.UPDATE_REMOVE:
-			removeProductsFromCart(collection, request.Updates[i].Products, c.Param("id"))
-			// case models.UPDATE_REPACE:
-			// 	replaceProductsInCart(collection, request.Updates[i].Products, c.Param("id"))
-		}
+	query := bson.M{"userId": c.Param("id")}
+	change := bson.M{"$push": bson.M{"products": product}}
+	_, err = collection.Upsert(query, change)
+	if err != nil {
+		fmt.Println("Error While inserting: ", err)
+		c.String(http.StatusInternalServerError, "")
+		return
 	}
 
-	println(request.Updates[0].Operation)
-
-	c.String(http.StatusOK, "Update")
+	c.String(http.StatusOK, "")
 }
 
-// Delete delete user cart
-func Delete(c *gin.Context) {
-	c.String(http.StatusOK, "delete "+c.Param("id"))
-}
+// UpdateProduct User Cart
+func UpdateProduct(c *gin.Context) {
+	jsonRequest, _ := ioutil.ReadAll(c.Request.Body)
 
-// addUpdateProductsInCart
-func addUpdateProductsInCart(collection *mgo.Collection, products []models.Product, userID string) {
+	product := &models.Product{}
+	err := json.Unmarshal([]byte(jsonRequest), product)
+	if err != nil {
+		fmt.Println("Error Unmarshalling: ", err)
+		c.String(http.StatusInternalServerError, "")
+		return
+	}
+	product.AddedBy = c.Param("id")
 
-	for i := 0; i < len(products); i++ {
+	session, err := mgo.Dial(models.MongodbServer)
+	if err != nil {
+		fmt.Println("mongodb connection failed", err)
+		c.String(http.StatusInternalServerError, "")
+		return
+	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	collection := session.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
 
-		count, _ := collection.Find(bson.M{"userId": userID, "products.id": products[i].Id}).Count()
+	fmt.Println("ProductId: ", c.Param("productid"))
+	count, _ := collection.Find(bson.M{"userId": c.Param("id"), "products.id": bson.ObjectIdHex(c.Param("productid"))}).Count()
 
-		fmt.Println("Product Id: ", products[i].Id.Hex(), " Count: ", count)
-
-		if count > 0 {
-			query := bson.M{"userId": userID, "products.id": products[i].Id}
-			change := bson.M{"$set": bson.M{"products.$": products[i]}}
-			err := collection.Update(query, change)
-
-			if err != nil {
-				fmt.Println("Error While updating: ", err)
-			}
-
-		} else {
-			query := bson.M{"userId": userID}
-			change := bson.M{"$push": bson.M{"products": products[i]}}
-			_, err := collection.Upsert(query, change)
-			if err != nil {
-				fmt.Println("Error While inserting: ", err)
-			}
-		}
+	if count == 0 {
+		c.String(http.StatusNotFound, "")
+		return
 	}
 
+	query := bson.M{"userId": c.Param("id"), "products.id": product.Id}
+	change := bson.M{"$set": bson.M{"products.$": product}}
+	err = collection.Update(query, change)
+
+	if err != nil {
+		fmt.Println("Error While updating: ", err)
+		c.String(http.StatusInternalServerError, "")
+		return
+	}
+
+	c.String(http.StatusOK, "")
 }
 
-// removeProductsFromCart
-func removeProductsFromCart(collection *mgo.Collection, products []models.Product, userID string) {
-	for i := 0; i < len(products); i++ {
-		query := bson.M{"userId": userID}
-		change := bson.M{"$pull": bson.M{"products": bson.M{"id": products[i].Id}}}
-
-		err := collection.Update(query, change)
-		if err != nil {
-			fmt.Println("Error While removing: ", err)
-		}
+// RemoveProduct User Cart
+func RemoveProduct(c *gin.Context) {
+	session, err := mgo.Dial(models.MongodbServer)
+	if err != nil {
+		fmt.Println("mongodb connection failed", err)
+		c.String(http.StatusInternalServerError, "")
+		return
 	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+	collection := session.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
+
+	fmt.Println("ProductId: ", c.Param("productid"))
+
+	query := bson.M{"userId": c.Param("id")}
+	change := bson.M{"$pull": bson.M{"products": bson.M{"id": bson.ObjectIdHex(c.Param("productid"))}}}
+
+	err = collection.Update(query, change)
+	if err != nil {
+		fmt.Println("Error While removing: ", err)
+	}
+	c.String(http.StatusOK, "")
 }
