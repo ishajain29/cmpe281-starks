@@ -81,66 +81,48 @@ Shared-Carts
     {
         userId: <user_id>
     }
-    
 
     201 Created
-    {
-        cartId: <cart_id>,
-        link: "http://my.api.com/carts/user/<cart_id>"
-    }
 
     403 Forbidden
     {
         error: "Cart for this user already exists"
     }
     ```
-2. Add Remove items to/from user cart
+2. Add product to user cart
 
     ```
-    PATCH http://my.api.com/carts/user/<cart_id>
-    {
-        "update":
-                [
-                    {
-                        "op": "add", 
-                        "products": 
-                                [
-                                    {  
-                                        "id"        : "507f1f77bcf86cd799439011",
-                                        "quantity"  : 1,
-                                        "name"      : "Apple - MacBook Pro® - 13 Display",
-                                        "price"     : 1299
-                                    }
-                                ]
-                    },
-                    {
-                        "op": "remove", 
-                        "products": 
-                                [
-                                    {  
-                                        "id": "507f1f77bcf86cd799439012"
-                                    }   
-                                ]
-                    },
-                    {
-                        "op": "replace", 
-                        "products": 
-                                [
-                                    {  
-                                        "id": "507f1f77bcf86cd799439013",
-                                        "quantity"  : 4,
-                                        "name"      : "Apple - MacBook Pro® - 13 Display",
-                                        "price"     : 1299
-                                    }                            
-                                ]
-                    }
-                ]
+    POST http://my.api.com/carts/user/<user_id>
+    {  
+        "id"        : "507f1f77bcf86cd799439012",
+        "quantity"  : 1,
+        "name"      : "Apple - MacBook Pro® - 13 Display",
+        "price"     : 1290
     }
 
     200 OK
     ```
-3. Update/Delete items from user cart
-4. Place order
+3. Update product from user cart
+
+    ```
+    PUT http://my.api.com/carts/user/<user_id>/product/<product_id>
+    {  
+        "id"		: "507f1f77bcf86cd799439012",
+        "quantity"  : 2,
+        "name"      : "Apple - MacBook Pro® - 13 Display",
+        "price"     : 1290
+    }
+
+    200 OK
+    ```
+4. Remove product from user cart
+
+    ```
+    DELETE http://my.api.com/carts/user/<user_id>/product/<product_id>
+
+    200 OK
+    ```
+5. Place order
 
 ### Shared Cart Related Services ###
 
