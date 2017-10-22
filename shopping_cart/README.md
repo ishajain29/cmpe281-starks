@@ -39,10 +39,10 @@ Shared shopping cart will allow your friends, colleague and roommates to create 
 User-Carts
 {
     _id      :   <cart_id>,
-    user_id  :   <user_id>,
+    userId  :   <user_id>,
     products :   [ 
                     { 
-                        product_id: <product_id>,
+                        productId: <product_id>,
                         quantity  : 1,
                         name      : "Apple - MacBook Pro® - 13 Display",
                         price     : $1299
@@ -54,19 +54,19 @@ User-Carts
 Shared-Carts
 {
     _id             :   <shared_cart_id>,
-    admin_id        :   <user_id>,
-    group_users     :   [<user_id>, <user_id>, <user_id>],
+    adminId        :   <user_id>,
+    groupUsers     :   [<user_id>, <user_id>, <user_id>],
     products        :   [ 
                             { 
-                                product_id: <product_id>,
+                                productId: <product_id>,
                                 quantity  : 1,
                                 name      : "Google Pixel 2, 64GB Black",
                                 price     : $649,
                                 added_by  : <userid>
                             }
                         ],
-    invite_link     :   "https://sharedshoppingcart.com/cart/invite/460cab6e-a813-11e7-9f32-60f81dc1f3c0",
-    expiration_date :   "2016-05-18T16:00:00Z"
+    inviteLink     :   "http://my.api.com/carts/shared/460cab6e-a813-11e7-9f32-60f81dc1f3c0/join",
+    expirationDate :   "2016-05-18T16:00:00Z"
 }
 ```
 
@@ -75,13 +75,73 @@ Shared-Carts
 ### User Cart Related Services ###
 
 1. Create new user cart
-2. Add items to user cart
-3. Update/Delete items from user cart
-4. Place order
+
+    ```
+    POST http://my.api.com/carts/user
+    {
+        userId: <user_id>
+    }
+
+    201 Created
+
+    403 Forbidden
+    {
+        error: "Cart for this user already exists"
+    }
+    ```
+2. Add product to user cart
+
+    ```
+    POST http://my.api.com/carts/user/<user_id>/product
+    {  
+        "id"        : "507f1f77bcf86cd799439012",
+        "quantity"  : 1,
+        "name"      : "Apple - MacBook Pro® - 13 Display",
+        "price"     : 1290
+    }
+
+    200 OK
+    ```
+3. Update product from user cart
+
+    ```
+    PUT http://my.api.com/carts/user/<user_id>/product/<product_id>
+    {  
+        "id"		: "507f1f77bcf86cd799439012",
+        "quantity"  : 2,
+        "name"      : "Apple - MacBook Pro® - 13 Display",
+        "price"     : 1290
+    }
+
+    200 OK
+    ```
+4. Remove product from user cart
+
+    ```
+    DELETE http://my.api.com/carts/user/<user_id>/product/<product_id>
+
+    200 OK
+    ```
+5. Place order
 
 ### Shared Cart Related Services ###
 
 1. Create shared cart
+    ```
+    POST http://my.api.com/carts/shared
+    {
+        adminId: <user_id>,
+        groupUsers: [<user_id>, <user_id>, <user_id>]
+    }
+
+    
+    201 Created
+    {
+        sharedCartId: <shared_cart_id>,
+        link: "http://my.api.com/carts/shared/<shared_cart_id>",
+        inviteLink: "http://my.api.com/carts/shared/<shared_cart_id>/join"
+    }
+    ```
 2. Add users to shared cart[admin only]
     * with email ids
     * with sharable invite link
