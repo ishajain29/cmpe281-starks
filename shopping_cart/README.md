@@ -39,7 +39,7 @@ Shared shopping cart will allow your friends, colleague and roommates to create 
 User-Carts
 {
     _id      :   <cart_id>,
-    userId  :   <user_id>,
+    userId   :   <user_id>,
     products :   [ 
                     { 
                         productId: <product_id>,
@@ -54,8 +54,9 @@ User-Carts
 Shared-Carts
 {
     _id             :   <shared_cart_id>,
-    adminId        :   <user_id>,
-    groupUsers     :   [<user_id>, <user_id>, <user_id>],
+    adminId         :   <user_id>,
+    cartName        :   <cart_name>,
+    groupUsers      :   [<user_id>, <user_id>, <user_id>],
     products        :   [ 
                             { 
                                 productId: <product_id>,
@@ -76,81 +77,120 @@ Shared-Carts
 
 1. Create new user cart
 
-    ```
-    POST http://my.api.com/carts/user
-    {
-        userId: <user_id>
-    }
+```
+POST http://my.api.com/carts/user
+{
+    userId: <user_id>
+}
 
-    201 Created
+201 Created
 
-    403 Forbidden
-    {
-        error: "Cart for this user already exists"
-    }
-    ```
+403 Forbidden
+{
+    error: "Cart for this user already exists"
+}
+```
 2. Add product to user cart
 
-    ```
-    POST http://my.api.com/carts/user/<user_id>/product
-    {  
-        "id"        : "507f1f77bcf86cd799439012",
-        "quantity"  : 1,
-        "name"      : "Apple - MacBook Pro® - 13 Display",
-        "price"     : 1290
-    }
+```
+POST http://my.api.com/carts/user/<user_id>/product
+{  
+    "id"        : "507f1f77bcf86cd799439012",
+    "quantity"  : 1,
+    "name"      : "Apple - MacBook Pro® - 13 Display",
+    "price"     : 1290
+}
 
-    200 OK
-    ```
+200 OK
+```
 3. Update product from user cart
 
-    ```
-    PUT http://my.api.com/carts/user/<user_id>/product/<product_id>
-    {  
-        "id"		: "507f1f77bcf86cd799439012",
-        "quantity"  : 2,
-        "name"      : "Apple - MacBook Pro® - 13 Display",
-        "price"     : 1290
-    }
+```
+PUT http://my.api.com/carts/user/<user_id>/product/<product_id>
+{  
+    "id"        : "507f1f77bcf86cd799439012",
+    "quantity"  : 2,
+    "name"      : "Apple - MacBook Pro® - 13 Display",
+    "price"     : 1290
+}
 
-    200 OK
-    ```
+200 OK
+```
 4. Remove product from user cart
 
-    ```
-    DELETE http://my.api.com/carts/user/<user_id>/product/<product_id>
+```
+DELETE http://my.api.com/carts/user/<user_id>/product/<product_id>
 
-    200 OK
-    ```
+200 OK
+```
 5. Place order
 
 ### Shared Cart Related Services ###
 
 1. Create shared cart
-    ```
-    POST http://my.api.com/carts/shared
-    {
-        adminId: <user_id>,
-        groupUsers: [<user_id>, <user_id>, <user_id>]
-    }
+```
+POST http://my.api.com/carts/shared
+{
+    adminId: <user_id>,
+    cartName: <cart_name>,
+    groupUsers: [<user_id>, <user_id>, <user_id>]
+}
 
-    
-    201 Created
-    {
-        sharedCartId: <shared_cart_id>,
-        link: "http://my.api.com/carts/shared/<shared_cart_id>",
-        inviteLink: "http://my.api.com/carts/shared/<shared_cart_id>/join"
-    }
-    ```
+
+201 Created
+{
+    cartId: <shared_cart_id>,
+    link: "http://my.api.com/carts/shared/<shared_cart_id>",
+    inviteLink: "http://my.api.com/carts/shared/<shared_cart_id>/join"
+}
+```
+
 2. Add users to shared cart[admin only]
     * with email ids
     * with sharable invite link
+
 3. Remove users from shared cart[admin only]
-4. Add items to shared cart
-5. Update/Delete items from shared cart
-    * Admin can update/delete all the items
-    * Group users can update/delete those items that are added by them only
-6. Place order[admin only]
+
+4. Add products to shared cart
+```
+POST http://my.api.com/carts/shared/<cart_id>/product
+{  
+    "id"        : "507f1f77bcf86cd799439012",
+    "quantity"  : 1,
+    "name"      : "Apple - MacBook Pro® - 13 Display",
+    "price"     : 1290,
+    "addedBy"	: "anuj6"
+}
+
+200 OK
+```
+
+5. Update Products from shared cart
+    * Admin can update all the items
+    * Group users can update those items that are added by them only
+```
+PUT http://my.api.com/carts/shared/<cart_id>/product/507f1f77bcf86cd799439012
+{  
+    "id"        : "507f1f77bcf86cd799439012",
+    "quantity"  : 2,
+    "name"      : "Apple - MacBook Pro® - 13 Display",
+    "price"     : 1290,
+    "addedBy"	: "anuj6"
+}
+
+200 OK
+```
+
+6. Remove Products from shared cart
+    * Admin can remove all the items
+    * Group users can remove those items that are added by them only
+```
+DELETE http://my.api.com/carts/shared/<cart_id>/product/<product_id>
+
+200 OK
+```
+
+7. Place order[admin only]
 
 ### Common Services ###
 
