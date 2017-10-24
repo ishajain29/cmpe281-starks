@@ -18,6 +18,8 @@ func main() {
 		r1.GET("/:userId", usercart.GetCart)
 		r1.DELETE("/:userId", usercart.DeleteCart)
 
+		r1.POST("/:userId/order", usercart.PlaceOrder)
+
 		r1.POST("/:userId/product", usercart.AddProduct)
 		r1.PUT("/:userId/product/:productId", usercart.UpdateProduct)
 		r1.DELETE("/:userId/product/:productId", usercart.RemoveProduct)
@@ -28,6 +30,8 @@ func main() {
 		r2.POST("", sharedcart.CreateCart)
 		r2.GET("/:cartId", sharedcart.GetCart)
 		r2.DELETE("/:cartId", sharedcart.DeleteCart)
+
+		r2.POST("/:cartId/order", sharedcart.PlaceOrder)
 
 		r2.POST("/:cartId/product", sharedcart.AddProduct)
 		r2.PUT("/:cartId/product/:productId", sharedcart.UpdateProduct)

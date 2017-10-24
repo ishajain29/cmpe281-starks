@@ -125,6 +125,11 @@ DELETE http://my.api.com/carts/user/<user_id>/product/<product_id>
 ```
 5. Place order
 
+```
+POST http://my.api.com/carts/user/<user_id>/order
+
+200 OK
+```
 ### Shared Cart Related Services ###
 
 1. Create shared cart
@@ -191,6 +196,11 @@ DELETE http://my.api.com/carts/shared/<cart_id>/product/<product_id>
 ```
 
 7. Place order[admin only]
+```
+POST http://my.api.com/carts/user/<user_id>/order
+
+200 OK
+```
 
 ### Common Services ###
 
