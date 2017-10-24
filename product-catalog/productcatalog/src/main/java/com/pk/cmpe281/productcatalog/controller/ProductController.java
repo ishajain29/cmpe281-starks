@@ -82,4 +82,16 @@ public class ProductController {
 		 
 		 return productList;
 	 }
+	 
+	 @RequestMapping(value = "/products/search/{keyword}", 
+			 method = RequestMethod.GET, produces = "application/json")
+	 @ResponseBody
+	 public List<Product> searchProduct(@PathVariable String keyword){
+	     
+		 List<Product> productList = new ArrayList<Product>();
+		
+		 productList = productCatalogDAO.searchProduct(keyword);
+		 
+		 return productList;   
+	 }
 }
