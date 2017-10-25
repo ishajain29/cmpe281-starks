@@ -2,7 +2,7 @@ extends layout
 
 block content
 	h1 Add User
-	form(name='adduser', method='post', action='/adduser')
+	form(name='addUser', method='post', action='/addUser')
 		div
 			input#inputEmail(type='text', placeholder='Enter Email', name='email')
 		div
@@ -10,7 +10,7 @@ block content
 		div
 			input#inputLastName(type='text', placeholder='Enter Lastname', name='lastname')
 		div
-			input#inputLastName(type='text', placeholder='Enter username', name='username')
+			input#inputUserName(type='text', placeholder='Enter username', name='username')
 		div
 			input#inputPassword(type='text', placeholder='Enter Password', name='password')
 		div
