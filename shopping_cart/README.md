@@ -151,10 +151,22 @@ POST http://my.api.com/carts/shared
 ```
 
 2. Add users to shared cart[admin only]
-    * with email ids
+    * with email Ids/ User Ids
+    ```
+    POST http://my.api.com/carts/shared/<cart_id>/user
+    [<user_id_1>, <user_id_2>, <user_id_3>]
+
+    200 OK
+    ```
+
     * with sharable invite link
 
 3. Remove users from shared cart[admin only]
+```
+DELETE http://my.api.com/carts/shared/<cart_id>/user/<user_id>
+
+200 OK
+```
 
 4. Add products to shared cart
 ```
