@@ -36,6 +36,9 @@ func main() {
 		r2.POST("/:cartId/product", sharedcart.AddProduct)
 		r2.PUT("/:cartId/product/:productId", sharedcart.UpdateProduct)
 		r2.DELETE("/:cartId/product/:productId", sharedcart.RemoveProduct)
+
+		r2.POST("/:cartId/user", sharedcart.AddUser)
+		r2.DELETE("/:cartId/user/:userId", sharedcart.RemoveUser)
 	}
 	// By default it serves on :8080
 	router.Run()

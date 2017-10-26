@@ -244,6 +244,62 @@ func PlaceOrder(c *gin.Context) {
 	c.String(http.StatusOK, "")
 }
 
+// AddUser add users to the shared cart
+func AddUser(c *gin.Context) {
+	jsonRequest, _ := ioutil.ReadAll(c.Request.Body)
+
+	var arrUserId []string
+
+	if err := json.Unmarshal([]byte(jsonRequest), &arrUserId); err != nil {
+		fmt.Println("Error Unmarshalling: ", err)
+		c.String(http.StatusInternalServerError, "Error Unmarshalling json")
+	}
+
+	session, collection, err := getMongoConnection()
+	if err != nil {
+		c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
+		return
+	}
+	defer session.Close()
+
+	query := bson.M{"_id": bson.ObjectIdHex(c.Param("cartId"))}
+	change := bson.M{"$push": bson.M{"groupUsers": bson.M{"$each": arrUserId}}}
+	_, err = collection.Upsert(query, change)
+	if err != nil {
+		fmt.Println("Error While inserting: ", err)
+		c.String(http.StatusInternalServerError, "error while inserting")
+		return
+	}
+
+	c.String(http.StatusOK, "")
+
+}
+
+// RemoveUser remove users from shared cart
+func RemoveUser(c *gin.Context) {
+
+	session, collection, err := getMongoConnection()
+	if err != nil {
+		c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
+		return
+	}
+	defer session.Close()
+
+	fmt.Println("UserId: ", c.Param("userId"))
+
+	query := bson.M{"_id": bson.ObjectIdHex(c.Param("cartId"))}
+	change := bson.M{"$pull": bson.M{"groupUsers": c.Param("userId")}}
+
+	err = collection.Update(query, change)
+	if err != nil {
+		fmt.Println("Error While removing user: ", err)
+		c.String(http.StatusInternalServerError, "Error while removing group user from mongodb")
+		return
+	}
+
+	c.String(http.StatusOK, "")
+}
+
 func getMongoConnection() (mgo.Session, mgo.Collection, error) {
 
 	var collection *mgo.Collection
