@@ -30,3 +30,9 @@ In Extreme Programming, feedback can be of various forms: system and team. None 
 
 * A decorum of positive feedback mechanism was maintained. Through this system of listening, speaking and concluding all the valid points brought to the table, general consensus was met in inter-database access only through services. Such a decision would prevent breach of information and also maintain privacy.
 
+**Week 5**
+
+* This week, we came to common grounds of working on front-end technology and connecting it to our application. 
+
+* It was ensured that each person's work and framework was taken into account before deciding upon the technology to be used. This was extremely essential since each person had different databases and programming languages that they were working on.
+
