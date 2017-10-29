@@ -15,23 +15,30 @@ func main() {
 	r1 := router.Group("/carts/user")
 	{
 		r1.POST("", usercart.CreateCart)
-		r1.GET("/:id", usercart.GetCart)
-		//r1.PUT("/:id", usercart.Update)
-		//r1.PATCH("/:id", usercart.UpdateCart)
-		r1.DELETE("/:id", usercart.DeleteCart)
+		r1.GET("/:userId", usercart.GetCart)
+		r1.DELETE("/:userId", usercart.DeleteCart)
 
-		r1.POST("/:id/product", usercart.AddProduct)
-		r1.PUT("/:id/product/:productid", usercart.UpdateProduct)
-		r1.DELETE("/:id/product/:productid", usercart.RemoveProduct)
+		r1.POST("/:userId/order", usercart.PlaceOrder)
+
+		r1.POST("/:userId/product", usercart.AddProduct)
+		r1.PUT("/:userId/product/:productId", usercart.UpdateProduct)
+		r1.DELETE("/:userId/product/:productId", usercart.RemoveProduct)
 	}
 
 	r2 := router.Group("/carts/shared")
 	{
 		r2.POST("", sharedcart.CreateCart)
-		r2.GET("/:id", sharedcart.GetCart)
-		//r2.PATCH("/:id", usercart.UpdateCart)
-		//r2.PUT("/:id", sharedcart.Update)
-		r2.DELETE("/:id", sharedcart.DeleteCart)
+		r2.GET("/:cartId", sharedcart.GetCart)
+		r2.DELETE("/:cartId", sharedcart.DeleteCart)
+
+		r2.POST("/:cartId/order", sharedcart.PlaceOrder)
+
+		r2.POST("/:cartId/product", sharedcart.AddProduct)
+		r2.PUT("/:cartId/product/:productId", sharedcart.UpdateProduct)
+		r2.DELETE("/:cartId/product/:productId", sharedcart.RemoveProduct)
+
+		r2.POST("/:cartId/user", sharedcart.AddUser)
+		r2.DELETE("/:cartId/user/:userId", sharedcart.RemoveUser)
 	}
 	// By default it serves on :8080
 	router.Run()

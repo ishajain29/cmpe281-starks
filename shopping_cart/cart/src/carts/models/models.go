@@ -52,6 +52,7 @@ type (
 	SharedCart struct {
 		Id             bson.ObjectId `json:"id" bson:"_id,omitempty"`
 		AdminId        string        `json:"adminId" bson:"adminId"`
+		CartName       string        `json:"cartName" bson:"cartName"`
 		GroupUsers     []string      `json:"groupUsers" bson:"groupUsers"`
 		Products       []Product     `json:"products" bson:"products"`
 		ExpirationDate time.Time     `json:"expirationDate" bson:"expirationDate"`
@@ -65,23 +66,18 @@ type (
 		AddedBy  string        `json:"addedBy" bson:"addedBy"`
 	}
 
-	CreateUserCartResponse struct {
-		CartId string `json:"cartId"`
-		Link   string `json:"link"`
-	}
-
 	CreateSharedCartResponse struct {
 		CartId     string `json:"cartId"`
 		Link       string `json:"link"`
 		InviteLink string `json:"inviteLink"`
 	}
 
-	UpdateUserCartRequest struct {
-		Updates []Update `json:"update"`
+	CreateUserCartRequest struct {
+		UserId string `json:userId`
 	}
 
-	Update struct {
-		Operation string    `json:"op"`
-		Products  []Product `json:"products"`
+	CreateSharedCartRequest struct {
+		AdminId  string `json:adminId`
+		CartName string `json:cartName`
 	}
 )
