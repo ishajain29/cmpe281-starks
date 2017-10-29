@@ -26,7 +26,6 @@ router.get('/:username', function(req, res) {
 });
 
 var deleteUser = "DELETE FROM users.user_details  WHERE username = ? ALLOW FILTERING";
-;
 
 router.delete('/:username', function(req, res){
 	client.execute(deleteUser,[req.params.username], function(err, result){
