@@ -23,3 +23,8 @@ Currently I am working on the user sessions and to begin with I have started wit
 ## Week-4
 This week we have started building the basic web services. Hence I suggested all of the team member to build a simple connection oriented service to understand the basics and to maintain a log of all the requests and responses for a particular service which can be later used by other team members. They also planned to have a direct connectivity among the other server's databases, but to keep it simple I proposed to built the apis and do the communication, so that all the data can be shared in simple json format.For simplicity we will use a NoSQL dbs for storing all the data.
 
+## Week-5
+In this week we tried to complete our remaining web services and figuring out how to put our databases on cloud and creating clusters. So for creating the shared cart, my teammates were planning to implement two methods: one by sharing a link to the cart and other by adding the members directly, by using their usernames. But for the simplicity sake I suggested to implement only one out of the two methods as it might take long to implement both.
+Then I also asked them to finalize a template for front end, so that we can start making changes to the front end according to our web services, such that in later phases of development it will be easy for us. Because integrating all the code at the end will be more troublesome and will take more time.
+
+
