@@ -32,3 +32,10 @@ Respect in Extreme Programming (XP) refers to a system where everyone gives and 
 * Everyone gave their front end decvelopment ideas and we all agreed to use AngularJs as user interface technology for our project. Everyone was given the proper respect and their ideas were discussed with pro/cons of using them.
 
 * Since we were in fourth week of project, we agreed to accelarate the projects works and finish the web services part in this week. Respect to other team members was maintaind at all the phases of discussion.
+
+#### Week 5:
+* Team had discussion about connecting backend to frontend technology. JQuery will be used to implement UI. Everyone's views were considered while deciding about UI framework.
+
+* This week team will be working on running DB's on aws. We had good discussion about that. All the queries and clarification of team were discussed and utmost respect was maintained for other team members in the process.
+
+* As just four weeks are left to finsih the project, we decided to fasten our works. In all the processes, respect towards other members was maintained.
