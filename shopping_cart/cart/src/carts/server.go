@@ -5,6 +5,7 @@ import (
 	"carts/usercart"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"net/http"
 	"os"
 )
 
@@ -25,6 +26,7 @@ func main() {
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
 
+	router.GET("", ping)
 	r1 := router.Group("/carts/user")
 	{
 		r1.POST("", usercart.CreateCart)
@@ -55,4 +57,8 @@ func main() {
 	}
 	// By default it serves on :8080
 	router.Run(":" + ServerPort)
+}
+
+func ping(c *gin.Context) {
+	c.String(http.StatusOK, "Server running...")
 }
