@@ -14,7 +14,7 @@ public class ProductCatalogDAOImpl implements ProductCatalogDAO{
 	
 	private MongoOperations mongoOps;
 	private static final String PRODUCT_COLLECTION = "products";
-	private static final int RESULTS_PER_PAGE = 10;
+	private static final int RESULTS_PER_PAGE = 9;
 	
 	public ProductCatalogDAOImpl(MongoOperations mongoOps){
 		this.mongoOps = mongoOps;
