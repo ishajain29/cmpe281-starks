@@ -1,7 +1,23 @@
-var pcProductCatalogServerURL = "http://18.221.248.174:8080";
+var pcProductCatalogServerURL = "http://18.221.248.174:8080/productCatalog";
+
+/* Fetch page 1 product data to display on Home Page */
+function pcGetProductData(){
+	
+	$.ajax({
+	   url: pcProductCatalogServerURL + '/products/page/1',
+	   error: function(xhr, status, error) {
+	      console.log(xhr.responseText);
+	   },
+	   success: function(data) {
+	    var $prodctHTML = pcGenerateProductDOM(data);
+	    $('#expeditions').append($prodctHTML);
+	   },
+	   dataType: "json"
+	});
+}
 
 /* To Generate the Home page Product Section DOM based on the product data fethced from the server */
-function generateProductDOM(productArray){
+function pcGenerateProductDOM(productArray){
 
 	var productHTML = "";
 	var productCounter = 1;

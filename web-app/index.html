@@ -37,17 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 
-		$.ajax({
-		   url: pcProductCatalogServerURL + '/productCatalog/products/page/1',
-		   error: function(xhr, status, error) {
-		      console.log(xhr.responseText);
-		   },
-		   success: function(data) {
-		    var $prodctHTML = generateProductDOM(data);
-		    $('#expeditions').append($prodctHTML);
-		   },
-		   dataType: "json"
-		});
+		pcGetProductData();
 
 	});
 </script>
