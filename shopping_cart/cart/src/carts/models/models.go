@@ -29,7 +29,8 @@ func init() {
 	MongodbCollectionUserCarts = "usercarts"
 	MongodbCollectionSharedCarts = "sharedcarts"
 
-	LinkAPI = os.Getenv("SERVER_ADDRESS") + "/carts"
+	var serverAddress = os.Getenv("SERVER_ADDRESS") + ":" + os.Getenv("SERVER_PORT")
+	LinkAPI = serverAddress + "/carts"
 	LinkUserCart = LinkAPI + "/user"
 	LinkSharedCart = LinkAPI + "/shared"
 

@@ -3,9 +3,22 @@ package main
 import (
 	"carts/sharedcart"
 	"carts/usercart"
-
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+	"os"
 )
+
+var ServerAddress string
+var ServerPort string
+
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		panic("Error loading .env file")
+	}
+	ServerAddress = os.Getenv("SERVER_ADDRESS")
+	ServerPort = os.Getenv("SERVER_PORT")
+}
 
 func main() {
 	// Creates a gin router with default middleware:
@@ -41,5 +54,5 @@ func main() {
 		r2.DELETE("/:cartId/user/:userId", sharedcart.RemoveUser)
 	}
 	// By default it serves on :8080
-	router.Run()
+	router.Run(":" + ServerPort)
 }
