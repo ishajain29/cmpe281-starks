@@ -24,3 +24,13 @@ This Wiki page contains information about how team implemented Extreme Programmi
 * This week we decided how we will be approaching our project goal during our weekly meeting.
 * During team meeting, everyone shared their thoughts on their functionality and how they are going to implement it. Their dependency to other modules and how they will share data between other modules.
 * The communication went well and everyone got the idea about the system as a whole and what will be the features of the system.
+
+## Week 4
+* This week we communicated about the problems that we are facing or we may face due to the distributed nature of the system. After a break of one week it was important to communicate well and get everyone back on track.
+* Everyone shared thier thoughts their own webservices and what are the dependencies that their module rely on. We communicated about which frontend technologies we can use and gave their opinion about their knowledge on that some technologies.
+* Everyone discussed upon how they are going to proceed this week, what are the challanges that they facing. Everybody gave suggestions to each others.
+
+## Week 5
+* From this week new phase of design patterns is starting in the project. This will also mean more ingeration tasks will come up. I forcast that the task of maintaining good communicaiton lines will increase and I will have to work harder to keep track that the team members are effectively speaking to each other.
+* The team's communication was robust as the changes in the design pattern arrived. We decided how we will create ui for the product. Adopting the new pattern was not easy as most of the teammates were new to the design pattern. But after a meeting and discussion everyone knew how they will proceed to this methodology and everyone got enough knowledge to adapt new method.
+
