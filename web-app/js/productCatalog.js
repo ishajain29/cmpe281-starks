@@ -10,7 +10,11 @@ function pcGetProductData(){
 	   },
 	   success: function(data) {
 	    var $prodctHTML = pcGenerateProductDOM(data);
-	    $('#expeditions').append($prodctHTML);
+		$('#expeditions').append($prodctHTML);
+
+		var event = new Event('productsloaded');
+		document.dispatchEvent(event);
+
 	   },
 	   dataType: "json"
 	});
@@ -46,8 +50,10 @@ function pcGenerateProductDOM(productArray){
 															"<form action='#' method='post'>" +
 																"<fieldset>" + 
 																	"<input type='hidden' name='cmd' value='_cart'>" +
-																	"<input type='hidden' name='id' value='"+ product.id +"'>" + 
-																	"<input type='submit' name='submit' value='Add to cart' class='button'>" +
+																	"<input type='hidden' name='id' value='"+ product.id +"'>" + 																	
+																	"<input type='hidden' name='item_name' value='" + product.title + "' />" +	
+																	"<input type='hidden' name='amount' value='" + product.price + "' />" +	
+																	"<input type='submit' name='submit' value='Add to cart' class='button'>" +																	
 																"</fieldset>" +
 															"</form>" + 
 														"</div>" +
