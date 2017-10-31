@@ -449,7 +449,7 @@ ul.multi-column-dropdown h6 {
 	outline:none;
 }
 #PPMiniCart .minicart-submit {
-    display: none;
+    /*display: none;*/
 }
 #PPMiniCart .minicart-submit:hover{
 	background:#fe9126 !important;
@@ -2516,7 +2516,7 @@ h3.w3_agile_header, h2.w3_agile_header {
     font-size: 14px;
 }
 .w3l_offers {
-    width: 52%;
+    width: 40%;
 }
 .agile-login {
     padding: 6px 0;
