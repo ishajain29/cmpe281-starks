@@ -4,13 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var cassandra = require('cassandra-driver');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
 var addUser = require('./routes/addUser');
 var editUser = require('./routes/editUser');
-var userById = require('./routes/userById');
 
 var app = express();
 
@@ -24,13 +24,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({resave: true, secret:"cmpe281-starks", cookie: {maxage: 60000}, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/user', user);
 app.use('/addUser', addUser);
 app.use('/editUser', editUser);
-app.use('/userById',userById);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -5,7 +5,7 @@ block content
 	ul
 		each user, i in users
 			li 
-				a(href="/user/#{user.username}") #{user.email}
+				a(href="/user/#{user.userid}") #{user.email}
 
 	a(href="/addUser") SignUp!
   
