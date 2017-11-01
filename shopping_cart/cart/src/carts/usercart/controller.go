@@ -77,26 +77,36 @@ func CreateCart(c *gin.Context) {
 func GetCart(c *gin.Context) {
 
 	c.Header("Content-Type", "application/json; charset=utf-8")
-
-	session, collection, err := getMongoConnection()
-	if err != nil {
-		c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
-		return
-	}
-	defer session.Close()
-
-	var userCart models.UserCart
-	//err = collection.FindId(bson.ObjectIdHex(c.Param("userId"))).One(&userCart)
-	err = collection.Find(bson.M{"userId": c.Param("userId")}).One(&userCart)
-
-	if err != nil {
+	userCart := GetUserCart(c.Param("userId"))
+	if userCart.Id == bson.ObjectIdHex("") {
 		c.String(http.StatusNotFound, "{\"Error\": \"Could no cart found for this id\"}")
 		return
 	}
 
 	uj, _ := json.Marshal(userCart)
-
 	c.String(http.StatusOK, string(uj))
+}
+
+func GetUserCart(userId string) models.UserCart {
+
+	var userCart models.UserCart
+
+	session, collection, err := getMongoConnection()
+	if err != nil {
+		//c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
+		return userCart
+	}
+	defer session.Close()
+
+	//err = collection.FindId(bson.ObjectIdHex(c.Param("userId"))).One(&userCart)
+	err = collection.Find(bson.M{"userId": userId}).One(&userCart)
+
+	if err != nil {
+		//c.String(http.StatusNotFound, "{\"Error\": \"Could no cart found for this id\"}")
+		return userCart
+	}
+
+	return userCart
 }
 
 // DeleteCart delete user cart

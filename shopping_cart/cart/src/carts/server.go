@@ -1,8 +1,11 @@
 package main
 
 import (
+	"carts/models"
 	"carts/sharedcart"
 	"carts/usercart"
+	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/itsjamie/gin-cors"
 	"github.com/joho/godotenv"
@@ -68,8 +71,30 @@ func main() {
 		r2.POST("/:cartId/user", sharedcart.AddUser)
 		r2.DELETE("/:cartId/user/:userId", sharedcart.RemoveUser)
 	}
+
+	router.GET("carts/user/:userId/all", getAllUserCarts)
+
+	var userCart models.UserCart
+	fmt.Println(userCart)
+
 	// By default it serves on :8080
 	router.Run(":" + ServerPort)
+}
+
+func getAllUserCarts(c *gin.Context) {
+	c.Header("Content-Type", "application/json; charset=utf-8")
+
+	userCart := usercart.GetUserCart(c.Param("userId"))
+
+	sharedCarts := sharedcart.GetUsersAllSharedCart(c.Param("userId"))
+	fmt.Println(sharedCarts)
+
+	var combineCarts models.CombineCarts
+	combineCarts.UserCarts = userCart
+	combineCarts.SharedCarts = sharedCarts
+
+	uj, _ := json.Marshal(combineCarts)
+	c.String(http.StatusOK, string(uj))
 }
 
 func ping(c *gin.Context) {

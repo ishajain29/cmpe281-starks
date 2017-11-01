@@ -40,6 +40,7 @@ func CreateCart(c *gin.Context) {
 
 	cartId := bson.NewObjectId()
 	var arrGroupUsers []string
+	arrGroupUsers = append(arrGroupUsers, reqAdminId)
 
 	emptySharedCart := models.SharedCart{
 		Id:         cartId,
@@ -298,6 +299,30 @@ func RemoveUser(c *gin.Context) {
 	}
 
 	c.String(http.StatusOK, "")
+}
+
+func GetUsersAllSharedCart(userId string) []models.SharedCart {
+	var sharedCarts []models.SharedCart
+
+	session, collection, err := getMongoConnection()
+	if err != nil {
+		//c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
+		fmt.Println("MongoDB Connection Failed")
+		return sharedCarts
+	}
+	defer session.Close()
+
+	var arrUserId []string
+	arrUserId = append(arrUserId, userId)
+
+	err = collection.Find(bson.M{"groupUsers": bson.M{"$in": arrUserId}}).All(&sharedCarts)
+
+	if err != nil {
+		//c.String(http.StatusNotFound, "{\"Error\": \"Could no cart found for this id\"}")
+		fmt.Println("no cart found for this id")
+		return sharedCarts
+	}
+	return sharedCarts
 }
 
 func getMongoConnection() (mgo.Session, mgo.Collection, error) {

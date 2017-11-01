@@ -44,6 +44,11 @@ const (
 )
 
 type (
+	CombineCarts struct {
+		UserCarts   UserCart     `json:"userCart"`
+		SharedCarts []SharedCart `json:"sharedCarts"`
+	}
+
 	UserCart struct {
 		Id       bson.ObjectId `json:"id" bson:"_id,omitempty"`
 		UserId   string        `json:"userId" bson:"userId"`
