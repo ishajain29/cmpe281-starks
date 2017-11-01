@@ -1,4 +1,4 @@
-var pcProductCatalogServerURL = "http://18.221.248.174:8080/productCatalog";
+var pcProductCatalogServerURL = "http://18.216.132.146:8080/productCatalog";
 
 /* Fetch page 1 product data to display on Home Page */
 function pcGetProductData(){
@@ -42,7 +42,7 @@ function pcGenerateProductDOM(productArray){
 												"<figure>" + 
 													"<div class='snipcart-item block'>" +
 														"<div class='snipcart-thumb'>" +
-															"<a href='products.html'><img style='height:150px' title=' ' alt=' ' src='"+ product.imageURL +"'></a>" +
+															"<a href='single.html?id="+ product.id +"'><img style='height:150px' title=' ' alt=' ' src='"+ product.imageURL +"'></a>" +
 															"<p>"+ product.title +"</p>" +
 															"<h4>$"+ product.price +"</h4>" + 
 														"</div>" + 
@@ -74,4 +74,24 @@ function pcGenerateProductDOM(productArray){
 	});
 
 	return productHTML;
+}
+
+/* To display all the details of the product on a single page */
+function pcGetProductDetail(productId){
+
+	$.ajax({
+		   url: pcProductCatalogServerURL + '/product/' + productId,
+		   error: function(xhr, status, error) {
+		      console.log(xhr.responseText);
+		   },
+		   success: function(data) {
+		    $("#product-title").text(data.title);
+		    $("#product-description").text(data.description);
+		    $("#product-price").text("$" + data.price);
+		    $("#product-category").text(data.category);
+		    $("#product-image").attr("src", data.imageURL);
+		    $("#product-id").val(data.id);
+		   },
+		   dataType: "json"
+		});
 }
