@@ -1,8 +1,8 @@
-Activity Logs
+**Activity Logs**
 
 Logs are responsible for keeping an account of the user activities such that the information agglomerated could be further used for data analytics. For the sake of convenience, this application utilizes 3 different database schemas for user activity logs. 
 
-Logs retrieved from User Logs Web Services:
+*Logs retrieved from User Logs Web Services:
 
 POST http://shoppingcart.com/userlogs
 
@@ -13,9 +13,9 @@ POST http://shoppingcart.com/userlogs
 
 }
 
+***
 
-
-Logs retrieved from Cart Web Services:
+*Logs retrieved from Cart Web Services:
 
 POST http://shoppingcart.com/cartlogs
 
@@ -42,14 +42,15 @@ Database Name: /cartlogs
 			productid: <String>
 			qty: <int>
 		]
-	groupusers: [*<userid, String>]
-
-	activity: <String> ("Cart Created", "Product Added","Shared Cart Joined", "Cart Updated", "Product Removed", "User(s) Added", "User(s) Removed", "Order Placed")
+	groupusers: [<userid, String>]
+	activity: <String> ("Cart Created", "Product Added","Shared Cart Joined", "Cart Updated", "Product Removed", "User(s) 	                           Added", "User(s) Removed", "Order Placed")
 	timestamp : <Date.now>
 
 }
 
-Logs retrieved from Search Logs Web Services:
+***
+
+*Logs retrieved from Search Logs Web Services:
 
 POST http://shoppingcart.com/searchlogs
 
