@@ -45,7 +45,7 @@ Database Name: /cartlogs
 			qty: <int>
 		]
 	groupusers: [<userid, String>]
-	activity: <String> ("Cart Created", "Product Added","Shared Cart Joined", "Cart Updated", "Product Removed", "User(s) 	                           Added", "User(s) Removed", "Order Placed")
+	activity: <String> ("Cart Created", "Product Added","Shared Cart Joined", "Cart Updated", "Product Removed", "User(s) Added", "User(s) Removed", "Order Placed")
 	timestamp : <Date.now>
 
 }
