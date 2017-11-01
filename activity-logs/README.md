@@ -2,8 +2,9 @@
 
 Logs are responsible for keeping an account of the user activities such that the information agglomerated could be further used for data analytics. For the sake of convenience, this application utilizes 3 different database schemas for user activity logs. 
 
-*Logs retrieved from User Logs Web Services:
+*Logs retrieved from User Logs Web Services:*
 
+```
 POST http://shoppingcart.com/userlogs
 
 {
@@ -12,11 +13,11 @@ POST http://shoppingcart.com/userlogs
 	timestamp : <Date.now>
 
 }
-
+```
 ***
 
-*Logs retrieved from Cart Web Services:
-
+*Logs retrieved from Cart Web Services:*
+```
 POST http://shoppingcart.com/cartlogs
 
 {
@@ -28,9 +29,10 @@ POST http://shoppingcart.com/cartlogs
 			quantity: <int>
 		]	
 }
+```
 
 Handling the fetched log-
-
+```
 Database Name: /cartlogs
 
 {
@@ -47,11 +49,11 @@ Database Name: /cartlogs
 	timestamp : <Date.now>
 
 }
-
+```
 ***
 
-*Logs retrieved from Search Logs Web Services:
-
+*Logs retrieved from Search Logs Web Services:*
+```
 POST http://shoppingcart.com/searchlogs
 
 {
@@ -60,6 +62,5 @@ POST http://shoppingcart.com/searchlogs
 	timestamp : <Date.now>
 
 }
-
-
+```
 
