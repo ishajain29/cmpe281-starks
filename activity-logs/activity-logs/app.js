@@ -7,8 +7,8 @@ bodyParser = require('body-parser'),
 mongodb=require('mongodb'),
 index = require('./routes/index'),
 search = require('./routes/search'),
-usercart = require('./routes/usercart'),
-useraccounts = require('./routes/useraccounts'),
+usercart = require('./routes/cartlogs'),
+useraccounts = require('./routes/userlogs'),
 fs = require('fs'),
 http = require('http'),
 createError = require('http-errors');
@@ -32,8 +32,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
+app.use('/userlogs', useraccounts);
+app.use('/cartlogs', usercart);
 app.use('/search', search);
-app.use('/usercart', usercart);
+
+
 
 
 // catch 404 and forward to error handler

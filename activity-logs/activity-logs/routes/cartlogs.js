@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-let UserAccounts = require('../model/useraccounts');
+let CartLogs = require('../model/cartlogs');
 
-/* Display the user accounts logs */
+/* Display the user cart logs */
 router.route('/')
     .get(function(req, res, next) {
 
-        UserAccounts.find({}, function (err, result) {
+        CartLogs.find({}, function (err, result) {
               if (err) {
                   res.send('There was an error displaying the collection');
               } else if(result.length) {
@@ -18,22 +18,32 @@ router.route('/')
               }
         });
     })
-/* Adding a user accounts log to the database */
+/* Adding a user cart log to the database */
     .post(function(req, res, next) {
 
         var userid = req.body.userid,
-        keyword = req.body.keyword,
+        cartid = req.body.cartid,
+        cartname = req.body.cartname| '',
+        typeofcart = req.body.typeofcart| '',
+        groupusers = req.body.groupusers,
+        activity =  req.body.typeofcart| '',
         timestamp = req.body.timestamp;
 
-        UserAccounts.create({
+        console.log(userid+" "+cartid+" "+" "+cartname+" "+typeofcart+" "+groupusers+" "+activity+" "+timestamp);
+
+        CartLogs.create({
           userid : userid,
-          keyword : keyword,
+          cartid : cartid,
+          cartname : cartname,
+          typeofcart : typeofcart,
+          groupusers : groupusers,
+          activity : activity,
           timestamp : timestamp
         }, function(err,result){
           if(err) {
             res.send("There was a problem adding info to DB");
           } else {
-            console.log("Creating new search" +result);
+            console.log("Creating new user cart log" +result);
             res.json(result);
           }
         })

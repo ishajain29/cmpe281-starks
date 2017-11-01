@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 
-var usercartSchema = new mongoose.Schema({
+var userlogsSchema = new mongoose.Schema({
   userid: {
     type: String,
     required:true
   },
-  cartid: {
+  activity: {
     type: String,
     required:true
   },
@@ -16,6 +16,8 @@ var usercartSchema = new mongoose.Schema({
   } //{ type: Date, default: Date.now },
   //isloved: Boolean
 },
-{collection: 'usercartdata'});
+{collection: 'userlogs'},
+{versionKey: false})
+;
 
-let UserCart = module.exports = mongoose.model('usercart', usercartSchema);
+let UserLogs = module.exports = mongoose.model('userlogs', userlogsSchema);
