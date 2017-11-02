@@ -1,4 +1,4 @@
-var scShoppingCartServerURL = "http://localhost/cart";
+var scShoppingCartServerURL = "http://54.183.205.180/cart";
 
 var scSelectedCartIndex = 0;
 
