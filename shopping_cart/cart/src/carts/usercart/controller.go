@@ -78,10 +78,10 @@ func GetCart(c *gin.Context) {
 
 	c.Header("Content-Type", "application/json; charset=utf-8")
 	userCart := GetUserCart(c.Param("userId"))
-	if userCart.Id == bson.ObjectIdHex("") {
-		c.String(http.StatusNotFound, "{\"Error\": \"Could no cart found for this id\"}")
-		return
-	}
+	// if userCart.Id == bson.ObjectIdHex("") {
+	// 	c.String(http.StatusNotFound, "{\"Error\": \"Could no cart found for this id\"}")
+	// 	return
+	// }
 
 	uj, _ := json.Marshal(userCart)
 	c.String(http.StatusOK, string(uj))

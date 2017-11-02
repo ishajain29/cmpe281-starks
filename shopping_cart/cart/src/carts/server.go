@@ -87,7 +87,6 @@ func getAllUserCarts(c *gin.Context) {
 	userCart := usercart.GetUserCart(c.Param("userId"))
 
 	sharedCarts := sharedcart.GetUsersAllSharedCart(c.Param("userId"))
-	fmt.Println(sharedCarts)
 
 	var combineCarts models.CombineCarts
 	combineCarts.UserCarts = userCart
