@@ -14,4 +14,9 @@ function scGetUserShoppingCart(){
         dataType: "json"
      });
 }
-    
+
+function scCartSelectionChanged(e){
+    scSelectedCartIndex =  parseInt(e.target.id);
+    var event = new Event('productsloaded');
+    document.dispatchEvent(event);
+}
