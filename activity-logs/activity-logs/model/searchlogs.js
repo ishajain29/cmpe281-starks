@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var searchSchema = new mongoose.Schema({
+var searchlogsSchema = new mongoose.Schema({
   userid: {
     type: String,
     required:true
@@ -16,6 +16,6 @@ var searchSchema = new mongoose.Schema({
   } //{ type: Date, default: Date.now },
   //isloved: Boolean
 },
-{collection: 'searchdata'});
+{collection: 'searchlogs'});
 
-let Search = module.exports = mongoose.model('search', searchSchema);
+let Search = module.exports = mongoose.model('searchlogs', searchlogsSchema);

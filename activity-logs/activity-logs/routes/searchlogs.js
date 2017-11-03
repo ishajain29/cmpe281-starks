@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-let Search = require('../model/search');
+let SearchLogs = require('../model/searchlogs');
 
 /* Display the user search logs */
 router.route('/')
     .get(function(req, res, next) {
 
-        Search.find({}, function (err, result) {
+        SearchLogs.find({}, function (err, result) {
               if (err) {
                   res.send('There was an error displaying the collection');
               } else if(result.length) {
@@ -25,7 +25,7 @@ router.route('/')
         keyword = req.body.keyword,
         timestamp = req.body.timestamp
 
-        Search.create({
+        SearchLogs.create({
           userid : userid,
           keyword : keyword,
           timestamp : timestamp

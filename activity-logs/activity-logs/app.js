@@ -6,7 +6,7 @@ cookieParser = require('cookie-parser'),
 bodyParser = require('body-parser'),
 mongodb=require('mongodb'),
 index = require('./routes/index'),
-search = require('./routes/search'),
+search = require('./routes/searchlogs'),
 usercart = require('./routes/cartlogs'),
 useraccounts = require('./routes/userlogs'),
 fs = require('fs'),
@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/userlogs', useraccounts);
 app.use('/cartlogs', usercart);
-app.use('/search', search);
+app.use('/searchlogs', search);
 
 
 
