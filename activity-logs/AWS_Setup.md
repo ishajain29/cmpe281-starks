@@ -10,4 +10,4 @@
    * sudo apt-get install npm
    * npm install
    * sudo apt-get install nodejs-legacy
-   * node app.js
+* node app.js
