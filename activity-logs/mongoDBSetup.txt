@@ -1,0 +1,18 @@
+./mongo
+show dbs
+use test
+show collections
+use users
+db
+db.info
+db.info.count()
+db.info.insert({name: 'Ritika', product:'Icerberg Lettuce',order_id:'1',status:'ordered'})
+db.info.find()
+db.info.find().forEach(printjson)
+{
+	"_id" : ObjectId("59d02caccf68d7609a0d7618"),
+	"name" : "Ritika",
+	"product" : "Icerberg Lettuce",
+	"order_id" : "1",
+	"status" : "ordered"
+}
