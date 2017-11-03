@@ -16,7 +16,7 @@ function scSendRequest(strType, strUrl, productData, callback){
             url: strUrl, 
             data: productData,
             error: function(xhr, status, error) {
-                console.log("Error While Adding Product to cart ", xhr.responseText);
+                //console.log("Error While Adding Product to cart ", xhr.responseText);
                 callback(true);
              },
             success: function(result) {
@@ -25,4 +25,65 @@ function scSendRequest(strType, strUrl, productData, callback){
             },
             dataType: "json"
         });
+}
+
+
+function scSendRequestUpdateItemUserCart(userId, product, callback){
+    
+    var url = scShoppingCartServerURL + "/user/" + userId + "/product/" + product.id;
+    var data = {  
+        "id"		: product.id,
+        "quantity"  : product.quantity,
+        "name"      : product.item_name,
+        "price"     : product.amount
+    };
+    scSendRequest("PUT", url, JSON.stringify(data), callback);
+}
+
+function scSendRequestAddItemUserCart(userId, product, callback){
+    
+    var url = scShoppingCartServerURL + "/user/" + userId + "/product";
+    var data = {  
+        "id"		: product.id,
+        "quantity"  : product.quantity,
+        "name"      : product.item_name,
+        "price"     : product.amount
+    };
+    scSendRequest("POST", url, JSON.stringify(data), callback);
+}
+
+    
+
+function scSendRequestAddItemSharedCart(cartId, product, callback){
+    
+    var url = scShoppingCartServerURL + "/shared/" + cartId + "/product";
+    var data = {  
+        "id"		: product.id,
+        "quantity"  : product.quantity,
+        "name"      : product.item_name,
+        "price"     : product.amount,
+        "addedBy"   : scTempUserId
+    };
+    scSendRequest("POST", url, JSON.stringify(data), callback);
+}
+
+
+function scSendRequestUpdateItemSharedCart(cartId, product, callback){
+    var url = scShoppingCartServerURL + "/shared/" + cartId + "/product/" + product.id;
+    var data = {  
+        "id"		: product.id,
+        "quantity"  : product.quantity,
+        "name"      : product.item_name,
+        "price"     : product.amount,
+        "addedBy"   : scTempUserId
+    };
+    scSendRequest("PUT", url, JSON.stringify(data), callback);
+};
+
+function scReloadCart(bSuccessful){
+    if(bSuccessful){
+        //self.fire('add', idx, product, isExisting);
+        var event = new Event('cartReloadRequired');
+        document.dispatchEvent(event);
+    }
 }
