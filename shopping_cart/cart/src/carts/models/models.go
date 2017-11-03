@@ -65,11 +65,11 @@ type (
 	}
 
 	Product struct {
-		Id       bson.ObjectId `json:"id"`
-		Quantity int           `json:"quantity" bson:"quantity"`
-		Name     string        `json:"name" bson:"name"`
-		Price    float32       `json:"price" bson:"price"`
-		AddedBy  string        `json:"addedBy" bson:"addedBy"`
+		Id       string  `json:"id" bson:"id"`
+		Quantity int     `json:"quantity" bson:"quantity"`
+		Name     string  `json:"name" bson:"name"`
+		Price    float32 `json:"price" bson:"price"`
+		AddedBy  string  `json:"addedBy" bson:"addedBy"`
 	}
 
 	CreateSharedCartResponse struct {

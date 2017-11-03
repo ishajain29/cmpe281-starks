@@ -157,7 +157,7 @@ func UpdateProduct(c *gin.Context) {
 	defer session.Close()
 
 	fmt.Println("ProductId: ", c.Param("productId"))
-	count, _ := collection.Find(bson.M{"_id": bson.ObjectIdHex(c.Param("cartId")), "products.id": bson.ObjectIdHex(c.Param("productId"))}).Count()
+	count, _ := collection.Find(bson.M{"_id": bson.ObjectIdHex(c.Param("cartId")), "products.id": c.Param("productId")}).Count()
 
 	if count == 0 {
 		c.String(http.StatusNotFound, "")
@@ -190,7 +190,7 @@ func RemoveProduct(c *gin.Context) {
 	fmt.Println("ProductId: ", c.Param("productId"))
 
 	query := bson.M{"_id": bson.ObjectIdHex(c.Param("cartId"))}
-	change := bson.M{"$pull": bson.M{"products": bson.M{"id": bson.ObjectIdHex(c.Param("productId"))}}}
+	change := bson.M{"$pull": bson.M{"products": bson.M{"id": c.Param("productId")}}}
 
 	err = collection.Update(query, change)
 	if err != nil {
