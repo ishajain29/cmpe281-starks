@@ -22,7 +22,7 @@ router.post('/login', function(req,res){
     var email = req.body.email;
     var password = req.body.password;
 
-    User.findOne({email: email, password: password}, function(err, user) {
+    User.findOne({email: email}, function(err, user) {
         if(err){
             return res.status(500).send("There was a problem finding the user.");
         }
@@ -30,8 +30,17 @@ router.post('/login', function(req,res){
             return res.status(404).send();
         }
 
-        req.session.user = user;
-        return res.status(200).send();
+        user.comparePassword(password, function(err, isMatch) {
+            if (isMatch && isMatch == true) {
+                req.session.user = user;
+                return res.status(200).send();
+
+            } else {
+                return res.status(401).send();
+            }
+        });
+
+       
     }); 
 });
 
