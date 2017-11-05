@@ -5,18 +5,18 @@
 * **Anuj**: 
 * **Isha**: This week due to some roadblocks I shifted my project from cassandra to mongodb, so I recreated all the web services for mongodb and set the mongo database on aws cloud. I also implemented session management and password encryption for user sessions.
 * **Ritika**:   
-* **Shantagouda** 
+* **Shantagouda** This week i worked on consuming other webservices data into Neo4j Database. Created web services to dynamically create Nodes and Relationships whenever the user performs some activity. 
 
 ### What is the team going to do next week?
 * **Purvesh**: I will work on developing the separate pages for products of different categories and will also start working on setting up the MongoDB cluster on the AWS.
 * **Anuj**: 
 * **Isha**: In this week I will work on frontend pages of login and registration and will try to set up the mongodb cluster on AWS.
 * **Ritika**: 
-* **Shantagouda**: 
+* **Shantagouda**: I will work on setting up Neo4j clusters on AWS and test the functionality of Recommendation system once it is running on AWS.
 
 ### What are the current blockers/challenges the team is facing?
 * **Purvesh**: No challenges/blockers at the moment.
 * **Anuj**: 
 * **Isha**: Setting cassandra cluster on AWS free tier.
 * **Ritika**: 
-* **Shantagouda**: 
+* **Shantagouda**: No Challenges or Blockers at the moment.
