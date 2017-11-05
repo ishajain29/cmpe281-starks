@@ -39,3 +39,5 @@ In Extreme Programming, feedback can be of various forms: system and team. None 
 **Week 6**
 
 * This week was one of the most crucial week for our development in terms of collaboration of our domains and also, hosting our database and code to the AWS server. We came to a general agreement of utilizing the AWS Ubuntu servers for this purpose.   Moreover, positive feedback was enrolled in order to sort out the cloud service provider to be chosen.
+
+* The team has also started to engage on the solution to the partition tolerance problem given by the Professor. Inputs by each team member were incorporated to seek progress to this application.
