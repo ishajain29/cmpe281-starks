@@ -34,3 +34,6 @@ This Wiki page contains information about how team implemented Extreme Programmi
 * From this week new phase of design patterns is starting in the project. This will also mean more ingeration tasks will come up. I forcast that the task of maintaining good communicaiton lines will increase and I will have to work harder to keep track that the team members are effectively speaking to each other.
 * The team's communication was robust as the changes in the design pattern arrived. We decided how we will create ui for the product. Adopting the new pattern was not easy as most of the teammates were new to the design pattern. But after a meeting and discussion everyone knew how they will proceed to this methodology and everyone got enough knowledge to adapt new method.
 
+## Week 6
+* This week we started developing user interface for our shared shooping cart appliation. For that the initial communication with the team wass very important. So I scheduled the meeting early so that everyone has enough information about what they are developing and how they will be developing.
+* Everyone stated their views on how should be the UI during the meeting as well as on the slack channel.
