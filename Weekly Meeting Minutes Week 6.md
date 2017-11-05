@@ -1,4 +1,4 @@
-## Week 5
+## Week 6
 
 ### What did the team do the past week?
 * **Purvesh**: I worked on the front end development for the super market website. I worked on fethching and displaying the products on the home page of the website. Also, developed a page which can be opened by clicking on a product on the home page that displays individual product details.
