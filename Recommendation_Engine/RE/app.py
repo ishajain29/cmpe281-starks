@@ -83,7 +83,7 @@ def add_user(username,email):
 
 
 #http://0.0.0.0:8888/purchased?user=userid&product=productid
-@app.route('/purchased/<username>/<product_id>', methods=['get'])
+@app.route('/purchased/<username>/<product_id>', methods=['GET'])
 def rel_purchased(username,product_id):
     
     session = driver.session()
@@ -98,7 +98,7 @@ def rel_purchased(username,product_id):
     
 
 #http://0.0.0.0:8888/purchased?user=userid&product=productid
-@app.route('/searched/<username>/<product_id>', methods=['get'])
+@app.route('/searched/<username>/<product_id>', methods=['GET'])
 def rel_searched(username,product_id):
     
     session = driver.session()
@@ -109,9 +109,44 @@ def rel_searched(username,product_id):
     #           "WHERE a.name= 'username' AND b.id= 'product_id'"
     #           "CREATE (a)-[:PURCHASED]->(b)")
     #session.close()
+    return 'OK'    
+
+
+@app.route('/rcmd/<username>', methods=['GET'])
+def rcmd(username):
+    session = driver.session()
+    result = session.run("MATCH (p:Person {name:$username})-[:PURCHASED]->(:Product)<-[:PURCHASED]-(p2:Person)-[:PURCHASED]->(pd2:Product)"
+            "WHERE NOT (p)-[:PURCHASED]->(pd2)"
+            "RETURN pd2.title as product_title, pd2.description as product_details" , username=username)
+    for record in result:
+        print("Product: %s ,,, Description:  %s" % (record["product_title"], record["product_details"]))
+        return 'Loop Entered'
+    session.close()
     return 'OK'
+    #return jsonify([record[("product_title","product_details")] for record in result])
+    #session.close()
+    #return 'OK'
     
-    #a64cac48-1852-4346-8a64-d2c74f01e6a6
+@app.route('/rcmdp/<username>', methods=['GET'])
+def rcmdp(username):
+    session = driver.session()
+    result = session.run("MATCH (p:Person {name:$username})-[:PURCHASED]->(pd:Product)"
+                        "RETURN pd.title as product_title, pd.description as product_details" , username=username)
+    for record in result:
+        print("Product: %s ,,,, Description: %s" % (record["product_title"], record["product_details"]))
+        return 'Loop Entered'
+    return 'OK'    
+
+@app.route('/rcmds/<username>', methods=['GET'])
+def rcmds(username):
+    session = driver.session()
+    result = session.run("MATCH (p:Person {name:$username})-[:SEARCHED]->(pd:Product)"
+                        "RETURN pd.title as product_title, pd.description as product_details" , username=username)
+    for record in result:
+        print("Product: %s ,,,, Description: %s" % (record["product_title"], record["product_details"]))
+        return 'Loop Entered'
+    return 'OK' 
+
 
 # Get Supplier and Category of products they supply.
 @app.route('/neo', methods=['GET'])
