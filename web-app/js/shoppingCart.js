@@ -87,3 +87,8 @@ function scReloadCart(bSuccessful){
         document.dispatchEvent(event);
     }
 }
+
+function scSendRequestPlaceOrderUserCart(userId, callback){
+    var url = scShoppingCartServerURL + "/user/" + userId + "/order";
+    scSendRequest("POST", url, JSON.stringify({}), callback);
+}
