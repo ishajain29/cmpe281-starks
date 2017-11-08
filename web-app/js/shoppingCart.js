@@ -87,3 +87,23 @@ function scReloadCart(bSuccessful){
         document.dispatchEvent(event);
     }
 }
+
+function scSendRequestPlaceOrder(){
+    if(scSelectedCartIndex) {
+        var url = scShoppingCartServerURL + "/user/" + userId + "/order";
+        scSendRequest("POST", url, JSON.stringify({}), callback);
+    }
+    else {
+
+    }
+}
+
+function scSendRequestPlaceOrderUserCart(userId, callback){
+    var url = scShoppingCartServerURL + "/user/" + userId + "/order";
+    scSendRequest("POST", url, JSON.stringify({}), callback);
+}
+
+function scSendRequestPlaceOrderSharedCart(cartId, callback){
+    var url = scShoppingCartServerURL + "/shared/" + cartId + "/order";
+    scSendRequest("POST", url, JSON.stringify({}), callback);
+}
