@@ -10,4 +10,5 @@ public interface ProductCatalogDAO {
 	public Product getProductById(String uuid);
 	public List<Product> getProductsByPageNumber(int pageNumber);
 	public List<Product> getProductsByCategory(String category);
+	public List<Product> searchProduct(String keyword);
 }

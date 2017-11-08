@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 
 import com.pk.cmpe281.productcatalog.model.Product;
 
@@ -12,7 +14,7 @@ public class ProductCatalogDAOImpl implements ProductCatalogDAO{
 	
 	private MongoOperations mongoOps;
 	private static final String PRODUCT_COLLECTION = "products";
-	private static final int RESULTS_PER_PAGE = 10;
+	private static final int RESULTS_PER_PAGE = 9;
 	
 	public ProductCatalogDAOImpl(MongoOperations mongoOps){
 		this.mongoOps = mongoOps;
@@ -26,10 +28,10 @@ public class ProductCatalogDAOImpl implements ProductCatalogDAO{
 	@Override
 	public Product getProductById(String uuid){
 		
-		Query findProductQuery = new Query();
-		findProductQuery.addCriteria(Criteria.where("_id").is(uuid));
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(uuid));
 
-	    Product productObj = this.mongoOps.findOne(findProductQuery, Product.class);
+	    Product productObj = this.mongoOps.findOne(query, Product.class);
 	    
 	    return productObj;
 	}
@@ -58,5 +60,18 @@ public class ProductCatalogDAOImpl implements ProductCatalogDAO{
 		
 		return productsOfCategory;
 		
+	}
+	
+	public List<Product> searchProduct(String keyword){
+		
+		TextCriteria criteria = TextCriteria.forDefaultLanguage()
+				.matchingAny(keyword);
+		
+		Query query = TextQuery.queryText(criteria)
+				.sortByScore();
+		
+		List<Product> searchResultProducts = this.mongoOps.find(query, Product.class);
+		
+		return searchResultProducts;
 	}
 }

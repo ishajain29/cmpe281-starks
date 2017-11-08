@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import com.pk.cmpe281.productcatalog.exception.ProductNotFoundException;
 import com.pk.cmpe281.productcatalog.model.Product;
 
 @RestController
+@CrossOrigin
 public class ProductController {
 	
 	 @Autowired
@@ -81,5 +83,17 @@ public class ProductController {
 		 productList = productCatalogDAO.getProductsByCategory(category);
 		 
 		 return productList;
+	 }
+	 
+	 @RequestMapping(value = "/products/search/{keyword}", 
+			 method = RequestMethod.GET, produces = "application/json")
+	 @ResponseBody
+	 public List<Product> searchProduct(@PathVariable String keyword){
+	     
+		 List<Product> productList = new ArrayList<Product>();
+		
+		 productList = productCatalogDAO.searchProduct(keyword);
+		 
+		 return productList;   
 	 }
 }
