@@ -95,3 +95,23 @@ function pcGetProductDetail(productId){
 		   dataType: "json"
 		});
 }
+
+/* To get the product based on the category and display on the separate page */
+function pcGetProductsByCategory(category){
+
+	$.ajax({
+		   url: pcProductCatalogServerURL + '/products/' + category,
+		   error: function(xhr, status, error) {
+		      console.log(xhr.responseText);
+		   },
+		   success: function(data) {
+		       var $prodctHTML = pcGenerateProductDOM(data);
+				$('#productCategory').append($prodctHTML);
+
+				var $updateCategory = category.replace("-"," ").toUpperCase();
+				$('#category').append($updateCategory);
+
+		   },
+		   dataType: "json"
+		});
+}
