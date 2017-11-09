@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-let CartLogs = require('../model/cartlogs');
+var CartLogs = require('../model/cartlogs');
 
 /* Display the user cart logs */
 router.route('/')
