@@ -2,6 +2,7 @@ var scShoppingCartServerURL = "http://localhost/carts";
 var scTempUserId = "anuj";
 
 var scSelectedCartIndex = 0;
+var scCartModel;
 
 function scCartSelectionChanged(e){
     scSelectedCartIndex =  parseInt(e.target.id);
@@ -21,7 +22,7 @@ function scSendRequest(strType, strUrl, productData, callback){
              },
             success: function(result) {
                 console.log("Response Arrived !!!!!!!!!", result);
-                callback(true);
+                callback(true, result);
             },
             dataType: "json"
         });
@@ -96,4 +97,14 @@ function scSendRequestPlaceOrderUserCart(userId, callback){
 function scSendRequestPlaceOrderSharedCart(cartId, callback){
     var url = scShoppingCartServerURL + "/shared/" + cartId + "/order";
     scSendRequest("POST", url, JSON.stringify({}), callback);
+}
+
+function scSendRequestGetCartDetails(cartId, callback){
+    var url = scShoppingCartServerURL + "/shared/" + cartId;
+    scSendRequest("GET", url, JSON.stringify({}), callback);
+}
+
+function  scSendRequestDeleteUserFromCart(cartId, userId, callback){
+    var url = scShoppingCartServerURL + "/shared/" + cartId + "/user/" + userId;
+    scSendRequest("DELETE", url, JSON.stringify({}), callback);
 }
