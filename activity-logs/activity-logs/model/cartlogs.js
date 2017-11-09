@@ -41,4 +41,4 @@ var cartlogsSchema = new mongoose.Schema({
 },
 {collection: 'cartlogs'});
 
-let CartLogs = module.exports = mongoose.model('usercart', cartlogsSchema);
+var CartLogs = module.exports = mongoose.model('usercart', cartlogsSchema);
