@@ -1,0 +1,26 @@
+## Application Server Configuration
+* Create t2.mirco Ubuntu 16.04 instance
+* Install Python using Anaconda Python Distribution on Ubuntu
+  * curl -O https://repo.continuum.io/archive/Anaconda3-4.2.0-Linux-x86_64.sh
+* Install pip
+* Install JDK 8 with following commands:
+	* sudo add-apt-repository ppa:webupd8team/java
+	* sudo apt-get update
+	* sudo apt-get install oracle-java8-installer
+
+## Cassandra Primary Node Configuration
+* Create t2.micro Ubuntu 16.04 instance in the private subnet of same VPC of application server
+* We will use NAT instance to connect to Cassandra instance
+* To directly SSH into the Cassandra instance to perform installation, perform following command on NAT instance:
+	* sudo iptables -t nat -A PREROUTING -p tcp --dport 10234 -j DNAT --to-destination [Private IP address of Instance]:22
+* Perform following command to install Cassandra Enterprise Version:
+	* echo “deb http://www.apache.org/dist/cassandra/debian 37x main” | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+	* $ gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D
+  * $ gpg --export --armor F758CE318D77295D | sudo apt-key add -
+  * sudo apt-get install cassandra
+	* sudo apt-get update
+* Cassandra is installed as a service on the Ubuntu. To test, start and stop, use following commands:
+	* sudo service cassandra status
+  * sudo service cassandra start
+	* sudo service cassandra stop
+* Open port 9042 in the security group to allow traffic on Cassandra
