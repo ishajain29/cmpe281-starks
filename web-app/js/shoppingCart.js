@@ -88,16 +88,6 @@ function scReloadCart(bSuccessful){
     }
 }
 
-function scSendRequestPlaceOrder(){
-    if(scSelectedCartIndex) {
-        var url = scShoppingCartServerURL + "/user/" + userId + "/order";
-        scSendRequest("POST", url, JSON.stringify({}), callback);
-    }
-    else {
-
-    }
-}
-
 function scSendRequestPlaceOrderUserCart(userId, callback){
     var url = scShoppingCartServerURL + "/user/" + userId + "/order";
     scSendRequest("POST", url, JSON.stringify({}), callback);
