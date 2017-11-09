@@ -20,4 +20,4 @@ var userlogsSchema = new mongoose.Schema({
 {versionKey: false})
 ;
 
-let UserLogs = module.exports = mongoose.model('userlogs', userlogsSchema);
+var UserLogs = module.exports = mongoose.model('userlogs', userlogsSchema);
