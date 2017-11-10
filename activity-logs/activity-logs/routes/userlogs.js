@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-let UserLogs = require('../model/userlogs');
+var UserLogs = require('../model/userlogs');
 
 /* Display the user accounts logs */
 router.route('/')
