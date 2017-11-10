@@ -115,3 +115,26 @@ function pcGetProductsByCategory(category){
 		   dataType: "json"
 		});
 }
+
+/* To Search through the  product catalog with given keyword */
+function pcGetSearchResults(keyword){
+
+	$.ajax({
+		   url: pcProductCatalogServerURL + '/products/search/' + keyword,
+		   error: function(xhr, status, error) {
+		      console.log(xhr.responseText);
+		   },
+		   success: function(data) {
+		   		var resultCount = data.length;
+		   		var $prodctHTML;
+		   		if(resultCount == 0){
+		   			$('#productCategory').append("<strong>No results found matching with keyword.</strong>");
+		   		} else {
+		   			$prodctHTML = pcGenerateProductDOM(data);
+					$('#productCategory').append($prodctHTML);
+
+		   		}
+		    },
+		   dataType: "json"
+		});
+}
