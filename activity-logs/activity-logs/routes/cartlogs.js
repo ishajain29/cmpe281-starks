@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-let CartLogs = require('../model/cartlogs');
+var CartLogs = require('../model/cartlogs');
 
 /* Display the user cart logs */
 router.route('/')
@@ -23,19 +23,26 @@ router.route('/')
 
         var userid = req.body.userid,
         cartid = req.body.cartid,
-        cartname = req.body.cartname| '',
-        typeofcart = req.body.typeofcart| '',
+        cartname = req.body.cartname,
+        typeofcart = req.body.typeofcart,
+        products = req.body.products,
         groupusers = req.body.groupusers,
-        activity =  req.body.typeofcart| '',
+        activity =  req.body.activity,
         timestamp = req.body.timestamp;
 
-        console.log(userid+" "+cartid+" "+" "+cartname+" "+typeofcart+" "+groupusers+" "+activity+" "+timestamp);
+         if(typeof cartname!="undefined")
+           typeofcart="Shared";
+         else
+          typeofcart="User";
+    //      console.log(products);
+        console.log(userid+" "+cartid+" "+" "+cartname+" "+typeofcart+" "+groupusers+" "+activity+" "+timestamp+" "+products);
 
         CartLogs.create({
           userid : userid,
           cartid : cartid,
           cartname : cartname,
           typeofcart : typeofcart,
+          products : products,
           groupusers : groupusers,
           activity : activity,
           timestamp : timestamp

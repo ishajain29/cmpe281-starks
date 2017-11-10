@@ -18,4 +18,4 @@ var searchlogsSchema = new mongoose.Schema({
 },
 {collection: 'searchlogs'});
 
-let Search = module.exports = mongoose.model('searchlogs', searchlogsSchema);
+var Search = module.exports = mongoose.model('searchlogs', searchlogsSchema);

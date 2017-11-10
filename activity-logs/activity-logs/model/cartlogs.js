@@ -1,5 +1,11 @@
 var mongoose = require('mongoose');
 
+var Product = new mongoose.Schema({
+  id: String,
+  quantity: Number},
+  {_id: false}
+);
+
 var cartlogsSchema = new mongoose.Schema({
   userid: {
     type: String,
@@ -17,12 +23,7 @@ var cartlogsSchema = new mongoose.Schema({
     required: true
   },
   products: {
-    productid: {
-      type: String
-    },
-    qty: {
-      type: Number
-    }
+    type: [Product]
   },
   groupusers: {
     type: [String]
@@ -40,4 +41,4 @@ var cartlogsSchema = new mongoose.Schema({
 },
 {collection: 'cartlogs'});
 
-let CartLogs = module.exports = mongoose.model('usercart', cartlogsSchema);
+var CartLogs = module.exports = mongoose.model('usercart', cartlogsSchema);
