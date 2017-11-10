@@ -22,6 +22,8 @@ router.post('/login', function(req,res){
     var email = req.body.email;
     var password = req.body.password;
 
+    req.render('index');
+
     User.findOne({email: email}, function(err, user) {
         if(err){
             return res.status(500).send("There was a problem finding the user.");
@@ -60,7 +62,9 @@ router.get('/logout', function(req, res){
 router.get('/', function (req, res) {
     User.find({}, function (err, users) {
         if (err) return res.status(500).send("There was a problem finding the users.");
-        res.status(200).send(users);
+        res.status(200);
+        //res.set('Content-Type','application/javascript; charset=utf-8');
+        res.render('index',{users : users});
     });
 });
 
