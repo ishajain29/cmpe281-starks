@@ -424,7 +424,7 @@ ul.multi-column-dropdown h6 {
 #PPMiniCart form {
     width: 590px !important;
 	padding: 10px 20px 40px !important;
-	max-height:450px !important;
+	/* max-height:450px !important; */
 }
 #PPMiniCart ul {
     width: 548px !important;
@@ -2746,7 +2746,7 @@ ul.faq {
 	top: 140px !important;
 }
 #PPMiniCart form {
-	max-height: 185px !important;
+	/* max-height: 185px !important; */
 }
 .w3l_offers p {
     font-size: 13px;
@@ -2790,7 +2790,7 @@ ul.faq {
 	left: 36% !important;
 }
 #PPMiniCart form {
-	max-height: 165px !important;
+	/* max-height: 165px !important; */
 }
 .agile-login {
     width: 37%;
@@ -3420,6 +3420,7 @@ td.invert-image a img {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    max-width: 500px;
 }
 
 /* The Close Button */
