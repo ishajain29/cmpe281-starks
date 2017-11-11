@@ -37,3 +37,7 @@ This Wiki page contains information about how team implemented Extreme Programmi
 ## Week 6
 * This week we started developing user interface for our shared shooping cart appliation. For that the initial communication with the team wass very important. So I scheduled the meeting early so that everyone has enough information about what they are developing and how they will be developing.
 * Everyone stated their views on how should be the UI during the meeting as well as on the slack channel.
+
+## Week 7
+
+* This week we decided to complete user interface development with web service integration. So, we will need to meet more frequently in the weeks ahead. We might need to do pair programming in order to be more productive. Communication amongst the team members is very important and I will try to coordiante in the comming week. Working with the Scrum board is still a daunting task and I hope to be able to do it correctly.
