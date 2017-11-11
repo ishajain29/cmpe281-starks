@@ -108,3 +108,9 @@ function  scSendRequestDeleteUserFromCart(cartId, userId, callback){
     var url = scShoppingCartServerURL + "/shared/" + cartId + "/user/" + userId;
     scSendRequest("DELETE", url, JSON.stringify({}), callback);
 }
+
+function scSendRequestAddUserSharedCart(cartId, strEmail, callback){
+    var url = scShoppingCartServerURL + "/shared/" + cartId + "/user";
+    var data = [strEmail];
+    scSendRequest("POST", url, JSON.stringify(data), callback);
+}
