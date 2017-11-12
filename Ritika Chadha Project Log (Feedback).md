@@ -41,3 +41,9 @@ In Extreme Programming, feedback can be of various forms: system and team. None 
 * This week was one of the most crucial week for our development in terms of collaboration of our domains and also, hosting our database and code to the AWS server. We came to a general agreement of utilizing the AWS Ubuntu servers for this purpose.   Moreover, positive feedback was enrolled in order to sort out the cloud service provider to be chosen.
 
 * The team has also started to engage on the solution to the partition tolerance problem given by the Professor. Inputs by each team member were incorporated to seek progress to this application.
+
+**Week 7**
+
+* After having discussion with professor, our team sat together to decide a way out for the most important aspect of our application that is testing out partition tolerance in our application. For that purpose, each person gave his/her views and came to a conclusion that was agreeable to each team member and also, proved to be most contructive.
+
+* Healthy conversation such as this led to a positive feedback mechanism and we came to a consensus of testing out partition tolerance on our MongoDB Cluster through customizing port 27017 on Security Groups in AWS and also, showing no availability in case of any partition among the nodes.
