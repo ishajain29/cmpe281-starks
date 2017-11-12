@@ -4,7 +4,7 @@ Pull docker image:
 
 docker pull neo4j
 
-Start an instance/Container of neo4j:
+Start an instance/Container for neo4j to deploy in aws:
 
 docker run \
     --publish=7474:7474 --publish=7687:7687 \
