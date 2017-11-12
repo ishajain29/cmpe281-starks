@@ -46,3 +46,10 @@ Respect in Extreme Programming (XP) refers to a system where everyone gives and 
 * This week team has set target to deploy the applications to AWS. We discussed about the procedure to deploy to AWS. all the queries related to this were clarified within team.
 
 * Team respected other individuals and their ideas. All the team members were given fair time to explain their ideas and views about the next steps in project.
+
+#### Week 7:
+* This week team worked on deploying their application to AWS. Challenges and drawbacks were discussed and everyone took active part in the discussion. 
+
+* We also discussed about the partition tolerence that we have to demonstrate in the demo and everyone's views were respected and received. 
+
+* Team respected other members ideas and changes were advised to team members where ever possible. Respect towards others was maintained at all the stages.
