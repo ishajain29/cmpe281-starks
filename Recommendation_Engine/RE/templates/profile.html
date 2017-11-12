@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>{{ username }}'s profile</h2>
+
+{% if session.username %}
+    {% if session.username == username %}
+        <h3>Users who brought items similar to you:</h3>
+
+          {% for user in similar %}
+            <p>
+            <a href="{{ url_for('profile', username=user.similar_user) }}">{{ user.similar_user }}</a>
+            also purchased  <i>{{ ", ".join(user.tags) }}</i> {{ ", ".join(user.posts) }}
+            </p> 
+          {% else %}
+            <p>There aren't any users who've purchased products the same category as you!</p>
+          {% endfor %}
+
+        <h3>Recommendations for you</h3>
+            Based on your previous purchases
+            {% for product in products %}
+            <p>
+            {{ product.post.title }}
+            </p>
+
+
+          {% else %}
+            <p>There aren't any users who've purchased products the same category as you!</p>
+          {% endfor %}
+
+        <h3>Your recent purchases:</h3>
+
+
+    {% else %}
+
+      <p>{{ username }} has liked {{ common.likes }} of your purchases and
+        {% if common.tags %}
+        also purchased  <i>{{ ", ".join(common.tags) }}</i>
+        {% else %}
+        hasn't purchased any of the same category
+        {% endif %}
+      </p>
+
+    <h3>{{ username }}'s recent purchases:</h3>
+
+    {% endif %}
+{% endif %}
+
+{% include "display_posts.html" %}
+
+{% endblock %}
