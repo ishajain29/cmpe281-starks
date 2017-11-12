@@ -14,3 +14,9 @@ docker run \
     --volume=$HOME/neo4j/conf:/conf \
     neo4j 
 
+
+Clustering of Neo4j in AWS:
+
+Three node cluster created in AWS. Partition tolerence to be tested with Neo4j. Since Neo4j lands in 'CA' category of 'CAP' theorem, more research has to be done in this regard.
+
+Neo4j is not fault tolerent. It can only exhibit consistency and availability.
