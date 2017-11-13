@@ -74,6 +74,10 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
 .agileits_header {
     background: #333333;
     padding: 12px 0;
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    width: 100%;
 }
 .w3l_offers {
     float: left;
@@ -182,6 +186,7 @@ button.w3view-cart:focus{
 }
 .logo_products {
     padding: 2em 0;
+    margin-top: 90px;
 }
 .w3ls_logo_products_left {
     float: left;
@@ -463,10 +468,7 @@ ul.multi-column-dropdown h6 {
 #PPMiniCart {
     left: 44% !important;
 }
-.minicart-showing #PPMiniCart form{
-    overflow-x: hidden;
-    overflow-y: auto;
-}
+
 #PPMiniCart .minicart-footer {
     position: relative;
 	width: 80%;
@@ -2757,6 +2759,7 @@ ul.faq {
 }
 .logo_products {
     padding: 1.5em 0;
+    margin-top: 90px;
 }
 .skdslider {
     height: 281px;
@@ -2821,6 +2824,7 @@ ul.faq {
 }
 .logo_products {
     padding: 1em 0;
+    margin-top: 90px;
 }
 .top_brand_left {
     width: 100%;
