@@ -33,7 +33,7 @@ router.post('/login', function(req,res){
         user.comparePassword(password, function(err, isMatch) {
             if (isMatch && isMatch == true) {
                 req.session.user = user;
-                return res.status(200).send();
+                return res.status(200).redirect('/user/dashboard');
 
             } else {
                 return res.status(401).send();
@@ -57,7 +57,7 @@ router.get('/logout', function(req, res){
 });
 
 // RETURNS ALL THE USERS IN THE DATABASE
-router.get('/', function (req, res) {
+router.get('/users', function (req, res) {
     User.find({}, function (err, users) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(users);
@@ -73,6 +73,8 @@ router.get('/:id', function (req, res) {
         res.status(200).send(user);
     });
 });
+
+
 
 // DELETES A USER FROM THE DATABASE
 router.delete('/:id', function (req, res) {
