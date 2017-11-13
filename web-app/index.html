@@ -66,16 +66,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</ul>
 			</div>
 			<div class="product_list_header">  
-					<form action="#" method="post" class="last"> 
-						<input type="hidden" name="cmd" value="_cart">
-						<input type="hidden" name="display" value="1">
-						<button type="submit" name="submit" class="btn btn-primary">
-								<i class="fa fa-cart-arrow-down" aria-hidden="true"></i> &nbsp; <span id="scCartMainButtonValue">My Cart</span>
-						</button>
+				<form action="#" method="post" class="last"> 
+					<input type="hidden" name="cmd" value="_cart">
+					<input type="hidden" name="display" value="1">
+					<button type="submit" name="submit" class="btn btn-primary">
+							<i class="fa fa-cart-arrow-down" aria-hidden="true"></i> &nbsp; <span id="scCartMainButtonValue">My Cart</span>
+					</button>
 
-						<!-- <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Shopping Cart</button> -->
-					</form>  
-
+					<button type="button" class="btn btn-primary" id="scBtnCreateNewCart" onclick="return scShowCreateNewCart(event)">
+						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true" style="top: 0.1em;"></span> &nbsp;<span>New Shared Cart</span>
+					</button>
+				</form>  
 			</div>
 			<div class="clearfix"> </div>
 		</div>
@@ -967,43 +968,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	  </div>
 </div>
-<!-- 
 
-<div id="scDialogAddUser" class="modal">
+
+<div id="scDialogCreateNewCart" class="modal">
 	
 	  <div class="modal-content">
 		<span class="close">&times;</span>
-		<p style="margin-bottom : 30px;">Add User to Cart</p>
+		<p style="margin-bottom : 30px;">Create New Shared Cart</p>
 		<div class="model-body" id="model-body">
 			
-				<ul class="list-group" id="scListUsers">
-						<li class="list-group-item justify-content-between">
-						    Anuj Chaudhari (anuj.chaudhari@gmail.com)
-						  	<button type="button" class="btn btn-default btn-sm"  style="position:absolute; right: 10px; top: 5px;">
-								<span class="glyphicon glyphicon-remove-sign"></span>
-						  	</button>
-						</li>
-
-						<li class="list-group-item justify-content-between">
-							Purvesh Patel (purvesh.patel@gmail.com)
-								<button type="button" class="btn btn-default btn-sm"  style="position:absolute; right: 10px; top: 5px;">
-									<span class="glyphicon glyphicon-remove-sign"></span>
-								</button>
-						</li>
-
-						<li class="list-group-item justify-content-between">
-							Tejas Panchal (tejas.panchal@gmail.com)
-								<button type="button" class="btn btn-default btn-sm"  style="position:absolute; right: 10px; top: 5px;">
-									<span class="glyphicon glyphicon-remove-sign"></span>
-								</button>
-						</li>
-
-					  </ul>
+			<div class="input-group">
+				 <input type="text" class="form-control" placeholder="Cart Name" id="scNewCartInput">
+				 <span class="input-group-btn">
+				  <button class="btn btn-primary" type="button" id="scAddUserBtn" onclick="return scCreateNewSharedCart(event)">Create</button>
+				</span>
+			</div> </br>
 
 		</div>
 	  </div>
 </div>
- -->
+
 
 <!-- //footer -->	
 <!-- Bootstrap Core JavaScript -->

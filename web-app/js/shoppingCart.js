@@ -10,6 +10,17 @@ function scCartSelectionChanged(e){
     document.dispatchEvent(event);
 }
 
+function scCreateNewSharedCart(){
+    var strCartName = document.getElementById("scNewCartInput").value;
+    if(strCartName == "") return;
+
+    var url = scShoppingCartServerURL + "/shared";
+    var data = {  
+        "adminId"	: scTempUserId,
+        "cartName"  : strCartName
+    };
+    scSendRequest("POST", url, JSON.stringify(data), scNewCartCreated);
+}
 
 function scSendRequest(strType, strUrl, productData, callback){
     $.ajax({
@@ -86,6 +97,14 @@ function scReloadCart(bSuccessful){
         //self.fire('add', idx, product, isExisting);
         var event = new Event('cartReloadRequired');
         document.dispatchEvent(event);
+    }
+}
+
+function scNewCartCreated(bSuccessful){
+    if(bSuccessful){
+        scDialogCreateNewCart.style.display = "none";
+        scSelectedCartIndex = scCartModel.length;
+        scReloadCart(true);        
     }
 }
 

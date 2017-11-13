@@ -78,7 +78,7 @@ input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input
 .w3l_offers {
     float: left;
     padding: 9px 0;
-	width: 47%;
+	width: 35%;
 }
 .w3l_offers p {
     font-size: 15px;
@@ -127,7 +127,7 @@ button.btn.btn-default.search:hover {
 }
 .agile-login {
     float: left;
-    width: 40%;
+    width:  35%;
     text-align: center;
     padding: 9px 0;
 }
@@ -386,6 +386,7 @@ ul.multi-column-dropdown h6 {
 /*-- cart --*/
 .product_list_header {
     float: right;
+    padding: 9px 0;
 }
 .snipcart-details {
     text-align: center;
@@ -2516,7 +2517,7 @@ h3.w3_agile_header, h2.w3_agile_header {
     font-size: 14px;
 }
 .w3l_offers {
-    width: 40%;
+    width: 35%;
 }
 .agile-login {
     padding: 6px 0;
@@ -2793,10 +2794,10 @@ ul.faq {
 	/* max-height: 165px !important; */
 }
 .agile-login {
-    width: 37%;
+    width: 35%;
 }
 .w3l_offers {
-    width: 56%;
+    width: 35%;
 }
 .agile-login ul li {
     padding: 0em 0.4em;
@@ -2857,7 +2858,7 @@ ul.faq {
     text-align: center;
 }
 .agile-login {
-    width: 38%;
+    width: 35%;
 }
 .about .grid-top h4 {
     font-size: 1.3em;
@@ -2895,7 +2896,7 @@ ul.faq {
 	max-height: 210px !important;
 }
 .agile-login {
-    width: 40%;
+    width: 35%;
 }
 .value-minus, .value-plus {
     height: 22px;
@@ -2915,7 +2916,7 @@ ul.faq {
     width: 64%;
 }
 .agile-login {
-    width: 43%;
+    width: 35%;
 }
 .w3l_search input[type="search"] {
     width: 91%;
