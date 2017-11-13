@@ -31,4 +31,11 @@ app.get('/login',function(req, res) {
 	res.sendFile(path.join(__dirname,'views/login.html'));
 });
 
+app.get('/dashboard', function(req, res) {
+    if(!req.session.user){
+        return res.status(404).send();
+    }
+    return res.status(200).sendFile(path.join(__dirname,'views/dashboard.html'));
+});
+
 module.exports = app;
