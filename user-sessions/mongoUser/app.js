@@ -9,17 +9,33 @@ var morgan = require('morgan');
 
 var UserController = require('./user/UserController');
 
-app.set('view engine','ejs');
+app.set('view engine','html');
 app.set('views',__dirname + '/views');
 
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({secret:"zxcvbnmzxcvbnm", resave:false, saveUninitialized:true}));
+app.use(express.static(__dirname + '/public'));
 
-app.use('/userSession/users', UserController);
+app.use('/user', UserController);
 
 app.get('/',function(req, res) {
 	res.sendFile(path.join(__dirname,'views/index.html'));
+});
+
+app.get('/register',function(req, res) {
+	res.sendFile(path.join(__dirname,'views/registered.html'));
+});
+
+app.get('/login',function(req, res) {
+	res.sendFile(path.join(__dirname,'views/login.html'));
+});
+
+app.get('/dashboard', function(req, res) {
+    if(!req.session.user){
+        return res.status(404).send();
+    }
+    return res.status(200).sendFile(path.join(__dirname,'views/dashboard.html'));
 });
 
 module.exports = app;

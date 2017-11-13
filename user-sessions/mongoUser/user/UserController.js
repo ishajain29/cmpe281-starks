@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 var User = require('./User');
 
+
 // CREATES A NEW USER
 router.post('/register', function (req, res) {
     User.create({
@@ -33,14 +34,12 @@ router.post('/login', function(req,res){
         user.comparePassword(password, function(err, isMatch) {
             if (isMatch && isMatch == true) {
                 req.session.user = user;
-                return res.status(200).send();
+                return res.status(200).redirect('/dashboard');
 
             } else {
                 return res.status(401).send();
             }
         });
-
-       
     }); 
 });
 
@@ -48,16 +47,16 @@ router.get('/dashboard', function(req, res) {
     if(!req.session.user){
         return res.status(404).send();
     }
-    return res.status(200).send("Welcome!");
+    return res.status(200).sendFile(path.join(__dirname,'../views/dashboard.html'));
 });
 
 router.get('/logout', function(req, res){
     req.session.destroy();
-    return res.status(200).send();
+    return res.status(200).redirect('/');
 });
 
 // RETURNS ALL THE USERS IN THE DATABASE
-router.get('/', function (req, res) {
+router.get('/users', function (req, res) {
     User.find({}, function (err, users) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(users);
@@ -73,6 +72,8 @@ router.get('/:id', function (req, res) {
         res.status(200).send(user);
     });
 });
+
+
 
 // DELETES A USER FROM THE DATABASE
 router.delete('/:id', function (req, res) {

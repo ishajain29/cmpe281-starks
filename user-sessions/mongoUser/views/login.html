@@ -49,8 +49,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="agile-login">
 				<ul>
-					<li><a href="registered.html"> Create Account </a></li>
-					<li><a href="login.html">Login</a></li>
+					<li><a href="/register"> Create Account </a></li>
+					<li><a href="/login">Login</a></li>
 					<li><a href="contact.html">Help</a></li>
 					
 				</ul>
@@ -75,7 +75,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</ul>
 			</div>
 			<div class="w3ls_logo_products_left">
-				<h1><a href="index.html">super Market</a></h1>
+				<h1><a href="/">super Market</a></h1>
 			</div>
 		<div class="w3l_search">
 			<form action="#" method="post">
@@ -106,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div> 
 							<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 								<ul class="nav navbar-nav">
-									<li class="active"><a href="index.html" class="act">Home</a></li>	
+									<li class="active"><a href="/" class="act">Home</a></li>	
 									<!-- Mega Menu -->
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Groceries<b class="caret"></b></a>
@@ -231,9 +231,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h2>Login Form</h2>
 		
 			<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-				<form>
-					<input type="email" placeholder="Email Address" required=" " >
-					<input type="password" placeholder="Password" required=" " >
+				<form action="/user/login" method="post">
+					<input type="email" name="email" placeholder="Email Address" required=" " >
+					<input type="password" name="password" placeholder="Password" required=" " >
 					<div class="forgot">
 						<a href="#">Forgot Password?</a>
 					</div>
