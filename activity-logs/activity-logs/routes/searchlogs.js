@@ -39,5 +39,18 @@ router.route('/')
         })
     });
 
+router.route('/:userid').get(function(req,res,next){
+
+      SearchLogs.find({userid: req.params.userid}, function (err, result) {
+            if (err) {
+                res.send('There was an error displaying the collection');
+            } else if(result.length) {
+                res.send(result);
+            }
+            else {
+              res.send('No documents available');
+            }
+      });
+    });
 
 module.exports = router;
