@@ -1,0 +1,23 @@
+## MongoDB Primary Node Configuration
+* Create t2.micro Ubuntu 16.04 instance in the private subnet of same VPC of application server
+* We will use NAT instance to connect to MongoDB instance
+* To directly SSH into the MongoDB instance to perform installation, perform following command on NAT instance:
+	* sudo iptables -t nat -A PREROUTING -j DNAT --to-destination [Private IP address of Instance]:22
+* Perform following command to install MongoDB Enterprise Version:
+  * sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+  * echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+  * sudo apt-get update
+  * sudo apt-get install -y mongodb-org
+* MongoDB is installed as a service on the Ubuntu. To start and stop, use following commands:
+	* sudo service mongod start
+	* sudo service mongod stop
+* Open port 27017 in the security group to allow traffic on MongoDB
+
+## Miscellaneous MongoDB Setup
+* To perform text searching on the product data, we need to index the data using following commands:
+	* use udetails
+	* db.users.createIndex({firstname: "text", lastname: "text", email: "text", password: "text"})
+* To enable remote connection on the MongoDB instance, use following commands:
+	* sudo vi /etc/mongod.conf
+	* Comment line bindIp: 127.0.0.1 which accepts the requests from only mentioned IPs
+	* Restart mongod service
