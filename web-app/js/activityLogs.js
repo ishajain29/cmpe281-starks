@@ -6,7 +6,7 @@ var uaSearchLogsServerURL = "http://localhost:3000/searchlogs";
 function uaGetUserLogs(){
 
 	$.ajax({
-	   url: uaUserLogsServerURL,
+	   url: uaUserLogsServerURL+'/'+userid,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },
@@ -24,7 +24,7 @@ function uaGetUserLogs(){
 function uaGetCartLogs(){
 
 	$.ajax({
-	   url: uaCartLogsServerURL,
+	   url: uaCartLogsServerURL+'/'+userid,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },
@@ -42,7 +42,7 @@ function uaGetCartLogs(){
 function uaGetSearchLogs(){
 
 	$.ajax({
-	   url: uaSearchLogsServerURL,
+	   url: uaSearchLogsServerURL+'/'+userid,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },
