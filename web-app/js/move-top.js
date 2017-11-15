@@ -3,3 +3,11 @@
 if(sd>settings.min)
 $(containerIDhash).fadeIn(settings.inDelay);else
 $(containerIDhash).fadeOut(settings.Outdelay);});};})(jQuery);
+
+
+$(function(){
+    $("#header").load("header.html", function(){
+      var event = new Event('productsloaded');
+        document.dispatchEvent(event);
+    }); 		  
+});
