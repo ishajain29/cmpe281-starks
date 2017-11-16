@@ -1,0 +1,26 @@
+extends layout
+ 
+block content
+  h3= title
+  form#form_add_purchase(name="addpurchase", method="post", action="/addpurchase")
+    span Name
+    span &nbsp;
+    input#input_name(type="text", placeholder="user", name="user")
+    br
+    br
+    span Street
+    span &nbsp;
+    input#input_product(type="text", placeholder="product", name="product")
+    br
+    br
+    span City
+    span &nbsp;
+    input#input_category(type="text", placeholder="category", name="category")
+    br
+    br
+    span State
+    span &nbsp;
+    input#input_price(type="text", placeholder="price", name="price")
+    br
+    br
+    button#submit_product(type="submit") submit

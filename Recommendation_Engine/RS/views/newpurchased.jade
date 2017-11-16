@@ -1,0 +1,16 @@
+extends layout
+ 
+block content
+  h3= title
+  form#form_add_purchased(name="addpurchased", method="post", action="/addpurchased")
+    span User Id
+    span &nbsp;
+    input#input_userid(type="text", placeholder="userid", name="userid")
+    br
+    br
+    span Product Id
+    span &nbsp;
+    input#input_productid(type="text", placeholder="productid", name="productid")
+    br
+    br
+    button#submit_product(type="submit") submit

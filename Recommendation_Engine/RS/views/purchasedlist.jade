@@ -1,0 +1,9 @@
+extends layout
+ 
+block content
+  h3.
+    Purchases
+  ul
+    each purchase, i in purchasedlist
+      li#purchase_list_item
+        a(href='#') #{purchase.userid} Purchased #{purchase.productid}  
