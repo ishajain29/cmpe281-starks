@@ -17,11 +17,21 @@
 	
 	<context:component-scan base-package="com.pk.cmpe281.productcatalog.controller" />
 	
-	<mongo:mongo host="localhost" port="27017" id="mongo" />
+	<!-- MongoDB Single Instance Configuration  
+		<mongo:mongo host="localhost" port="27017" id="mongo" />
+	 -->
+	
+	<!-- MongoDB replica set configuration -->
+	<mongo:mongo id="mongo" replica-set="10.0.1.82:27017,10.0.1.240:27017,10.0.1.99:27017" /> 
+	
 	<mongo:db-factory dbname="productdb" mongo-ref="mongo" id="mongoDbFactory" />
+	
+	<bean id="readPreferenceSecondary" class="com.mongodb.TaggableReadPreference.SecondaryReadPreference">
+	</bean>
 		
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		 <property name="readPreference" ref="readPreferenceSecondary"></property>
 	</bean>
 	
 	<bean id="productCatalogDAO" class="com.pk.cmpe281.productcatalog.dao.ProductCatalogDAOImpl">
@@ -29,4 +39,3 @@
 	</bean>
 
 </beans>
- 
