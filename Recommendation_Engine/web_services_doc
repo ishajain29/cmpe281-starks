@@ -1,0 +1,54 @@
+Recommendation Engine Web Services. 
+
+1. Logs retrieved from Shopping cart Web Services (Purchase Details):
+
+POST /recommedation/purchased
+
+{
+	userid: <String>
+	productid: <String
+	timestamp : <Date.now>
+}
+
+2. Logs retrieved from Activity Logs Web Services (Search History):
+
+POST /recommedation/searched
+
+{
+	userid: <String>
+	productid: <String>
+	timestamp : <Date.now>
+}
+
+3. Get all Previously purchased details for a user
+
+GET /recommendations/purchaselist/userid
+Results:
+{
+	userid: <String>
+	productid: <String>
+	timestamp : <Date.now>
+}
+
+3. Get Recommendations based on Previous purchases:
+
+Interact with product catalog to get product details.
+
+GET /recommendations/rcmd/userid
+Results:
+{
+	userid: <string>
+	productid: <string>
+}
+
+4. Get Recommendations based on search history:
+
+GET /recommendations/searched/userid
+Results:
+{
+	userid: <string>
+	productid: <string>
+}
+
+
+
