@@ -2,18 +2,18 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 
+// Get a Mongo client to work with the Mongo server
+var MongoClient = mongodb.MongoClient;
+// Define where the MongoDB server is
+var url = 'mongodb://localhost:27017/sampsite';
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-// Return Product details based on userid
+// Return all Product details based on userid
 router.get('/purchaselist', function(req, res){
- 
-  // Get a Mongo client to work with the Mongo server
-  var MongoClient = mongodb.MongoClient;
-  // Define where the MongoDB server is
-  var url = 'mongodb://localhost:27017/sampsite';
  
   // Connect to the server
   MongoClient.connect(url, function (err, db) {
@@ -52,13 +52,6 @@ router.get('/purchaselist', function(req, res){
 
 
   router.post('/addpurchase', function(req, res){
- 
-    // Get a Mongo client to work with the Mongo server
-    var MongoClient = mongodb.MongoClient;
- 
-    // Define where the MongoDB server is
-    var url = 'mongodb://localhost:27017/sampsite';
- 
     // Connect to the server
     MongoClient.connect(url, function(err, db){
       if (err) {
@@ -98,13 +91,6 @@ router.get('/newpurchased', function(req, res){
 
 // Add purchase details to DB (Userid, Productid, Category)
 router.post('/addpurchased', function(req, res){
- 
-    // Get a Mongo client to work with the Mongo server
-    var MongoClient = mongodb.MongoClient;
- 
-    // Define where the MongoDB server is
-    var url = 'mongodb://localhost:27017/sampsite';
- 
     // Connect to the server
     MongoClient.connect(url, function(err, db){
       if (err) {
@@ -139,19 +125,12 @@ router.post('/addpurchased', function(req, res){
   });
 
 
-
 router.get('/newsearched', function(req, res){
     res.render('newsearched', {title: 'Add Searched' });
 });
 
 // Add Search details to DB
 router.post('/addsearched', function(req, res){
- 
-    // Get a Mongo client to work with the Mongo server
-    var MongoClient = mongodb.MongoClient;
- 
-    // Define where the MongoDB server is
-    var url = 'mongodb://localhost:27017/sampsite';
  
     // Connect to the server
     MongoClient.connect(url, function(err, db){
@@ -187,14 +166,8 @@ router.post('/addsearched', function(req, res){
   });
 
 
+// Return previous purchased products based on user id
 router.get('/rcmd', function(req, res){
- 
-  // Get a Mongo client to work with the Mongo server
-  var MongoClient = mongodb.MongoClient;
- 
-  // Define where the MongoDB server is
-  var url = 'mongodb://localhost:27017/sampsite';
-
   // Connect to the server
   MongoClient.connect(url, function (err, db) {
   if (err) {
@@ -207,7 +180,7 @@ router.get('/rcmd', function(req, res){
     var collection = db.collection('purchased');
  
     // Find all students
-    collection.find({userid: req.query.userid},{"productid":1}).toArray(function (err, result) {
+    collection.find({userid: req.query.userid},{"_id":0,"productid":1}).toArray(function (err, result) {
       if (err) {
         res.send(err);
       } else if (result.length) {
