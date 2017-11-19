@@ -1,0 +1,24 @@
+* Firstly, using my ami of mongoDB instance I created three more instances on AWS.
+* Once three servers are up and running, make following entries in the host file '/etc/hosts' of all three instances:
+  	
+  	`127.0.0.1 localhost mongo0.usersession.com`
+ +	
+  	`10.0.1.74 mongo0.usersession.com`
+ +	
+  	`10.0.1.140 mongo1.usersession.com`
+ +	
+  	`10.0.1.56 mongo2.usersession.com`
+  
+ +  * Stop the MongoDB instance.
+ +	* Open the configuration file /etc/mongod.conf.
+ +	* Uncomment the line "Replication:" and add following line:
+ +	replSetName: rs0
+  
+  
+ * Perform the following commands to configure replica set:
+ +	* rs.initiate()
+ +	* rs.add("mongo1.example.com:27017")
+ +	* rs.add("mongo2.example.com:27017")
+ +
+ +* To check the configuration of the replica set, use the following command:
+ +	* rs.config()
