@@ -41,3 +41,7 @@ This Wiki page contains information about how team implemented Extreme Programmi
 ## Week 7
 
 * This week we decided to complete user interface development with web service integration. So, we will need to meet more frequently in the weeks ahead. We might need to do pair programming in order to be more productive. Communication amongst the team members is very important and I will try to coordiante in the comming week. Working with the Scrum board is still a daunting task and I hope to be able to do it correctly.
+
+## Week 8
+
+* As this was the last week of the project and we need to integrate our full application to make it work with each others. This was a really good excercise for enhancing communication in the team. Having to have to do a tremendious amount of work in such a short period of time forced the team members to communicate and collaborate. It was good practice for improving our technical skills as well.
