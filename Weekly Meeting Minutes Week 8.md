@@ -12,11 +12,11 @@
 * **Anuj**: 
 * **Isha**: 
 * **Ritika**: 
-* **Shantagouda**: NA
+* **Shantagouda**: N/A
 
 ### What are the current blockers/challenges the team is facing?
 * **Purvesh**: 
 * **Anuj**: 
 * **Isha**: 
 * **Ritika**: 
-* **Shantagouda**: NA
+* **Shantagouda**: N/A
