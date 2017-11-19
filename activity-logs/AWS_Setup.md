@@ -39,7 +39,21 @@ sudo iptables -A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
 * Create /data/db directories in var of the ubunutu server.
 * Test it by running 'mongod --dbpath /var/data/db'.
 
+OR
 
+```echo "[mongodb-org-3.4]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.4/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc" |
+  sudo tee -a /etc/yum.repos.d/mongodb-org-3.4.repo
+  ```
+  
+```
+sudo yum -y update && sudo yum install -y mongodb-org-server \
+    mongodb-org-shell mongodb-org-tools  
+```
 ***
      
 
