@@ -53,3 +53,10 @@ Respect in Extreme Programming (XP) refers to a system where everyone gives and 
 * We also discussed about the partition tolerence that we have to demonstrate in the demo and everyone's views were respected and received. 
 
 * Team respected other members ideas and changes were advised to team members where ever possible. Respect towards others was maintained at all the stages.
+
+#### Week 8:
+* Since this was the last week of project, we focussed on integration and testing of application. We checkd about the AWS Deployment of applications and databases. All the team members took part in this process.
+
+* We also discussed about partition tolerance and checked the various ways in which we can show the partion tolerance of all the modules of application.
+
+* Team members respected other ideas and views. Team ended the meeting with succussful running of application and this was mainly possible because all the team members listened to other views and ideas.
