@@ -47,3 +47,9 @@ In Extreme Programming, feedback can be of various forms: system and team. None 
 * After having discussion with professor, our team sat together to decide a way out for the most important aspect of our application that is testing out partition tolerance in our application. For that purpose, each person gave his/her views and came to a conclusion that was agreeable to each team member and also, proved to be most contructive.
 
 * Healthy conversation such as this led to a positive feedback mechanism and we came to a consensus of testing out partition tolerance on our MongoDB Cluster through customizing port 27017 on Security Groups in AWS and also, showing no availability in case of any partition among the nodes.
+
+**Week 8**
+
+* This week was all about making connections to the other services such that the code as a whole works to perfection. This required a mutual understanding and respect for each other's views and feedback.
+
+* Positive feedback and fruitful discussion led to each member stating their own requirements in order for their contribution to the project to surface out during our demo. Since this is the wrap-up week for our project, we also ensured to implement the last and the most important aspect of our project that is partition tolerance. This ensured a final follow-up to the one of the most important Agile Value- Feedback.
