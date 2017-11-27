@@ -1,4 +1,4 @@
-var pcProductCatalogServerURL = "http://18.216.132.146:8080/productCatalog";
+var pcProductCatalogServerURL = "http://52.14.80.57:8080/productCatalog";
 
 /* Fetch page 1 product data to display on Home Page */
 function pcGetProductData(){
