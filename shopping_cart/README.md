@@ -218,3 +218,128 @@ POST http://my.api.com/carts/user/<user_id>/order
 
 1. Check for out-of-stock items in the cart [when cart is loaded and before any order is placed]
 
+
+
+## Activity Log Events ##
+
+#### Shared Cart ####
+
+1. create cart - shared cart
+```
+{ 
+    activity: 'Cart Created',
+    cartid: '5a1decff7b91165406e027eb',
+    cartname: 'Office Cart 1',
+    groupusers: '["anuj"]',
+    products: 'null',
+    typeofcart: 'shared',
+    userid: 'anuj' 
+}
+```
+
+2. add product - shared cart
+```
+{
+    activity: 'Product Added',
+    cartid: '5a1decff7b91165406e027eb',
+    product: '{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}',
+    typeofcart: 'shared'
+}
+```
+
+3. remove product - shared cart
+```
+{
+    activity: 'Product Removed',
+    cartid: '5a1decff7b91165406e027eb',
+    productid: 'hfoeecff7b91165406e027eb',
+    typeofcart: 'shared'
+}
+```
+
+4. update product - shared cart
+```
+{
+    activity: 'Product Updated',
+    cartid: '5a1decff7b91165406e027eb',
+    product: '{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}',
+    typeofcart: 'shared'
+}
+```
+
+5. add user - shared cart
+```
+{
+    activity: 'User Added',
+    cartid: '5a1decff7b91165406e027eb',
+    typeofcart: 'shared',
+    addedUserId: 'purvesh'
+}
+```
+
+6. remove user - shared cart
+```
+{
+    activity: 'User Removed',
+    cartid: '5a1decff7b91165406e027eb',
+    typeofcart: 'shared',
+    removedUserId: 'purvesh'
+}
+```
+
+7. Place order - shared cart
+```
+{ 
+    activity: 'Order Placed',
+    cartid: '5a1decff7b91165406e027eb',
+    cartname: 'Office Cart 1',
+    groupusers: '["anuj"]',
+    products: '[{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"},
+                {"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}]',
+    typeofcart: 'shared',
+    userid: 'anuj' 
+}
+```
+
+#### User Cart ####
+
+1. add product - user cart
+```
+{
+    activity: 'Product Added',
+    userid: 'anuj',
+    product: '{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}',
+    typeofcart: 'user'
+}
+```
+
+2. remove product - user cart
+```
+{
+    activity: 'Product Removed',
+    user: 'anuj',
+    productid: 'hfoeecff7b91165406e027eb',
+    typeofcart: 'user'
+}
+```
+
+3. Product Updated - user cart
+```
+{
+    activity: 'Product Updated',
+    user: 'anuj',
+    product: '{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}',
+    typeofcart: 'user'
+}
+```
+
+4. Place order - user cart
+```
+{ 
+    activity: 'Order Placed',
+    userid: 'anuj',
+    products: '[{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"},
+                {"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}]',
+    typeofcart: 'user'
+}
+```

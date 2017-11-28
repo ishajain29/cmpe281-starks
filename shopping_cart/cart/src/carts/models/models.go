@@ -17,6 +17,9 @@ var LinkAPI = ""
 var LinkUserCart = ""
 var LinkSharedCart = ""
 
+var ActivityLogServerURL = ""
+var RecommendationServerURL = ""
+
 func init() {
 
 	err := godotenv.Load()
@@ -33,6 +36,9 @@ func init() {
 	LinkAPI = serverAddress + "/carts"
 	LinkUserCart = LinkAPI + "/user"
 	LinkSharedCart = LinkAPI + "/shared"
+
+	ActivityLogServerURL = os.Getenv("ACTIVITY_LOG_SERVER_URL")
+	RecommendationServerURL = os.Getenv("RECOMMENDATION_SERVER_URL")
 
 	println("LinkSharedCart:", LinkSharedCart)
 }

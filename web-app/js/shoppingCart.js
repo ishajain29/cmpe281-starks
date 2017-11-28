@@ -15,7 +15,8 @@ function scCreateNewSharedCart(){
     if(strCartName == "") return;
 
     var url = scShoppingCartServerURL + "/shared";
-    var data = {  
+    var data = {
+        "reqUserId" : scTempUserId,
         "adminId"	: scTempUserId,
         "cartName"  : strCartName
     };
@@ -44,6 +45,7 @@ function scSendRequestUpdateItemUserCart(userId, product, callback){
     
     var url = scShoppingCartServerURL + "/user/" + userId + "/product/" + product.id;
     var data = {  
+        "reqUserId" : scTempUserId,        
         "id"		: product.id,
         "quantity"  : product.quantity,
         "name"      : product.item_name,
@@ -56,6 +58,7 @@ function scSendRequestAddItemUserCart(userId, product, callback){
     
     var url = scShoppingCartServerURL + "/user/" + userId + "/product";
     var data = {  
+        "reqUserId" : scTempUserId,        
         "id"		: product.id,
         "quantity"  : product.quantity,
         "name"      : product.item_name,
@@ -69,7 +72,8 @@ function scSendRequestAddItemUserCart(userId, product, callback){
 function scSendRequestAddItemSharedCart(cartId, product, callback){
     
     var url = scShoppingCartServerURL + "/shared/" + cartId + "/product";
-    var data = {  
+    var data = {
+        "reqUserId" : scTempUserId,        
         "id"		: product.id,
         "quantity"  : product.quantity,
         "name"      : product.item_name,
@@ -82,7 +86,8 @@ function scSendRequestAddItemSharedCart(cartId, product, callback){
 
 function scSendRequestUpdateItemSharedCart(cartId, product, callback){
     var url = scShoppingCartServerURL + "/shared/" + cartId + "/product/" + product.id;
-    var data = {  
+    var data = { 
+        "reqUserId" : scTempUserId,        
         "id"		: product.id,
         "quantity"  : product.quantity,
         "name"      : product.item_name,
@@ -110,12 +115,18 @@ function scNewCartCreated(bSuccessful){
 
 function scSendRequestPlaceOrderUserCart(userId, callback){
     var url = scShoppingCartServerURL + "/user/" + userId + "/order";
-    scSendRequest("POST", url, JSON.stringify({}), callback);
+    var data = { 
+        "reqUserId" : scTempUserId
+    };
+    scSendRequest("POST", url, JSON.stringify(data), callback);
 }
 
 function scSendRequestPlaceOrderSharedCart(cartId, callback){
     var url = scShoppingCartServerURL + "/shared/" + cartId + "/order";
-    scSendRequest("POST", url, JSON.stringify({}), callback);
+    var data = { 
+        "reqUserId" : scTempUserId
+    };
+    scSendRequest("POST", url, JSON.stringify(data), callback);
 }
 
 function scSendRequestGetCartDetails(cartId, callback){
@@ -125,7 +136,10 @@ function scSendRequestGetCartDetails(cartId, callback){
 
 function  scSendRequestDeleteUserFromCart(cartId, userId, callback){
     var url = scShoppingCartServerURL + "/shared/" + cartId + "/user/" + userId;
-    scSendRequest("DELETE", url, JSON.stringify({}), callback);
+    var data = { 
+        "reqUserId" : scTempUserId
+    };
+    scSendRequest("DELETE", url, JSON.stringify(data), callback);
 }
 
 function scSendRequestAddUserSharedCart(cartId, strEmail, callback){

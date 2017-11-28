@@ -1,6 +1,7 @@
 package usercart
 
 import (
+	"bytes"
 	"carts/models"
 	"encoding/json"
 	"fmt"
@@ -158,6 +159,8 @@ func AddProduct(c *gin.Context) {
 		return
 	}
 
+	sendAddProductEvent(c.Param("userId"), *product)
+
 	c.String(http.StatusOK, "")
 }
 
@@ -199,6 +202,8 @@ func UpdateProduct(c *gin.Context) {
 		return
 	}
 
+	sendUpdateProductEvent(c.Param("userId"), c.Param("productId"), *product)
+
 	c.String(http.StatusOK, "")
 }
 
@@ -221,6 +226,9 @@ func RemoveProduct(c *gin.Context) {
 		c.String(http.StatusInternalServerError, "Error while removing product from mongodb")
 		return
 	}
+
+	sendRemoveProductEvent(c.Param("userId"), c.Param("productId"))
+
 	c.String(http.StatusOK, "")
 }
 
@@ -262,6 +270,7 @@ func PlaceOrder(c *gin.Context) {
 	}
 
 	//TODO: Send event to activity log about order placed successfully
+	sendPlaceOrderEvent(userCart)
 
 	c.String(http.StatusOK, "")
 }
@@ -281,4 +290,85 @@ func getMongoConnection() (mgo.Session, mgo.Collection, error) {
 	collection = session.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
 
 	return *session, *collection, nil
+}
+
+// --- Activity Log Events --- //
+
+func sendAddProductEvent(userId string, product models.Product) {
+
+	var dic map[string]string
+	dic = make(map[string]string)
+
+	productString, _ := json.Marshal(product)
+
+	dic["userid"] = userId
+	dic["typeofcart"] = "user"
+	dic["product"] = string(productString)
+	dic["activity"] = "Product Added"
+
+	requestData, _ := json.Marshal(dic)
+
+	_, err := http.Post(models.ActivityLogServerURL, "application/json", bytes.NewBuffer(requestData))
+
+	if err != nil {
+		fmt.Println("Could not send event to activity log server", err)
+	}
+}
+
+func sendUpdateProductEvent(userId string, productId string, product models.Product) {
+	var dic map[string]string
+	dic = make(map[string]string)
+
+	productString, _ := json.Marshal(product)
+
+	dic["userid"] = userId
+	dic["typeofcart"] = "user"
+	dic["product"] = string(productString)
+	dic["activity"] = "Product Updated"
+
+	requestData, _ := json.Marshal(dic)
+
+	_, err := http.Post(models.ActivityLogServerURL, "application/json", bytes.NewBuffer(requestData))
+
+	if err != nil {
+		fmt.Println("Could not send event to activity log server", err)
+	}
+}
+
+func sendRemoveProductEvent(userId string, productId string) {
+	var dic map[string]string
+	dic = make(map[string]string)
+
+	dic["userid"] = userId
+	dic["typeofcart"] = "user"
+	dic["productId"] = productId
+	dic["activity"] = "Product Removed"
+
+	requestData, _ := json.Marshal(dic)
+
+	_, err := http.Post(models.ActivityLogServerURL, "application/json", bytes.NewBuffer(requestData))
+
+	if err != nil {
+		fmt.Println("Could not send event to activity log server", err)
+	}
+}
+
+func sendPlaceOrderEvent(usercart models.UserCart) {
+	var dic map[string]string
+	dic = make(map[string]string)
+
+	products, _ := json.Marshal(usercart.Products)
+
+	dic["userid"] = usercart.UserId
+	dic["typeofcart"] = "user"
+	dic["products"] = string(products)
+	dic["activity"] = "Order Placed"
+
+	requestData, _ := json.Marshal(dic)
+
+	_, err := http.Post(models.ActivityLogServerURL, "application/json", bytes.NewBuffer(requestData))
+
+	if err != nil {
+		fmt.Println("Could not send event to activity log server", err)
+	}
 }
