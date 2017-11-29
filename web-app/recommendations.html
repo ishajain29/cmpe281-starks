@@ -40,8 +40,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 
-		rsGetPurchasedProducts("1234");
+		rsGetPurchasedProducts("Shanta");
 		rsGetSearchedProducts("1234");
+		rsGetCategoryProducts("edu");
 
 	});
 	$(function(){
@@ -480,7 +481,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 			<h3>Based on your purchase category</h3>
 				<div class="agile_top_brands_grids">
-					<div class="col-md-3 top_brand_left-1">
+					<div class="col-md-3 top_brand_left-1 hideBlock" id="rsPP_box_1">
 						<div class="hover14 column">
 							<div class="agile_top_brand_left_grid">
 								<div class="agile_top_brand_left_grid_pos">
@@ -490,29 +491,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<figure>
 										<div class="snipcart-item block">
 											<div class="snipcart-thumb">
-												<a href="products.html"><img title=" " alt=" " src="images/14.png"></a>		
-												<p>Fried-gram</p>
-												<div class="stars">
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star gray-star" aria-hidden="true"></i>
-												</div>
-													<h4>$35.99 <span>$55.00</span></h4>
+												<a href="single.html?id=" id="rsPC_link_1"><img style='height:150px' title=" " alt=" " id="rsPC_image_1" src=""></a>		
+												<p id="rsPC_name_1"></p>
+													<h4 id="rsPC_price_1"></h4>
 											</div>
 											<div class="snipcart-details top_brand_home_details">
 												<form action="#" method="post">
 													<fieldset>
 														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Fortune Sunflower Oil">
-														<input type="hidden" name="amount" value="35.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
+														<input type="hidden" name="item_name" id="rsPC_name_input_1" value="Fortune Sunflower Oil">
+														<input type="hidden" name="amount" id="rsPC_price_input_1" value="35.99">
+														<input type="hidden" name="id" id="rsPC_id_input_1" value="35.99">
 														<input type="submit" name="submit" value="Add to cart" class="button">
 													</fieldset>
 												</form>
@@ -523,7 +512,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 top_brand_left-1">
+					<div class="col-md-3 top_brand_left-1 hideBlock"  id="rsPC_box_2">
 						<div class="hover14 column">
 							<div class="agile_top_brand_left_grid">
 								<div class="agile_top_brand_left_grid_pos">
@@ -533,75 +522,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<figure>
 										<div class="snipcart-item block">
 											<div class="snipcart-thumb">
-												<a href="products.html"><img title=" " alt=" " src="images/15.png"></a>		
-												<p>Navaratan-dal</p>
-												<div class="stars">
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star gray-star" aria-hidden="true"></i>
-												</div>
-													<h4>$30.99 <span>$45.00</span></h4>
+												<a href="single.html?id=" id="rsPC_link_2"><img style='height:150px' title=" " alt=" " id="rsPC_image_2" src=""></a>		
+												<p id="rsPC_name_2"></p>
+													<h4 id="rsPC_price_2"> </h4>
 											</div>
 											<div class="snipcart-details top_brand_home_details">
 												<form action="#" method="post">
 													<fieldset>
 														<input type="hidden" name="cmd" value="_cart">
-															<input type="hidden" name="add" value="1">
-															<input type="hidden" name="business" value=" ">
-															<input type="hidden" name="item_name" value="basmati rise">
-															<input type="hidden" name="amount" value="30.99">
-															<input type="hidden" name="discount_amount" value="1.00">
-															<input type="hidden" name="currency_code" value="USD">
-															<input type="hidden" name="return" value=" ">
-															<input type="hidden" name="cancel_return" value=" ">
-															<input type="submit" name="submit" value="Add to cart" class="button">
-													</fieldset>
-												</form>
-											</div>
-										</div>
-									</figure>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3 top_brand_left-1">
-						<div class="hover14 column">
-							<div class="agile_top_brand_left_grid">
-								<div class="agile_top_brand_left_grid_pos">
-									<img src="images/offer.png" alt=" " class="img-responsive">
-								</div>
-								<div class="agile_top_brand_left_grid_pos">
-									<img src="images/offer.png" alt=" " class="img-responsive">
-								</div>
-								<div class="agile_top_brand_left_grid1">
-									<figure>
-										<div class="snipcart-item block">
-											<div class="snipcart-thumb">
-												<a href="products.html"><img src="images/16.png" alt=" " class="img-responsive"></a>
-												<p>White-peasmatar</p>
-												<div class="stars">
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star gray-star" aria-hidden="true"></i>
-												</div>
-													<h4>$80.99 <span>$105.00</span></h4>
-											</div>
-											<div class="snipcart-details top_brand_home_details">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Pepsi soft drink">
-														<input type="hidden" name="amount" value="80.00">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
+														<input type="hidden" name="item_name" id="rsPC_name_input_2" value="Fortune Sunflower Oil">
+														<input type="hidden" name="amount" id="rsPC_price_input_2" value="35.99">
+														<input type="hidden" name="id" id="rsPC_id_input_2" value="35.99">
 														<input type="submit" name="submit" value="Add to cart" class="button">
 													</fieldset>
 												</form>
@@ -612,7 +543,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3 top_brand_left-1">
+					<div class="col-md-3 top_brand_left-1 hideBlock"  id="rsPC_box_3">
+						<div class="hover14 column">
+							<div class="agile_top_brand_left_grid">
+								<div class="agile_top_brand_left_grid_pos">
+									<img src="images/offer.png" alt=" " class="img-responsive">
+								</div>
+								<div class="agile_top_brand_left_grid_pos">
+									<img src="images/offer.png" alt=" " class="img-responsive">
+								</div>
+								<div class="agile_top_brand_left_grid1">
+																		<figure>
+										<div class="snipcart-item block">
+											<div class="snipcart-thumb">
+												<a href="single.html?id=" id="rsPC_link_3"><img style='height:150px' title=" " alt=" " id="rsPC_image_3" src=""></a>		
+												<p id="rsPC_name_3"></p>
+													<h4 id="rsPC_price_3"> </h4>
+											</div>
+											<div class="snipcart-details top_brand_home_details">
+												<form action="#" method="post">
+													<fieldset>
+														<input type="hidden" name="cmd" value="_cart">
+														<input type="hidden" name="item_name" id="rsPC_name_input_3" value="Fortune Sunflower Oil">
+														<input type="hidden" name="amount" id="rsPC_price_input_3" value="35.99">
+														<input type="hidden" name="id" id="rsPC_id_input_3" value="35.99">
+														<input type="submit" name="submit" value="Add to cart" class="button">
+													</fieldset>
+												</form>
+											</div>
+										</div>
+									</figure>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 top_brand_left-1 hideBlock"  id="rsPC_box_4">
 						<div class="hover14 column">
 							<div class="agile_top_brand_left_grid">
 								<div class="agile_top_brand_left_grid_pos">
@@ -622,29 +587,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<figure>
 										<div class="snipcart-item block">
 											<div class="snipcart-thumb">
-												<a href="products.html"><img title=" " alt=" " src="images/17.png"></a>		
-												<p>Channa-dal</p>
-												<div class="stars">
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star blue-star" aria-hidden="true"></i>
-													<i class="fa fa-star gray-star" aria-hidden="true"></i>
-												</div>
-													<h4>$35.99 <span>$55.00</span></h4>
+												<a href="single.html?id=" id="rsPC_link_4"><img  style='height:150px' title=" " alt=" " id="rsPC_image_4" src=""></a>		
+												<p id="rsPC_name_4"></p>
+													<h4 id="rsPC_price_4"> </h4>
 											</div>
 											<div class="snipcart-details top_brand_home_details">
 												<form action="#" method="post">
 													<fieldset>
 														<input type="hidden" name="cmd" value="_cart">
-														<input type="hidden" name="add" value="1">
-														<input type="hidden" name="business" value=" ">
-														<input type="hidden" name="item_name" value="Fortune Sunflower Oil">
-														<input type="hidden" name="amount" value="35.99">
-														<input type="hidden" name="discount_amount" value="1.00">
-														<input type="hidden" name="currency_code" value="USD">
-														<input type="hidden" name="return" value=" ">
-														<input type="hidden" name="cancel_return" value=" ">
+														<input type="hidden" name="item_name" id="rsPC_name_input_4" value="Fortune Sunflower Oil">
+														<input type="hidden" name="amount" id="rsPC_price_input_4" value="35.99">
+														<input type="hidden" name="id" id="rsPC_id_input_4" value="35.99">
 														<input type="submit" name="submit" value="Add to cart" class="button">
 													</fieldset>
 												</form>
