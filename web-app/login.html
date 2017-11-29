@@ -30,6 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript" src="js/shoppingCart.js"></script>
+<script type="text/javascript" src="js/userSessions.js"></script>
 
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -193,14 +194,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<h2>Login Form</h2>
 		
 			<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-				<form>
-					<input type="email" placeholder="Email Address" required=" " >
-					<input type="password" placeholder="Password" required=" " >
+					<input type="email" id="email" placeholder="Email Address" required=" " >
+					<input type="password" id="password" placeholder="Password" required=" " >
 					<div class="forgot">
 						<a href="#">Forgot Password?</a>
 					</div>
-					<input type="submit" value="Login">
-				</form>
+					<input type="button" style="outline: none;border: none;padding: 10px 0;font-size: 1em;color: #fff;display: block;width: 100%;background: #3399cc;margin: 1.5em 0 0;" value="Login" onclick="validateLogin()">
+				
 			</div>
 			<h4>For New People</h4>
 			<p><a href="registered.html">Register Here</a> (Or) go back to <a href="index.html">Home<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>

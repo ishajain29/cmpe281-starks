@@ -4,6 +4,7 @@ var db = require('./db');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var path = require('path');
+var cors = require('cors');
 
 var morgan = require('morgan');
 
@@ -16,19 +17,12 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({secret:"zxcvbnmzxcvbnm", resave:false, saveUninitialized:true}));
 app.use(express.static(__dirname + '/public'));
+app.use(cors())
 
 app.use('/user', UserController);
 
-app.get('/',function(req, res) {
-	res.sendFile(path.join(__dirname,'views/index.html'));
-});
-
 app.get('/register',function(req, res) {
 	res.sendFile(path.join(__dirname,'views/registered.html'));
-});
-
-app.get('/login',function(req, res) {
-	res.sendFile(path.join(__dirname,'views/login.html'));
 });
 
 app.get('/dashboard', function(req, res) {
@@ -37,5 +31,7 @@ app.get('/dashboard', function(req, res) {
     }
     return res.status(200).sendFile(path.join(__dirname,'views/dashboard.html'));
 });
+
+
 
 module.exports = app;
