@@ -73,3 +73,17 @@
 * To check the configuration of the replica set, use the following command:
 	* rs.config()
 
+
+
+* Server and MongoDB subnet Configuration:
+
+    1. Go Server         - Subnet 1
+    2. Mongo Primary     - Subnet 2
+    3. Mongo Secondary 1 - Subnet 2
+    4. Mongo Secondary 2 - Subnet 1
+
+* Case 1:
+    When connection between subnet 1 and subnet 2 are broken.
+        ie. When I allow subnet 2 Security group to allow 27017 traffic from only 1 current subnet(2), Go server and Mongo Secondary 2 wont be able to communicate with Mongo Cluster.
+    
+    Writing anything to primary directly will not reflect in Mongo Secondary 2 but will reflect in Mongo Secondary 1.
