@@ -4,7 +4,16 @@
 <script type="text/javascript" src="js/userSessions.js"></script>
 <script type="text/javascript">
 	$( document ).ready(function() {
-    	$("#logout").hide();
+		if(localStorage.getItem("userid") == null || localStorage.getItem("userid") == ""){
+
+			$("#logout").hide();
+			$("#login").show();
+
+		}else{
+			$("#logout").show();
+			$("#login").hide();
+		}
+    	
 	});
 </script>>
 <div class="agileits_header">
