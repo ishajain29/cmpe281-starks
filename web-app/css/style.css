@@ -3513,3 +3513,6 @@ td.invert-image a img {
   font-weight: bold;
 }
 
+.myactivity .nav-tabs > li {
+  width:33.33%;
+}
