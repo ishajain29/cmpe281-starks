@@ -3460,3 +3460,56 @@ td.invert-image a img {
     display: block;
 }
 
+/* Activity Logs */
+
+.myactivity p{
+  font-size: 20px;
+  color: #777;
+  width: 100%;
+  line-height: 40px;
+}
+
+.myactivity span{
+  text-align: center;
+  font-size: 20px;
+  color: #777;
+  width: 100%;
+  line-height: 20px;
+  margin-bottom: 30px;
+}
+
+.myactivity h5{
+  color:#fe9126 !important;
+  text-align: center;
+}
+
+.logstable div{
+  width: 95%;
+  margin: 0 auto;
+  border:1px solid #777;
+  text-align: center;
+  color: #fe9126;
+  border-bottom: none;
+  padding:20px;
+  background-color: #e0e0e0;
+  font-size: 19px;
+  line-height: 20px;
+}
+
+.logstable ul{
+  width: 100%;
+  margin: 0 auto;
+}
+
+.logstable li{
+  width: 95%;
+  margin: 0 auto;
+  border:1px solid #777;
+  list-style: none;
+  padding: 10px;
+  color:#016773;
+  background-color: white;
+  font-size:15px;
+  font-weight: bold;
+}
+
