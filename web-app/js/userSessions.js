@@ -23,9 +23,30 @@ function validateLogin(){
             console.log("Response Arrived !!!!!!!!!", result);
             localStorage.setItem("userid", result.userid);
             localStorage.setItem("email", result.email);
+            $('#login').hide();
+            $('#logout').show();
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/userlogs",
+                data: "Logged In",
+                error: function(xhr, status, error) {
+                    console.log("Error", error);
+                },
+                success: function(result) {
+                },
+                dataType: "json"
+            });
         },
         dataType: "json"
     });
+}
+
+function logout(){
+    localStorage.removeItem('userid');
+    localStorage.removeItem('email');
+    $('#login').show();
+    $('#logout').hide();
 }
 
 function register(){
@@ -53,6 +74,17 @@ function register(){
         success: function(result) {
             console.log("Response Arrived !!!!!!!!!", result);
             window.location.href ="http://localhost:8080/login";
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/userlogs",
+                data: "Registered",
+                error: function(xhr, status, error) {
+                    console.log("Error", error);
+                },
+                success: function(result) {
+                },
+                dataType: "json"
+            });
         },
         dataType: "json"
     });
