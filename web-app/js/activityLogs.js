@@ -1,6 +1,7 @@
 var uaUserLogsServerURL = "http://localhost:3000/userlogs";
 var uaCartLogsServerURL = "http://localhost:3000/cartlogs";
 var uaSearchLogsServerURL = "http://localhost:3000/searchlogs";
+var userid = localStorage.getItem('userid');
 
 /* Fetch User Logs */
 function uaGetUserLogs(){
