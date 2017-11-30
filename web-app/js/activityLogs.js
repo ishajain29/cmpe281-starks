@@ -7,7 +7,7 @@ var userid = localStorage.getItem('userid');
 function uaGetUserLogs(){
 
 	$.ajax({
-	   url: uaUserLogsServerURL+userid,
+	   url: uaUserLogsServerURL+"/"+userid,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },
@@ -38,7 +38,7 @@ function uaGetUserLogs(){
  function uaGetCartLogs(){
 
 	$.ajax({
-	   url: uaCartLogsServerURL+userid,
+	   url: uaCartLogsServerURL+"/"+userid,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },
@@ -128,7 +128,7 @@ $("div#cart div .logstable").append(htmlStr);
 function uaGetSearchLogs(){
 
 	$.ajax({
-	   url: uaSearchLogsServerURL+userid,
+	   url: uaSearchLogsServerURL+"/"+userid,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },
