@@ -395,7 +395,7 @@ func sendAddProductEvent(reqUserId string, cartId string, product models.Product
 
 	productString, _ := json.Marshal(product)
 
-	// dic["userid"] = reqUserId
+	dic["userid"] = reqUserId
 	dic["cartid"] = cartId
 	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
@@ -417,7 +417,7 @@ func sendUpdateProductEvent(reqUserId string, cartId string, productId string, p
 
 	productString, _ := json.Marshal(product)
 
-	// dic["userid"] = reqUserId
+	dic["userid"] = reqUserId
 	dic["cartid"] = cartId
 	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
@@ -437,7 +437,7 @@ func sendRemoveProductEvent(reqUserId string, cartId string, productId string) {
 	var dic map[string]string
 	dic = make(map[string]string)
 
-	// dic["userid"] = reqUserId
+	dic["userid"] = reqUserId
 	dic["cartid"] = cartId
 	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
@@ -457,11 +457,15 @@ func sendAddUserEvent(reqUserId string, cartId string, addedUser string) {
 	var dic map[string]string
 	dic = make(map[string]string)
 
-	// dic["userid"] = reqUserId
+	var groupUsers [1]string
+	groupUsers[0] = addedUser
+	groupUsersString, _ := json.Marshal(groupUsers)
+
+	dic["userid"] = getUserIdFromCartId(cartId)
 	dic["cartid"] = cartId
 	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
-	dic["addedUserId"] = addedUser
+	dic["groupusers"] = string(groupUsersString)
 	dic["activity"] = "User Added"
 
 	requestData, _ := json.Marshal(dic)
@@ -477,11 +481,15 @@ func sendRemoveUserEvent(reqUserId string, cartId string, removedUserId string) 
 	var dic map[string]string
 	dic = make(map[string]string)
 
-	// dic["userid"] = reqUserId
+	var groupUsers [1]string
+	groupUsers[0] = removedUserId
+	groupUsersString, _ := json.Marshal(groupUsers)
+
+	dic["userid"] = getUserIdFromCartId(cartId)
 	dic["cartid"] = cartId
 	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
-	dic["removedUserId"] = removedUserId
+	dic["groupusers"] = string(groupUsersString)
 	dic["activity"] = "User Removed"
 
 	requestData, _ := json.Marshal(dic)
@@ -531,4 +539,20 @@ func getCartNameFromCartId(cartId string) string {
 	defer session.Close()
 
 	return sharedCart.CartName
+}
+
+func getUserIdFromCartId(cartId string) string {
+
+	session, collection, err := getMongoConnection()
+	if err != nil {
+		//c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
+		return ""
+	}
+
+	var sharedCart models.SharedCart
+	collection.FindId(bson.ObjectIdHex(cartId)).One(&sharedCart)
+
+	defer session.Close()
+
+	return sharedCart.AdminId
 }

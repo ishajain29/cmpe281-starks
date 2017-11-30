@@ -322,7 +322,7 @@ POST http://my.api.com/carts/user/<user_id>/order
 ```
 {
     activity: 'Product Removed',
-    user: 'anuj',
+    userid: 'anuj',
     productid: 'hfoeecff7b91165406e027eb',
     typeofcart: 'user'
 }
@@ -332,7 +332,7 @@ POST http://my.api.com/carts/user/<user_id>/order
 ```
 {
     activity: 'Product Updated',
-    user: 'anuj',
+    userid: 'anuj',
     product: '{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}',
     typeofcart: 'user'
 }
