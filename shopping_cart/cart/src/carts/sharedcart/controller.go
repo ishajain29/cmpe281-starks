@@ -126,6 +126,7 @@ func AddProduct(c *gin.Context) {
 		c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
 		return
 	}
+
 	defer session.Close()
 
 	query := bson.M{"_id": bson.ObjectIdHex(c.Param("cartId"))}
@@ -396,6 +397,7 @@ func sendAddProductEvent(reqUserId string, cartId string, product models.Product
 
 	// dic["userid"] = reqUserId
 	dic["cartid"] = cartId
+	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
 	dic["products"] = string(productString)
 	dic["activity"] = "Product Added"
@@ -417,6 +419,7 @@ func sendUpdateProductEvent(reqUserId string, cartId string, productId string, p
 
 	// dic["userid"] = reqUserId
 	dic["cartid"] = cartId
+	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
 	dic["product"] = string(productString)
 	dic["activity"] = "Cart Updated"
@@ -436,6 +439,7 @@ func sendRemoveProductEvent(reqUserId string, cartId string, productId string) {
 
 	// dic["userid"] = reqUserId
 	dic["cartid"] = cartId
+	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
 	dic["productId"] = productId
 	dic["activity"] = "Product Removed"
@@ -455,6 +459,7 @@ func sendAddUserEvent(reqUserId string, cartId string, addedUser string) {
 
 	// dic["userid"] = reqUserId
 	dic["cartid"] = cartId
+	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
 	dic["addedUserId"] = addedUser
 	dic["activity"] = "User Added"
@@ -474,6 +479,7 @@ func sendRemoveUserEvent(reqUserId string, cartId string, removedUserId string) 
 
 	// dic["userid"] = reqUserId
 	dic["cartid"] = cartId
+	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
 	dic["removedUserId"] = removedUserId
 	dic["activity"] = "User Removed"
@@ -509,4 +515,20 @@ func sendPlaceOrderEvent(reqUserId string, sharedcart models.SharedCart) {
 	if err != nil {
 		fmt.Println("Could not send event to activity log server", err)
 	}
+}
+
+func getCartNameFromCartId(cartId string) string {
+
+	session, collection, err := getMongoConnection()
+	if err != nil {
+		//c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
+		return ""
+	}
+
+	var sharedCart models.SharedCart
+	collection.FindId(bson.ObjectIdHex(cartId)).One(&sharedCart)
+
+	defer session.Close()
+
+	return sharedCart.CartName
 }
