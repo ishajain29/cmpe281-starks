@@ -23,19 +23,13 @@ router.route('/')
 
         var userid = req.body.userid,
         cartid = req.body.cartid,
-        cartname = req.body.cartname,
+        cartname = req.body.cartname||"null",
         typeofcart = req.body.typeofcart,
         products = req.body.products,
         groupusers = req.body.groupusers,
         activity =  req.body.activity,
-        timestamp = req.body.timestamp;
-
-         if(typeof cartname!="undefined")
-           typeofcart="Shared";
-         else
-          typeofcart="User";
-    //      console.log(products);
-        console.log(userid+" "+cartid+" "+" "+cartname+" "+typeofcart+" "+groupusers+" "+activity+" "+timestamp+" "+products);
+        timestamp = req.body.timestamp,
+        typeofcart = req.body.typeofcart;
 
         CartLogs.create({
           userid : userid,
