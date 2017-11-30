@@ -1,4 +1,4 @@
-var pcProductCatalogServerURL = "http://52.14.80.57:8080/productCatalog";
+var pcProductCatalogServerURL = "http://Product-Catalog-Load-Balancer-795729955.us-east-2.elb.amazonaws.com/productCatalog";
 
 /* Fetch page 1 product data to display on Home Page */
 function pcGetProductData(){

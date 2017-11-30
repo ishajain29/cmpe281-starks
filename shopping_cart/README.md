@@ -242,6 +242,7 @@ POST http://my.api.com/carts/user/<user_id>/order
 {
     activity: 'Product Added',
     cartid: '5a1decff7b91165406e027eb',
+    cartname: 'Office Cart 1',
     product: '{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}',
     typeofcart: 'shared'
 }
@@ -252,6 +253,7 @@ POST http://my.api.com/carts/user/<user_id>/order
 {
     activity: 'Product Removed',
     cartid: '5a1decff7b91165406e027eb',
+    cartname: 'Office Cart 1',
     productid: 'hfoeecff7b91165406e027eb',
     typeofcart: 'shared'
 }
@@ -262,6 +264,7 @@ POST http://my.api.com/carts/user/<user_id>/order
 {
     activity: 'Product Updated',
     cartid: '5a1decff7b91165406e027eb',
+    cartname: 'Office Cart 1',
     product: '{"id":"hfoeecff7b91165406e027eb","quantity":1,"name":"basmati rise","price":30.99,"addedBy":"anuj"}',
     typeofcart: 'shared'
 }
@@ -272,6 +275,7 @@ POST http://my.api.com/carts/user/<user_id>/order
 {
     activity: 'User Added',
     cartid: '5a1decff7b91165406e027eb',
+    cartname: 'Office Cart 1',
     typeofcart: 'shared',
     addedUserId: 'purvesh'
 }
@@ -282,6 +286,7 @@ POST http://my.api.com/carts/user/<user_id>/order
 {
     activity: 'User Removed',
     cartid: '5a1decff7b91165406e027eb',
+    cartname: 'Office Cart 1',
     typeofcart: 'shared',
     removedUserId: 'purvesh'
 }
