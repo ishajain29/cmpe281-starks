@@ -1,2 +1,2 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://root:isha@ds243285.mlab.com:43285/udetails');
+mongoose.connect('mongodb://ec2-54-193-53-74.us-west-1.compute.amazonaws.com:27017/udetails');

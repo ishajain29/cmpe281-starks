@@ -1,16 +1,30 @@
 
 <!-- header -->
+
+<script type="text/javascript" src="js/userSessions.js"></script>
+<script type="text/javascript">
+	$( document ).ready(function() {
+    	$("#logout").hide();
+	});
+</script>>
 <div class="agileits_header">
 		<div class="container">
 
-			<div class="agile-login">
+			<div class="agile-login" id="login">
 				<ul>
 					<li><a href="registered.html"> Create Account </a></li>
 					<li><a href="login.html">Login</a></li>
 					<li><a href="contact.html">Help</a></li>
 					<li><a href="activity.html">My Activity</a></li>
-		
-					
+					<li><a href="recommendations.html">Recommendations</a></li>
+				</ul>
+			</div>
+			<div class="agile-login" id="logout">
+				<ul>
+					<li><a href="#" onclick="logout()">Logout</a></li>
+					<li><a href="contact.html">Help</a></li>
+					<li><a href="activity.html">My Activity</a></li>
+					<li><a href="recommendations.html">Recommendations</a></li>
 				</ul>
 			</div>
 			<div class="product_list_header">  

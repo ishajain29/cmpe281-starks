@@ -64,7 +64,7 @@ i.badge.badge-notify.my-cart-badge {
     color: #fff;
 	top: 1em;
 }
-input[type="submit"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input[type="reset"],.agileinfo_mail_grid_left ul li a,.events_bottom_left2 ul li a,.w3ls_service_grids1_right a,ul.agileits_social_icons li a,.w3l_banner_nav_right_banner_pet a,.w3ls_w3l_banner_nav_right_grid_head_grid ul li a,.products-breadcrumb ul li a,.w3_footer_grid ul li a,.w3l_fresh_vegetables_grid ul li a,.wthree_footer_copy p a,.agile_top_brand_left_grid1 .button,.w3ls_logo_products_left1 ul.special_items li a,.w3ls_logo_products_left1 ul.phone_email li a{
+input[type="submit"],input[type="button"],#PPMiniCart .minicart-submit,.w3ls_vegetables ul li a,input[type="reset"],.agileinfo_mail_grid_left ul li a,.events_bottom_left2 ul li a,.w3ls_service_grids1_right a,ul.agileits_social_icons li a,.w3l_banner_nav_right_banner_pet a,.w3ls_w3l_banner_nav_right_grid_head_grid ul li a,.products-breadcrumb ul li a,.w3_footer_grid ul li a,.w3l_fresh_vegetables_grid ul li a,.wthree_footer_copy p a,.agile_top_brand_left_grid1 .button,.w3ls_logo_products_left1 ul.special_items li a,.w3ls_logo_products_left1 ul.phone_email li a{
 	transition: .5s ease-in;
 	-webkit-transition: .5s ease-in;
 	-moz-transition: .5s ease-in;
@@ -3460,3 +3460,60 @@ td.invert-image a img {
     display: block;
 }
 
+/* Activity Logs */
+
+.myactivity p{
+  font-size: 20px;
+  color: #777;
+  width: 100%;
+  line-height: 40px;
+}
+
+.myactivity span{
+  text-align: center;
+  font-size: 20px;
+  color: #777;
+  width: 100%;
+  line-height: 20px;
+  margin-bottom: 30px;
+}
+
+.myactivity h5{
+  color:#fe9126 !important;
+  text-align: center;
+}
+
+.logstable div{
+  width: 95%;
+  margin: 0 auto;
+  border:1px solid #777;
+  text-align: center;
+  color: #fe9126;
+  border-bottom: none;
+  padding:20px;
+  background-color: #e0e0e0;
+  font-size: 19px;
+  line-height: 20px;
+}
+
+.logstable ul{
+  width: 100%;
+  margin: 0 auto;
+}
+
+.logstable li{
+  width: 95%;
+  margin: 0 auto;
+  border:1px solid #777;
+  list-style: none;
+  padding: 10px;
+  color:#016773;
+  background-color: white;
+  font-size:15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.myactivity .nav-tabs > li {
+  width:33.33%;
+}
