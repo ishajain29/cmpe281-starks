@@ -30,7 +30,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript" src="js/productCatalog.js"></script>
-<script type="text/javascript" src="js/uaGetSearchLogs.js"></script>
 <script type="text/javascript" src="js/recommendations.js"></script>
 <script type="text/javascript" src="js/shoppingCart.js"></script>
 <script type="text/javascript">
@@ -40,9 +39,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 
-		rsGetPurchasedProducts("Shanta");
-		rsGetSearchedProducts("1234");
-		rsGetCategoryProducts("edu");
+
+		//var userid = localStorage.getItem("userid");
+		rsGetPurchasedProducts("Sai");
+		rsGetSearchedProducts("shiva");
+		rsGetCategoryProducts("Sai");
 
 	});
 	$(function(){

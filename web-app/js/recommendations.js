@@ -1,12 +1,14 @@
-var pcProductCatalogServerURL = "http://52.14.80.57:8080/productCatalog";
-var rsRecommendationsServerURL = "http://13.57.67.164:3000/sampsite";
+var pcProductCatalogServerURL = "http://Product-Catalog-Load-Balancer-795729955.us-east-2.elb.amazonaws.com/productCatalog";
+var rsRecommendationsServerPurchaseURL = "http://13.57.146.16:3000/rspurchased";
+var rsRecommendationsServerSearchURL = "http://13.57.146.16:3000/rssearched";
+var rsRecommendationsServerCategoryURL = "http://13.57.146.16:3000/rscategory";
 
 
 // Get Previous Purchase Details
 function rsGetPurchasedProducts(userid){
 
 	$.ajax({
-	   url: rsRecommendationsServerURL+'/'+userid,
+	   url: rsRecommendationsServerPurchaseURL+'/'+userid,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },
@@ -32,7 +34,7 @@ function rsGetPurchasedProducts(userid){
 function rsGetSearchedProducts(userid){
 
 	$.ajax({
-	   url: rsRecommendationsServerURL+'/'+userid,
+	   url: rsRecommendationsServerSearchURL+'/'+userid,
 		error: function(xhr, status, error) {
 	        console.log(xhr.responseText);
 	    },
@@ -58,7 +60,7 @@ function rsGetSearchedProducts(userid){
 function rsGetCategoryProducts(userid){
 
 	$.ajax({
-	   url: rsPurchasedProductsServerURL+'/'+userid,
+	   url: rsRecommendationsServerCategoryURL+'/'+userid,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },
@@ -66,7 +68,27 @@ function rsGetCategoryProducts(userid){
 	    	console.log("Category Details");
       		console.log(data);
 
-      		var arrProductIds = [];
+      		rsGetProductsforCategory(data);
+      		
+		    
+		}
+		    
+  		});
+	}
+
+
+function rsGetProductsforCategory(category){
+
+	$.ajax({
+		   url: pcProductCatalogServerURL + '/products/' + category,
+		   error: function(xhr, status, error) {
+		      console.log(xhr.responseText);
+		   },
+		   success: function(data) {
+
+		   	console.log(data);
+
+		   	var arrProductIds = [];
 
       		for(var i = 0; i < data.length; i++){
       			arrProductIds.push(data[i].productid);
@@ -75,10 +97,12 @@ function rsGetCategoryProducts(userid){
       		//var arrProductIds = ["a64cac48-1852-4346-8a64-d2c74f01e6a6", "30650de6-c2b2-4f9a-b7ef-d8c7da16708e", "1a2be279-287d-4c9b-974f-1ef51c918be6"];
 
 		    for(var i = 0; i < arrProductIds.length; i++){
-		      	rsGetProductDetailForPurchaseHistory(arrProductIds[i], i + 1);
+		      	rsGetProductDetailForPurchaseCategory(arrProductIds[i], i + 1);
 		    }
-  		}
-	});
+
+		   
+		});
+}
 }
 
 
@@ -154,6 +178,47 @@ function rsGetProductDetailForSearchHistory(productId, index){
 			var event = new Event('productsloaded');
 			document.dispatchEvent(event);
 
+		   },
+		   dataType: "json"
+		});
+}
+
+
+/* To display all the details of the product on from previous purchase category */
+function rsGetProductDetailForPurchaseCategory(category, index){
+
+	$.ajax({
+		   url: pcProductCatalogServerURL + '/product/' + productId,
+		   error: function(xhr, status, error) {
+		      console.log(xhr.responseText);
+		   },
+		   success: function(data) {
+
+		   	console.log(data);
+
+		   	var box = "#rsPC_box_" + index; 
+		   	var name = "#rsPC_name_" + index;
+		   	var price = "#rsPC_price_" + index;
+		   	var image = "#rsPC_image_" + index;
+		   	var link = "#rsPC_link_" + index;
+
+		   	var inputName = "#rsPC_name_input_" + index;
+		   	var inputPrice = "#rsPC_price_input_" + index;
+		   	var inputID = "#rsPC_id_input_" + index;
+		   	
+		   	$(box).addClass("visible");
+		    $(name).text(data.title);
+		    $(price).text("$" + data.price);
+		    $(image).attr("src", data.imageURL);
+		    $(link).attr("href", "single.html?id=" + data.id);
+
+		    $(inputName).val(data.title);
+		    $(inputPrice).val(data.price);
+		    $(inputID).val(data.id);
+
+
+			var event = new Event('productsloaded');
+			document.dispatchEvent(event);
 		   },
 		   dataType: "json"
 		});
