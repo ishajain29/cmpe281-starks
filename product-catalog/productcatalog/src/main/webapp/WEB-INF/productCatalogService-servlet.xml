@@ -22,7 +22,7 @@
 	 -->
 	
 	<!-- MongoDB replica set configuration -->
-	<mongo:mongo id="mongo" replica-set="10.0.1.82:27017,10.0.1.240:27017,10.0.1.99:27017" /> 
+	<mongo:mongo id="mongo" replica-set="10.0.1.82:27017,10.0.1.240:27017,10.0.1.99:27017,10.0.2.221:27017,10.0.2.198:27017" /> 
 	
 	<mongo:db-factory dbname="productdb" mongo-ref="mongo" id="mongoDbFactory" />
 	

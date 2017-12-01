@@ -4,7 +4,18 @@
 <script type="text/javascript" src="js/userSessions.js"></script>
 <script type="text/javascript">
 	$( document ).ready(function() {
-    	$("#logout").hide();
+		if(localStorage.getItem("userid") == null || localStorage.getItem("userid") == ""){
+
+			$("#logout").hide();
+			$("#login").show();
+			$("#mycart").hide();
+
+		}else{
+			$("#logout").show();
+			$("#login").hide();
+			$("#mycart").show();
+		}
+    	
 	});
 </script>>
 <div class="agileits_header">
@@ -27,7 +38,7 @@
 					<li><a href="recommendations.html">Recommendations</a></li>
 				</ul>
 			</div>
-			<div class="product_list_header">  
+			<div class="product_list_header" id="mycart">  
 				<form action="#" method="post" class="last"> 
 					<input type="hidden" name="cmd" value="_cart">
 					<input type="hidden" name="display" value="1">

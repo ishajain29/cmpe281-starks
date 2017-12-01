@@ -1,4 +1,6 @@
-var usServerURL = "http://localhost:3000/user";
+var usServerURL = "http://54.193.49.125:3000/user";
+var alServerURL = "http://13.57.108.136/userlogs";
+var webServerURL = "http://localhost:8080";
 
 function validateLogin(){
     var email = $("#email").val();
@@ -23,13 +25,18 @@ function validateLogin(){
             console.log("Response Arrived !!!!!!!!!", result);
             localStorage.setItem("userid", result.userid);
             localStorage.setItem("email", result.email);
-            $('#login').hide();
-            $('#logout').show();
+            localStorage.setItem("firstname", result.firstname);
+            localStorage.setItem("lastname", result.lastname);
+
+            activitydata = {
+                activity : "Logged In",
+                userid : result.userid
+            }
 
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/userlogs",
-                data: "Logged In",
+                url: alServerURL,
+                data: activitydata,
                 error: function(xhr, status, error) {
                     console.log("Error", error);
                 },
@@ -37,16 +44,18 @@ function validateLogin(){
                 },
                 dataType: "json"
             });
+            window.location.href = webServerURL + "/";
         },
         dataType: "json"
     });
 }
 
 function logout(){
-    localStorage.removeItem('userid');
-    localStorage.removeItem('email');
-    $('#login').show();
-    $('#logout').hide();
+    localStorage.setItem("userid", "");
+    localStorage.setItem("email", "");
+    localStorage.setItem("firstname", "");
+    localStorage.setItem("lastname", "");
+    window.location.href = webServerURL + "/";
 }
 
 function register(){
@@ -73,11 +82,14 @@ function register(){
          },
         success: function(result) {
             console.log("Response Arrived !!!!!!!!!", result);
-            window.location.href ="http://localhost:8080/login";
+            activitydata = {
+                activity : "Registered",
+                userid : result.userid
+            }
             $.ajax({
                 type: "POST",
-                url: "http://localhost:3000/userlogs",
-                data: "Registered",
+                url: alServerURL,
+                data: activitydata,
                 error: function(xhr, status, error) {
                     console.log("Error", error);
                 },
@@ -85,6 +97,7 @@ function register(){
                 },
                 dataType: "json"
             });
+            window.location.href = webServerURL + "/login";
         },
         dataType: "json"
     });
