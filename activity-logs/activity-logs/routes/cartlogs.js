@@ -25,7 +25,7 @@ router.route('/')
         cartid = req.body.cartid,
         cartname = req.body.cartname||"null",
         typeofcart = req.body.typeofcart,
-        products = req.body.products,
+        products = req.body.product,
         groupusers = req.body.groupusers,
         activity =  req.body.activity,
         timestamp = req.body.timestamp,
