@@ -20,13 +20,16 @@ router.route('/')
     })
 /* Adding a user cart log to the database */
     .post(function(req, res, next) {
-
+        
+        if(req.body.groupusers==undefined)
+        req.body.groupusers=null;
+    
         var userid = req.body.userid,
         cartid = req.body.cartid,
         cartname = req.body.cartname||"null",
         typeofcart = req.body.typeofcart,
-        products = req.body.product,
-        groupusers = req.body.groupusers,
+        products = JSON.parse(req.body.product||null),
+        groupusers = JSON.parse(req.body.groupusers),
         activity =  req.body.activity,
         timestamp = req.body.timestamp,
         typeofcart = req.body.typeofcart;
