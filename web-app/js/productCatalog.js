@@ -201,3 +201,30 @@ function pcSubmitSearchProductIdsForRecommendation(productIds){
 		}); // end of AJAX call
 	} // end of if
 }
+
+/* To insert the product data to the product catalog  */
+function pcSaveProductData(title, description, price, category, imageURL) {
+
+	var obj = new Object();
+	obj.title = title;
+	obj.description = description;
+	obj.price = price;
+	obj.category = category;
+	obj.imageURL = imageURL;
+
+	var jsonVal = JSON.stringify(obj);
+
+	$.ajax({
+	   url: pcProductCatalogServerURL + '/product',
+		 contentType: "application/json",
+		 method: "POST",
+		 data: jsonVal,
+	   error: function(xhr, status, error) {
+	      console.log(xhr.responseText);
+				alert(error);
+	   },
+	   success: function(data) {
+			 alert("Product inserted successfully");
+	   },
+	});
+}
