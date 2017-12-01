@@ -31,6 +31,10 @@ function scSendRequest(strType, strUrl, productData, callback){
             data: productData,
             error: function(xhr, status, error) {
                 console.log("Error in sending request: ", error);
+                $('.top-right').notify({
+                    message: { text: 'Something went wrong !!! Error from the server ...' },
+                    type: 'danger'
+                  }).show();
                 callback(true);
              },
             success: function(result) {

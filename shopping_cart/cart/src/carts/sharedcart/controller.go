@@ -21,7 +21,7 @@ func CreateCart(c *gin.Context) {
 	err := json.Unmarshal([]byte(jsonRequest), request)
 	if err != nil {
 		fmt.Println("Error Unmarshalling: ", err)
-		c.String(http.StatusInternalServerError, "")
+		c.JSON(http.StatusInternalServerError, nil)
 		return
 	}
 
@@ -31,7 +31,7 @@ func CreateCart(c *gin.Context) {
 
 	session, collection, err := getMongoConnection()
 	if err != nil {
-		c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
+		c.JSON(http.StatusInternalServerError, nil)
 		return
 	}
 	defer session.Close()
@@ -87,7 +87,7 @@ func GetCart(c *gin.Context) {
 
 	uj, _ := json.Marshal(sharedCart)
 
-	c.String(http.StatusOK, string(uj))
+	c.JSON(http.StatusOK, string(uj))
 }
 
 // DeleteCart Delete shared cart
@@ -106,7 +106,7 @@ func DeleteCart(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // AddProduct to User cart
@@ -140,7 +140,7 @@ func AddProduct(c *gin.Context) {
 
 	sendAddProductEvent(c.Param("reqUserId"), c.Param("cartId"), *product)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // UpdateProduct User Cart
@@ -182,7 +182,7 @@ func UpdateProduct(c *gin.Context) {
 
 	sendUpdateProductEvent(c.Param("reqUserId"), c.Param("cartId"), c.Param("productId"), *product)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // RemoveProduct User Cart
@@ -209,7 +209,7 @@ func RemoveProduct(c *gin.Context) {
 
 	sendRemoveProductEvent(c.Param("reqUserId"), c.Param("cartId"), c.Param("productId"))
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // PlaceOrder place order for the items in the cart
@@ -257,7 +257,7 @@ func PlaceOrder(c *gin.Context) {
 	//TODO: Send order placed event to user activity log
 	sendPlaceOrderEvent(c.Param("reqUserId"), sharedCart)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // AddUser add users to the shared cart
@@ -289,7 +289,7 @@ func AddUser(c *gin.Context) {
 
 	sendAddUserEvent("Cart Admin", c.Param("cartId"), arrUserId[0])
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 
 }
 
@@ -317,7 +317,7 @@ func RemoveUser(c *gin.Context) {
 
 	sendRemoveUserEvent(c.Param("reqUserId"), c.Param("cartId"), c.Param("userId"))
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 func GetUsersAllSharedCart(userId string) []models.SharedCart {

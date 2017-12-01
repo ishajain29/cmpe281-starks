@@ -71,7 +71,7 @@ func CreateCart(c *gin.Context) {
 	// resJSON, _ := json.Marshal(resBody)
 	// c.String(http.StatusCreated, string(resJSON))
 
-	c.String(http.StatusCreated, "")
+	c.JSON(http.StatusCreated, nil)
 }
 
 // GetCart Get User's Cart from user id
@@ -127,7 +127,7 @@ func DeleteCart(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // AddProduct to User cart
@@ -161,7 +161,7 @@ func AddProduct(c *gin.Context) {
 
 	sendAddProductEvent(c.Param("userId"), *product)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // UpdateProduct User Cart
@@ -204,7 +204,7 @@ func UpdateProduct(c *gin.Context) {
 
 	sendUpdateProductEvent(c.Param("userId"), c.Param("productId"), *product)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // RemoveProduct User Cart
@@ -229,7 +229,7 @@ func RemoveProduct(c *gin.Context) {
 
 	sendRemoveProductEvent(c.Param("userId"), c.Param("productId"))
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // PlaceOrder place order for the items in the cart
@@ -272,7 +272,7 @@ func PlaceOrder(c *gin.Context) {
 	//TODO: Send event to activity log about order placed successfully
 	sendPlaceOrderEvent(userCart)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 func getMongoConnection() (mgo.Session, mgo.Collection, error) {
