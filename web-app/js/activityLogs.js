@@ -2,6 +2,7 @@ var uaUserLogsServerURL = "http://13.57.108.136/userlogs";
 var uaCartLogsServerURL = "http://13.57.108.136/cartlogs";
 var uaSearchLogsServerURL = "http://13.57.108.136/searchlogs";
 var userid = localStorage.getItem('userid');
+var email = localStorage.getItem('email');
 
 /* Fetch User Logs */
 function uaGetUserLogs(){
@@ -38,7 +39,7 @@ function uaGetUserLogs(){
  function uaGetCartLogs(){
 
 	$.ajax({
-	   url: uaCartLogsServerURL+"/"+userid,
+	   url: uaCartLogsServerURL+"/"+email,
 	   error: function(xhr, status, error) {
 	      console.log(xhr.responseText);
 	   },

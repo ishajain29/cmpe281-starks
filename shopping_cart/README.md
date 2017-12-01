@@ -277,7 +277,7 @@ POST http://my.api.com/carts/user/<user_id>/order
     cartid: '5a1decff7b91165406e027eb',
     cartname: 'Office Cart 1',
     typeofcart: 'shared',
-    addedUserId: 'purvesh'
+    groupusers: ['purvesh']
 }
 ```
 
@@ -288,7 +288,7 @@ POST http://my.api.com/carts/user/<user_id>/order
     cartid: '5a1decff7b91165406e027eb',
     cartname: 'Office Cart 1',
     typeofcart: 'shared',
-    removedUserId: 'purvesh'
+    groupusers: ['purvesh']
 }
 ```
 
