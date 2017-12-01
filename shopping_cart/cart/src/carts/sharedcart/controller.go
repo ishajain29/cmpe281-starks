@@ -10,6 +10,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 // CreateCart Create New Shared's Cart
@@ -398,11 +399,17 @@ func sendAddProductEvent(reqUserId string, cartId string, product models.Product
 
 	productString, _ := json.Marshal(product)
 
-	dic["userid"] = reqUserId
+        fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        fmt.Println(getUserIdFromCartId(cartId))
+        fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        fmt.Println(reqUserId)
+
+
+	dic["userid"] = getUserIdFromCartId(cartId)
 	dic["cartid"] = cartId
 	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
-	dic["products"] = string(productString)
+	dic["product"] = string(productString)
 	dic["activity"] = "Product Added"
 
 	requestData, _ := json.Marshal(dic)
@@ -420,12 +427,17 @@ func sendUpdateProductEvent(reqUserId string, cartId string, productId string, p
 
 	productString, _ := json.Marshal(product)
 
-	dic["userid"] = reqUserId
+        fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        fmt.Println(getUserIdFromCartId(cartId))
+        fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        fmt.Println(reqUserId)
+
+	dic["userid"] = getUserIdFromCartId(cartId)
 	dic["cartid"] = cartId
 	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
 	dic["product"] = string(productString)
-	dic["activity"] = "Cart Updated"
+	dic["activity"] = "Product Updated"
 
 	requestData, _ := json.Marshal(dic)
 
@@ -440,7 +452,7 @@ func sendRemoveProductEvent(reqUserId string, cartId string, productId string) {
 	var dic map[string]string
 	dic = make(map[string]string)
 
-	dic["userid"] = reqUserId
+	dic["userid"] = getUserIdFromCartId(cartId)
 	dic["cartid"] = cartId
 	dic["cartname"] = getCartNameFromCartId(cartId)
 	dic["typeofcart"] = "shared"
@@ -463,6 +475,9 @@ func sendAddUserEvent(reqUserId string, cartId string, addedUser string) {
 	var groupUsers [1]string
 	groupUsers[0] = addedUser
 	groupUsersString, _ := json.Marshal(groupUsers)
+	
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(getUserIdFromCartId(cartId))
 
 	dic["userid"] = getUserIdFromCartId(cartId)
 	dic["cartid"] = cartId
@@ -511,7 +526,7 @@ func sendPlaceOrderEvent(reqUserId string, sharedcart models.SharedCart) {
 	products, _ := json.Marshal(sharedcart.Products)
 	groupUsers, _ := json.Marshal(sharedcart.GroupUsers)
 
-	dic["userid"] = reqUserId
+	dic["userid"] = getUserIdFromCartId(sharedcart.Id.Hex())
 	dic["cartid"] = sharedcart.Id.Hex()
 	dic["cartname"] = sharedcart.CartName
 	dic["typeofcart"] = "shared"
@@ -535,6 +550,7 @@ func getCartNameFromCartId(cartId string) string {
 		//c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
 		return ""
 	}
+	session.SetSocketTimeout(10 *  time.Second)
 
 	var sharedCart models.SharedCart
 	collection.FindId(bson.ObjectIdHex(cartId)).One(&sharedCart)
@@ -556,6 +572,6 @@ func getUserIdFromCartId(cartId string) string {
 	collection.FindId(bson.ObjectIdHex(cartId)).One(&sharedCart)
 
 	defer session.Close()
-
+	fmt.Println("admin: " , sharedCart.AdminId)
 	return sharedCart.AdminId
 }

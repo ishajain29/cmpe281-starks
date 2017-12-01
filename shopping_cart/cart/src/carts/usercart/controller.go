@@ -10,6 +10,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 // CreateCart Create New User's Cart
@@ -288,6 +289,8 @@ func getMongoConnection() (mgo.Session, mgo.Collection, error) {
 	// }
 	// //defer session.Close()
 	// session.SetMode(mgo.SecondaryPreferred, true)
+
+	mgoSession.SetSocketTimeout(10 *  time.Second)
 	collection = mgoSession.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
 
 	return *mgoSession, *collection, nil
@@ -308,7 +311,7 @@ func sendAddProductEvent(userId string, product models.Product) {
 	dic["activity"] = "Product Added"
 
 	requestData, _ := json.Marshal(dic)
-
+	fmt.Println(string(requestData));
 	_, err := http.Post(models.ActivityLogServerURL, "application/json", bytes.NewBuffer(requestData))
 
 	if err != nil {
