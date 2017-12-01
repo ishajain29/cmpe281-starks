@@ -49,7 +49,7 @@ func init() {
 func GetMongoSession() *mgo.Session {
 	if MongoSession == nil {
 		var err error
-		MongoSession, err = mgo.Dial(MongodbServer)
+		MongoSession, err = mgo.DialWithTimeout(MongodbServer, 5 * time.Second)
 		if err != nil {
 			fmt.Println("mongodb connection failed: ", err)
 			panic("mongodb connection failed:")
