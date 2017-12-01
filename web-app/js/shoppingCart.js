@@ -1,5 +1,5 @@
-//var scShoppingCartServerURL = "http://54.183.237.157/carts";
-var scShoppingCartServerURL = "http://localhost/carts";
+var scShoppingCartServerURL = "http://54.183.237.157/carts";
+//var scShoppingCartServerURL = "http://localhost/carts";
 var scTempUserId = "anuj";
 
 var scSelectedCartIndex = 0;
@@ -30,14 +30,15 @@ function scSendRequest(strType, strUrl, productData, callback){
             url: strUrl, 
             data: productData,
             error: function(xhr, status, error) {
-                //console.log("Error While Adding Product to cart ", xhr.responseText);
+                console.log("Error in sending request: ", error);
                 callback(true);
              },
             success: function(result) {
                 console.log("Response Arrived !!!!!!!!!", result);
                 callback(true, result);
             },
-            dataType: "json"
+            dataType: "json",
+            timeout: 5000
         });
 }
 

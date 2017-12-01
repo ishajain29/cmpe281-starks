@@ -54,7 +54,7 @@ func GetMongoSession() *mgo.Session {
 			fmt.Println("mongodb connection failed: ", err)
 			panic("mongodb connection failed:")
 		}
-		MongoSession.SetMode(mgo.SecondaryPreferred, true)
+		MongoSession.SetMode(mgo.Secondary, true)
 		fmt.Println("New Mongo Session Created")
 	}
 	return MongoSession.Clone()
