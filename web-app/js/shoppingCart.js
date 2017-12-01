@@ -41,8 +41,7 @@ function scSendRequest(strType, strUrl, productData, callback){
                 console.log("Response Arrived !!!!!!!!!", result);
                 callback(true, result);
             },
-            dataType: "json",
-            timeout: 5000
+            dataType: "json"
         });
 }
 
