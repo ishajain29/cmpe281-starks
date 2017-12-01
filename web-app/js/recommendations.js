@@ -68,7 +68,14 @@ function rsGetCategoryProducts(userid){
 	    	console.log("Category Details");
       		console.log(data);
 
-      		rsGetProductsforCategory(data);
+      		var arrCategoryIds = [];
+
+      		for(var i = 0; i < data.length; i++){
+      			arrCategoryIds.push(data[i].category);
+      		}
+
+
+      		rsGetProductsforCategory(arrCategoryIds[0]);
       		
 		    
 		}
@@ -91,18 +98,18 @@ function rsGetProductsforCategory(category){
 		   	var arrProductIds = [];
 
       		for(var i = 0; i < data.length; i++){
-      			arrProductIds.push(data[i].productid);
+      			arrProductIds.push(data[i].id);
       		}
 
       		//var arrProductIds = ["a64cac48-1852-4346-8a64-d2c74f01e6a6", "30650de6-c2b2-4f9a-b7ef-d8c7da16708e", "1a2be279-287d-4c9b-974f-1ef51c918be6"];
 
-		    for(var i = 0; i < arrProductIds.length; i++){
+		    for(var i = 0; i < 4; i++){
 		      	rsGetProductDetailForPurchaseCategory(arrProductIds[i], i + 1);
 		    }
 
 		   
-		});
-}
+		}
+});
 }
 
 
@@ -185,7 +192,7 @@ function rsGetProductDetailForSearchHistory(productId, index){
 
 
 /* To display all the details of the product on from previous purchase category */
-function rsGetProductDetailForPurchaseCategory(category, index){
+function rsGetProductDetailForPurchaseCategory(productId, index){
 
 	$.ajax({
 		   url: pcProductCatalogServerURL + '/product/' + productId,
