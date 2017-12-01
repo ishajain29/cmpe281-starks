@@ -1,5 +1,5 @@
-var scShoppingCartServerURL = "http://54.183.237.157/carts";
-//var scShoppingCartServerURL = "http://localhost/carts";
+//var scShoppingCartServerURL = "http://54.183.237.157/carts";
+var scShoppingCartServerURL = "http://localhost/carts";
 var scTempUserId = "anuj";
 
 var scSelectedCartIndex = 0;

@@ -1,7 +1,9 @@
 package models
 
 import (
+	"fmt"
 	"github.com/joho/godotenv"
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"os"
 	"time"
@@ -19,6 +21,8 @@ var LinkSharedCart = ""
 
 var ActivityLogServerURL = ""
 var RecommendationServerURL = ""
+
+var MongoSession *mgo.Session
 
 func init() {
 
@@ -40,7 +44,20 @@ func init() {
 	ActivityLogServerURL = os.Getenv("ACTIVITY_LOG_SERVER_URL")
 	RecommendationServerURL = os.Getenv("RECOMMENDATION_SERVER_URL")
 
-	println("LinkSharedCart:", LinkSharedCart)
+}
+
+func GetMongoSession() *mgo.Session {
+	if MongoSession == nil {
+		var err error
+		MongoSession, err = mgo.Dial(MongodbServer)
+		if err != nil {
+			fmt.Println("mongodb connection failed: ", err)
+			panic("mongodb connection failed:")
+		}
+		MongoSession.SetMode(mgo.SecondaryPreferred, true)
+		fmt.Println("New Mongo Session Created")
+	}
+	return MongoSession.Clone()
 }
 
 const (

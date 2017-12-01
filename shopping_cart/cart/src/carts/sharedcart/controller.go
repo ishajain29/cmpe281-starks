@@ -348,17 +348,20 @@ func getMongoConnection() (mgo.Session, mgo.Collection, error) {
 
 	var collection *mgo.Collection
 
-	session, err := mgo.Dial(models.MongodbServer)
-	if err != nil {
-		fmt.Println("mongodb connection failed", err)
-		//c.String(http.StatusInternalServerError, "")
-		return *session, *collection, err
-	}
-	//defer session.Close()
-	session.SetMode(mgo.Monotonic, true)
-	collection = session.DB(models.MongodbDatabase).C(models.MongodbCollectionSharedCarts)
+	var mgoSession *mgo.Session = models.GetMongoSession()
 
-	return *session, *collection, nil
+	// session, err := mgo.Dial(models.MongodbServer)
+	// if err != nil {
+	// 	fmt.Println("mongodb connection failed", err)
+	// 	//c.String(http.StatusInternalServerError, "")
+	// 	return *session, *collection, err
+	// }
+	// defer models.MongoSession.Close()
+	// session.SetMode(mgo.SecondaryPreferred, true)
+
+	collection = mgoSession.DB(models.MongodbDatabase).C(models.MongodbCollectionSharedCarts)
+
+	return *mgoSession, *collection, nil
 }
 
 // --- Activity Log Events --- //
