@@ -40,13 +40,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	});
 </script>
-	
-<script type="text/javascript">
-$(document).ready(function() {
-    uaGetSearchLogs();
-});
-</script>	
-	
 <!-- <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){
@@ -55,7 +48,11 @@ $(document).ready(function() {
 		});
 	});
 </script> -->
-
+<script type="text/javascript">
+$(document).ready(function() {
+    uaGetSearchLogs();
+});
+</script>
 
 <!-- <script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -242,7 +239,6 @@ $(document).ready(function() {
   						<li role="presentation" class="active"><a href="#search"  id="search-tab" onclick=uaGetSearchLogs(); role="tab" data-toggle="tab" aria-controls="search" aria-expanded="true">Search</a></li>
   						<li role="presentation"><a href="#cart" role="tab" id="cart-tab" onclick=uaGetCartLogs(); data-toggle="tab" aria-controls="cart">Cart</a></li>
               <li role="presentation"><a href="#user" role="tab" id="user-tab" onclick=uaGetUserLogs(); data-toggle="tab" aria-controls="user">User</a></li>
-              <li role="presentation"><a href="#all" role="tab" id="all-tab" onclick=uaGetAllLogs(); data-toggle="tab" aria-controls="all">All</a></li>
   					</ul>
   					<div id="myTabContent" class="tab-content">
 
@@ -251,12 +247,7 @@ $(document).ready(function() {
   								<h5>My Search Logs</h5>
   								<p class="w3l-ad"></p>
 
-									<div class="logstable">
-
-										<div>29th November 2017</div>
-
-
-									</div>
+									<div class="logstable"></div>
 
   							</div>
   						</div>
@@ -265,17 +256,7 @@ $(document).ready(function() {
   							<div class="agile-tp">
   								<h5>My Cart Logs</h5>
   								<p class="w3l-ad"></p>
-									<div class="logstable">
-
-										<div>29th November 2017</div>
-
-										 <!-- <ul>
-											<li>You placed an order at 12:00pm</li>
-											<li>You placed an order at 1:00pm</li>
-											<li>You placed an order at 1:00pm</li>
-										</ul> -->
-
-									</div>
+									<div class="logstable"></div>
   							</div>
   						</div>
 
@@ -283,17 +264,7 @@ $(document).ready(function() {
   							<div class="agile-tp">
   								<h5>My User Logs</h5>
   								<p class="w3l-ad"></p>
-									<div class="logstable">
-
-										<div>29th November 2017</div>
-
-										 <ul>
-											<li>You placed an order at 12:00pm</li>
-											<li>You placed an order at 1:00pm</li>
-											<li>You placed an order at 1:00pm</li>
-										</ul>
-
-									</div>
+									<div class="logstable"></div>
 
   							</div>
   						</div>
@@ -302,6 +273,7 @@ $(document).ready(function() {
   							<div class="agile-tp">
   								<h5>All Logs</h5>
   								<p class="w3l-ad"></p>
+									<div class="logstable"></div>
   							</div>
   						</div>
 
