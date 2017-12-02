@@ -1,6 +1,6 @@
 var usServerURL = "http://54.183.241.202:3000/user";
 var alServerURL = "http://13.57.108.136/userlogs";
-var webServerURL = "http://" + window.location.hostname + window.location.port;
+var webServerURL = "http://" + window.location.hostname +":"+ window.location.port;
 
 function validateLogin(){
     var email = $("#email").val();
