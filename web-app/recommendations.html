@@ -39,11 +39,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
 
-
-		//var userid = localStorage.getItem("userid");
-		rsGetPurchasedProducts("Sai");
-		rsGetSearchedProducts("shiva");
-		rsGetCategoryProducts("Sai");
+		var rsuserid = localStorage.getItem("userid");
+        var rsemail =localStorage.getItem("email");
+		
+		rsGetPurchasedProducts(rsemail);
+		rsGetSearchedProducts(rsuserid);
 
 	});
 	$(function(){

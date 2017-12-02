@@ -17,18 +17,39 @@ function rsGetPurchasedProducts(userid){
       		console.log(data);
 
       		var arrProductIds = [];
-
-      		for(var i = 0; i < data.length; i++){
+      		for(var i = data.length-1; i >= 0 ; i--){
       			arrProductIds.push(data[i].productid);
       		}
 
-      		//var arrProductIds = ["a64cac48-1852-4346-8a64-d2c74f01e6a6", "30650de6-c2b2-4f9a-b7ef-d8c7da16708e", "1a2be279-287d-4c9b-974f-1ef51c918be6"];
-
-		    for(var i = 0; i < arrProductIds.length; i++){
+      	    for(var i = 0; i < arrProductIds.length; i++){
 		      	rsGetProductDetailForPurchaseHistory(arrProductIds[i], i + 1);
 		    }
+
+		    getProductCategory(arrProductIds[0]);
+
+      		//rsGetProductsforCategory(proid);
+
+      		//var arrProductIds = ["a64cac48-1852-4346-8a64-d2c74f01e6a6", "30650de6-c2b2-4f9a-b7ef-d8c7da16708e", "1a2be279-287d-4c9b-974f-1ef51c918be6"];
+
+
   		}
 	});
+}
+
+function getProductCategory(productId){
+	$.ajax({
+		   url: pcProductCatalogServerURL + '/product/' + productId,
+		   error: function(xhr, status, error) {
+		      console.log(xhr.responseText);
+		   },
+		   success: function(data) {
+
+		   rsGetProductsforCategory(data.category)
+
+
+		   }
+		   
+		});
 }
 
 function rsGetSearchedProducts(userid){
@@ -44,8 +65,8 @@ function rsGetSearchedProducts(userid){
 
       		var arrProductIds = [];
 
-      		for(var i = 0; i < data.length; i++){
-      			arrProductIds.push(data[i].productid);
+      		for(var i = data.length-1; i >= 0 ; i--){
+      		    arrProductIds.push(data[i].productid);
       		}
 
       		//var arrProductIds = ["a64cac48-1852-4346-8a64-d2c74f01e6a6", "30650de6-c2b2-4f9a-b7ef-d8c7da16708e", "1a2be279-287d-4c9b-974f-1ef51c918be6"];
@@ -56,33 +77,6 @@ function rsGetSearchedProducts(userid){
   		}
 	});
 }
-
-function rsGetCategoryProducts(userid){
-
-	$.ajax({
-	   url: rsRecommendationsServerCategoryURL+'/'+userid,
-	   error: function(xhr, status, error) {
-	      console.log(xhr.responseText);
-	   },
-	   success: function(data) {
-	    	console.log("Category Details");
-      		console.log(data);
-
-      		var arrCategoryIds = [];
-
-      		for(var i = 0; i < data.length; i++){
-      			arrCategoryIds.push(data[i].category);
-      		}
-
-
-      		rsGetProductsforCategory(arrCategoryIds[0]);
-      		
-		    
-		}
-		    
-  		});
-	}
-
 
 function rsGetProductsforCategory(category){
 
