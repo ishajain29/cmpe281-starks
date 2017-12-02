@@ -97,7 +97,7 @@ function register(){
                 },
                 dataType: "json"
             });
-            window.location.href = webServerURL + "/login";
+            window.location.href = webServerURL + "/login.html";
         },
         dataType: "json"
     });
