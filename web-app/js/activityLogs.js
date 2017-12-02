@@ -72,10 +72,10 @@ $("div#cart div .logstable").text('');
 				htmlStr=htmlStr+"<li>"+str+"</li>";
 			}
 
-			else if(data[i].activity=="Product Removed") {
-				str = "You removed a product -"+data[i].products.name+" from the cart "+data[i].cartname+" at "+data[i].timestamp+" on "+data[i].date;
-				htmlStr=htmlStr+"<li>"+str+"</li>";
-			}
+// 			else if(data[i].activity=="Product Removed") {
+// 				str = "You removed a product -"+data[i].products.name+" from the cart "+data[i].cartname+" at "+data[i].timestamp+" on "+data[i].date;
+// 				htmlStr=htmlStr+"<li>"+str+"</li>";
+// 			}
 
 			else if(data[i].activity=="Product Updated"){
 				str = "You updated a product -"+data[i].products.name+ " in the cart "+data[i].cartname+" at "+data[i].timestamp+" on "+data[i].date;
