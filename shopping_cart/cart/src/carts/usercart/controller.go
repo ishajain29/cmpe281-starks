@@ -375,4 +375,21 @@ func sendPlaceOrderEvent(usercart models.UserCart) {
 	if err != nil {
 		fmt.Println("Could not send event to activity log server", err)
 	}
+
+	fmt.Println("###########################")
+	fmt.Println(string(requestData))
+
+	dic = make(map[string]string)
+	dic["products"] = string(products)
+	requestData, _ = json.Marshal(dic)
+
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(string(requestData))
+
+	_, err = http.Post(models.RecommendationServerURL, "application/json", bytes.NewBuffer(requestData))
+
+	if err != nil {
+		fmt.Println("Could not send event to recommandation server", err)
+	}
+
 }

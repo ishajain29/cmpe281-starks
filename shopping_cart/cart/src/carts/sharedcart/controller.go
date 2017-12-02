@@ -399,11 +399,10 @@ func sendAddProductEvent(reqUserId string, cartId string, product models.Product
 
 	productString, _ := json.Marshal(product)
 
-        fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        fmt.Println(getUserIdFromCartId(cartId))
-        fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        fmt.Println(reqUserId)
-
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(getUserIdFromCartId(cartId))
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(reqUserId)
 
 	dic["userid"] = getUserIdFromCartId(cartId)
 	dic["cartid"] = cartId
@@ -427,10 +426,10 @@ func sendUpdateProductEvent(reqUserId string, cartId string, productId string, p
 
 	productString, _ := json.Marshal(product)
 
-        fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        fmt.Println(getUserIdFromCartId(cartId))
-        fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        fmt.Println(reqUserId)
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(getUserIdFromCartId(cartId))
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(reqUserId)
 
 	dic["userid"] = getUserIdFromCartId(cartId)
 	dic["cartid"] = cartId
@@ -541,6 +540,20 @@ func sendPlaceOrderEvent(reqUserId string, sharedcart models.SharedCart) {
 	if err != nil {
 		fmt.Println("Could not send event to activity log server", err)
 	}
+
+	dic = make(map[string]string)
+	dic["products"] = string(products)
+	requestData, _ = json.Marshal(dic)
+
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(string(requestData))
+
+	_, err = http.Post(models.RecommendationServerURL, "application/json", bytes.NewBuffer(requestData))
+
+	if err != nil {
+		fmt.Println("Could not send event to recommandation server", err)
+	}
+
 }
 
 func getCartNameFromCartId(cartId string) string {
@@ -550,7 +563,7 @@ func getCartNameFromCartId(cartId string) string {
 		//c.String(http.StatusInternalServerError, "MongoDB Connection Failed")
 		return ""
 	}
-	session.SetSocketTimeout(10 *  time.Second)
+	session.SetSocketTimeout(10 * time.Second)
 
 	var sharedCart models.SharedCart
 	collection.FindId(bson.ObjectIdHex(cartId)).One(&sharedCart)
@@ -572,6 +585,6 @@ func getUserIdFromCartId(cartId string) string {
 	collection.FindId(bson.ObjectIdHex(cartId)).One(&sharedCart)
 
 	defer session.Close()
-	fmt.Println("admin: " , sharedCart.AdminId)
+	fmt.Println("admin: ", sharedCart.AdminId)
 	return sharedCart.AdminId
 }
