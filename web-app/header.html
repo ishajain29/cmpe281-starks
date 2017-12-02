@@ -9,11 +9,13 @@
 			$("#logout").hide();
 			$("#login").show();
 			$("#mycart").hide();
-
+			$('#useremail').text(localStorage.getItem("email"));
+			
 		}else{
 			$("#logout").show();
 			$("#login").hide();
 			$("#mycart").show();
+			$('#useremail').text(localStorage.getItem("email"));
 		}
     	
 	});
@@ -38,7 +40,8 @@
 				</ul>
 			</div>
 			<div class="product_list_header" id="mycart">  
-				<form action="#" method="post" class="last"> 
+				<span id="useremail" style="color:white; position:absolute; top:0px;"> </span>
+				<form action="#" method="post" class="last" style="margin-top: 5px;"> 
 					<input type="hidden" name="cmd" value="_cart">
 					<input type="hidden" name="display" value="1">
 					<button type="submit" name="submit" class="btn btn-primary">
