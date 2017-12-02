@@ -10,6 +10,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 // CreateCart Create New User's Cart
@@ -71,7 +72,7 @@ func CreateCart(c *gin.Context) {
 	// resJSON, _ := json.Marshal(resBody)
 	// c.String(http.StatusCreated, string(resJSON))
 
-	c.String(http.StatusCreated, "")
+	c.JSON(http.StatusCreated, nil)
 }
 
 // GetCart Get User's Cart from user id
@@ -127,7 +128,7 @@ func DeleteCart(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // AddProduct to User cart
@@ -161,7 +162,7 @@ func AddProduct(c *gin.Context) {
 
 	sendAddProductEvent(c.Param("userId"), *product)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // UpdateProduct User Cart
@@ -204,7 +205,7 @@ func UpdateProduct(c *gin.Context) {
 
 	sendUpdateProductEvent(c.Param("userId"), c.Param("productId"), *product)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // RemoveProduct User Cart
@@ -229,7 +230,7 @@ func RemoveProduct(c *gin.Context) {
 
 	sendRemoveProductEvent(c.Param("userId"), c.Param("productId"))
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 // PlaceOrder place order for the items in the cart
@@ -272,24 +273,27 @@ func PlaceOrder(c *gin.Context) {
 	//TODO: Send event to activity log about order placed successfully
 	sendPlaceOrderEvent(userCart)
 
-	c.String(http.StatusOK, "")
+	c.JSON(http.StatusOK, nil)
 }
 
 func getMongoConnection() (mgo.Session, mgo.Collection, error) {
 
 	var collection *mgo.Collection
 
-	session, err := mgo.Dial(models.MongodbServer)
-	if err != nil {
-		fmt.Println("mongodb connection failed", err)
-		//c.String(http.StatusInternalServerError, "")
-		return *session, *collection, err
-	}
-	//defer session.Close()
-	session.SetMode(mgo.Monotonic, true)
-	collection = session.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
+	var mgoSession *mgo.Session = models.GetMongoSession()
+	// session, err := mgo.Dial(models.MongodbServer)
+	// if err != nil {
+	// 	fmt.Println("mongodb connection failed", err)
+	// 	//c.String(http.StatusInternalServerError, "")
+	// 	return *session, *collection, err
+	// }
+	// //defer session.Close()
+	// session.SetMode(mgo.SecondaryPreferred, true)
 
-	return *session, *collection, nil
+	mgoSession.SetSocketTimeout(10 *  time.Second)
+	collection = mgoSession.DB(models.MongodbDatabase).C(models.MongodbCollectionUserCarts)
+
+	return *mgoSession, *collection, nil
 }
 
 // --- Activity Log Events --- //
@@ -307,7 +311,7 @@ func sendAddProductEvent(userId string, product models.Product) {
 	dic["activity"] = "Product Added"
 
 	requestData, _ := json.Marshal(dic)
-
+	fmt.Println(string(requestData));
 	_, err := http.Post(models.ActivityLogServerURL, "application/json", bytes.NewBuffer(requestData))
 
 	if err != nil {
@@ -371,4 +375,21 @@ func sendPlaceOrderEvent(usercart models.UserCart) {
 	if err != nil {
 		fmt.Println("Could not send event to activity log server", err)
 	}
+
+	fmt.Println("###########################")
+	fmt.Println(string(requestData))
+
+	dic = make(map[string]string)
+	dic["products"] = string(products)
+	requestData, _ = json.Marshal(dic)
+
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	fmt.Println(string(requestData))
+
+	_, err = http.Post(models.RecommendationServerURL, "application/json", bytes.NewBuffer(requestData))
+
+	if err != nil {
+		fmt.Println("Could not send event to recommandation server", err)
+	}
+
 }

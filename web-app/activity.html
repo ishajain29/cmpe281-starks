@@ -37,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var event = new Event('productsloaded');
 			document.dispatchEvent(event);
 			$("html, body").animate({ scrollTop: 0 }, "slow");
-		}); 		  
+		});
 	});
 </script>
 <!-- <script type="text/javascript">
@@ -48,7 +48,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	});
 </script> -->
-
+<script type="text/javascript">
+$(document).ready(function() {
+    uaGetSearchLogs();
+});
+</script>
 
 <!-- <script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -70,7 +74,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 
 <div id="header"></div>
-	
+
 <!-- navigation -->
 	<div class="navigation-agileits">
 		<div class="container">
@@ -235,13 +239,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   						<li role="presentation" class="active"><a href="#search"  id="search-tab" onclick=uaGetSearchLogs(); role="tab" data-toggle="tab" aria-controls="search" aria-expanded="true">Search</a></li>
   						<li role="presentation"><a href="#cart" role="tab" id="cart-tab" onclick=uaGetCartLogs(); data-toggle="tab" aria-controls="cart">Cart</a></li>
               <li role="presentation"><a href="#user" role="tab" id="user-tab" onclick=uaGetUserLogs(); data-toggle="tab" aria-controls="user">User</a></li>
-              <li role="presentation"><a href="#all" role="tab" id="all-tab" onclick=uaGetAllLogs(); data-toggle="tab" aria-controls="all">All</a></li>
   					</ul>
   					<div id="myTabContent" class="tab-content">
+
   						<div role="tabpanel" class="tab-pane fade in active" id="search" aria-labelledby="search-tab">
   							<div class="agile-tp">
   								<h5>My Search Logs</h5>
   								<p class="w3l-ad"></p>
+
+									<div class="logstable"></div>
+
   							</div>
   						</div>
 
@@ -249,6 +256,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   							<div class="agile-tp">
   								<h5>My Cart Logs</h5>
   								<p class="w3l-ad"></p>
+									<div class="logstable"></div>
   							</div>
   						</div>
 
@@ -256,6 +264,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   							<div class="agile-tp">
   								<h5>My User Logs</h5>
   								<p class="w3l-ad"></p>
+									<div class="logstable"></div>
 
   							</div>
   						</div>
@@ -264,6 +273,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   							<div class="agile-tp">
   								<h5>All Logs</h5>
   								<p class="w3l-ad"></p>
+									<div class="logstable"></div>
   							</div>
   						</div>
 
@@ -414,7 +424,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   	</div>
   </div>
 
-<!-- //login -->
+
 <!-- //footer -->
 <div class="footer">
 		<div class="container">
@@ -496,40 +506,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- The Modal Dialogs -->
 <div id="scDialogCartSettings" class="modal">
-		
+
 		  <!-- Modal content -->
 		  <div class="modal-content">
 			<span class="close">&times;</span>
 			<p style="margin-bottom : 30px;">Group Cart Settings</p>
 			<div class="model-body" id="scDialogCartSettingsBody">
-				
+
 					<ul class="list-group" id="scListUsers">
 					</ul>
 			</div>
 		  </div>
 	</div>
-	
-	
+
+
 	<div id="scDialogCreateNewCart" class="modal">
-		
+
 		  <div class="modal-content">
 			<span class="close">&times;</span>
 			<p style="margin-bottom : 30px;">Create New Shared Cart</p>
 			<div class="model-body" id="model-body">
-				
+
 				<div class="input-group">
 					 <input type="text" class="form-control" placeholder="Cart Name" id="scNewCartInput">
 					 <span class="input-group-btn">
 					  <button class="btn btn-primary" type="button" id="scAddUserBtn" onclick="return scCreateNewSharedCart(event)">Create</button>
 					</span>
 				</div> </br>
-	
+
 			</div>
 		  </div>
 	</div>
-	
+
 	<!-- //The Modal Dialogs -->
-	
+
 
 
 <!-- //footer -->
