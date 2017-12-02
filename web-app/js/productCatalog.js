@@ -96,6 +96,8 @@ function pcGetProductDetail(productId){
 		    $("#product-category").text(data.category);
 		    $("#product-image").attr("src", data.imageURL);
 		    $("#product-id").val(data.id);
+		    $("#input-product-name").val(data.title);
+		    $("#input-product-amount").val(data.price);
 		   },
 		   dataType: "json"
 		});
