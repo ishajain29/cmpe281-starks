@@ -1,7 +1,6 @@
 var pcProductCatalogServerURL = "http://Product-Catalog-Load-Balancer-795729955.us-east-2.elb.amazonaws.com/productCatalog";
 var rsRecommendationsServerPurchaseURL = "http://13.57.146.16:3000/rspurchased";
 var rsRecommendationsServerSearchURL = "http://13.57.146.16:3000/rssearched";
-var rsRecommendationsServerCategoryURL = "http://13.57.146.16:3000/rscategory";
 
 
 // Get Previous Purchase Details
